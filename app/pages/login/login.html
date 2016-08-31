@@ -1,0 +1,97 @@
+<!--
+Generated template for the LoginPage page.
+
+See http://ionicframework.com/docs/v2/components/#navigation for more info on
+Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar primary>
+    <ion-title text-center>Autenticação</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="login-page">
+
+
+
+  <div>
+    <ion-segment [(ngModel)]="type" primary>
+      <ion-segment-button value="client">
+        Cliente
+      </ion-segment-button>
+      <ion-segment-button value="seller">
+        Vendedor
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div [ngSwitch]="type">
+
+    <div *ngSwitchCase="'client'">
+      <form [formGroup]="clientLoginForm" novalidate="">
+        <ion-item>
+          <ion-label floating>Email</ion-label>
+          <ion-input [formControl]="clientEmail" type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"></ion-input>
+        </ion-item>
+        <div *ngIf="!clientEmail.valid && (clientEmail.touched || clientFormSubmitted)">
+          <p padding-left danger *ngIf="clientEmail.errors.required">Este campo é obrigatório</p>
+          <p padding-left danger *ngIf="clientEmail.errors.minlength">Este campo deve ter pelo menos 8 caracteres</p>
+          <p padding-left danger *ngIf="clientEmail.errors.pattern">Este campo deve ser um email válido</p>
+        </div>
+
+        <ion-item>
+          <ion-label floating>Senha</ion-label>
+          <ion-input [formControl]="clientPassword" type="password"></ion-input>
+        </ion-item>
+        <div *ngIf="!clientPassword.valid && (clientPassword.touched || clientFormSubmitted)">
+          <p padding-left danger *ngIf="clientPassword.errors.required">Este campo é obrigatório</p>
+          <p padding-left danger *ngIf="clientPassword.errors.minlength">Este campo deve ter pelo menos 8 caracteres</p>
+        </div>
+
+        <div padding>
+          <a href=""> Não possui cadastro? Cadastre-se!</a>
+        </div>
+
+        <div padding class="submit-block">
+          <button primary block  (click)="clientLogin()">Autenticar</button>
+        </div>
+      </form>
+    </div>
+
+    <div *ngSwitchCase="'seller'">
+      <form [formGroup]="sellerLoginForm" novalidate="">
+        <ion-item>
+          <ion-label floating>Email</ion-label>
+          <ion-input [formControl]="sellerEmail" type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"></ion-input>
+        </ion-item>
+        <div *ngIf="!sellerEmail.valid && (sellerEmail.touched || sellerFormSubmitted)">
+          <p padding-left danger *ngIf="sellerEmail.errors.required">Este campo é obrigatório</p>
+          <p padding-left danger *ngIf="sellerEmail.errors.minlength">Este campo deve ter pelo menos 8 caracteres</p>
+          <p padding-left danger *ngIf="sellerEmail.errors.pattern">Este campo deve ser um email válido</p>
+        </div>
+
+        <ion-item>
+          <ion-label floating>Senha</ion-label>
+          <ion-input [formControl]="sellerPassword" type="password"></ion-input>
+        </ion-item>
+        <div *ngIf="!sellerPassword.valid && (sellerPassword.touched || sellerFormSubmitted)">
+          <p padding-left danger *ngIf="sellerPassword.errors.required">Este campo é obrigatório</p>
+          <p padding-left danger *ngIf="sellerPassword.errors.minlength">Este campo deve ter pelo menos 8 caracteres</p>
+        </div>
+
+        <div padding>
+          <a href=""> Não possui cadastro? Cadastre-se!</a>
+        </div>
+
+        <div padding class="submit-block">
+          <button primary block  (click)="sellerLogin()">Autenticar</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+</ion-content>
