@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, LoadingController } from 'ionic-angular';
-import {AuthService} from '../../services/auth.service';
+import {AuthService} from '../../providers/auth/auth';
 import {IMG_URL} from '../../config.ts';
 import {LoginPage} from '../login/login';
 import * as moment from 'moment';

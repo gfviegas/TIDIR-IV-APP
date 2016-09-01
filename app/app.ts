@@ -5,7 +5,7 @@ import {StatusBar} from 'ionic-native';
 import {LoginPage} from './pages/login/login';
 import {TabsPage} from './pages/tabs/tabs';
 
-import {AuthService} from './services/auth.service';
+import {AuthService} from './providers/auth/auth';
 
 import * as moment from 'moment';
 import 'moment/locale/pt-br';

@@ -1,9 +1,3 @@
-<!--
-Generated template for the LoginPage page.
-
-See http://ionicframework.com/docs/v2/components/#navigation for more info on
-Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar primary>
@@ -14,8 +8,6 @@ Ionic pages and navigation.
 
 
 <ion-content padding class="login-page">
-
-
 
   <div>
     <ion-segment [(ngModel)]="type" primary>
@@ -51,12 +43,11 @@ Ionic pages and navigation.
           <p padding-left danger *ngIf="clientPassword.errors.minlength">Este campo deve ter pelo menos 8 caracteres</p>
         </div>
 
-        <div padding>
-          <a href=""> Não possui cadastro? Cadastre-se!</a>
-        </div>
-
         <div padding class="submit-block">
           <button primary block  (click)="clientLogin()">Autenticar</button>
+        </div>
+        <div padding text-center>
+          <a (click)="goToSignIn()"> Não possui cadastro? Cadastre-se!</a>
         </div>
       </form>
     </div>
@@ -82,12 +73,11 @@ Ionic pages and navigation.
           <p padding-left danger *ngIf="sellerPassword.errors.minlength">Este campo deve ter pelo menos 8 caracteres</p>
         </div>
 
-        <div padding>
-          <a href=""> Não possui cadastro? Cadastre-se!</a>
-        </div>
-
         <div padding class="submit-block">
           <button primary block  (click)="sellerLogin()">Autenticar</button>
+        </div>
+        <div padding text-center>
+          <a (click)="goToSignIn()"> Não possui cadastro? Cadastre-se!</a>
         </div>
       </form>
     </div>

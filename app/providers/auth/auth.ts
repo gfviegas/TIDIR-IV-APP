@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
 import { Storage, LocalStorage } from 'ionic-angular';
-import {API_URL} from '../config';
+import {API_URL} from '../../config';
 import 'rxjs/Rx';
 
 @Injectable()

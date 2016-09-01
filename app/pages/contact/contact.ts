@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
-import {AuthService} from '../../services/auth.service';
+import {AuthService} from '../../providers/auth/auth';
 
 @Component({
   templateUrl: 'build/pages/contact/contact.html',
