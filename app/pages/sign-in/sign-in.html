@@ -51,8 +51,30 @@
         <p padding-left danger *ngIf="confirm.errors?.notEqual">Os campos não são idênticos</p>
       </div>
 
+      <ion-item ngControlGroup="contact">
+        <ion-label>Whatsapp</ion-label>
+        <ion-input [formControl]="whatsapp" type="text" pattern="^\([1-9]{2}\) [2-9][0-9]{3,4}\-[0-9]{4}$"></ion-input>
+      </ion-item>
+      <div *ngIf="!whatsapp.valid && (whatsapp.touched || formSubmitted)">
+        <p padding-left danger *ngIf="whatsapp.errors?.pattern">Digite um número válido no padrão (99) 99999-9999</p>
+      </div>
+      <ion-item ngControlGroup="contact">
+        <ion-label>Outro Telefone</ion-label>
+        <ion-input [formControl]="phone" type="text" pattern="^\([1-9]{2}\) [2-9][0-9]{3,4}\-[0-9]{4}$"></ion-input>
+      </ion-item>
+      <div *ngIf="!phone.valid && (phone.touched || formSubmitted)">
+        <p padding-left danger *ngIf="phone.errors?.pattern">Digite um número válido no padrão (99) 99999-9999</p>
+      </div>
+      <ion-item ngControlGroup="contact">
+        <ion-label>Link Facebook</ion-label>
+        <ion-input [formControl]="facebook" type="text"></ion-input>
+      </ion-item>
+      <div *ngIf="!facebook.valid && (facebook.touched || formSubmitted)">
+        <p padding-left danger *ngIf="facebook.errors?.pattern">Este campo é obrigatório</p>
+      </div>
+
       <ion-item ngControlGroup="location">
-        <ion-label>Estado</ion-label>
+        <ion-label>Estado*</ion-label>
         <ion-select [formControl]="state" (ionChange)="getCities()" multiple="false" cancelText="Cancelar" okText="Selecionar">
           <ion-option *ngFor="let uf of ufs; let i = index" [value]="i">{{uf.name}}</ion-option>
         </ion-select>
@@ -62,7 +84,7 @@
       </div>
 
       <ion-item ngControlGroup="location">
-        <ion-label>Cidade</ion-label>
+        <ion-label>Cidade*</ion-label>
         <ion-select [formControl]="city" [disabled]="state.value.length < 1" multiple="false" cancelText="Cancelar" okText="Selecionar">
           <ion-option *ngFor="let city of cities; let i = index" [value]="i">{{city.name}}</ion-option>
         </ion-select>

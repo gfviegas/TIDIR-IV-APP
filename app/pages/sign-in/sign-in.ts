@@ -12,14 +12,18 @@ import { SignService } from '../../providers/sign/sign';
 export class SignInPage {
 
   signInForm: FormGroup;
-  passwords: AbstractControl;
-  location: AbstractControl;
   name: AbstractControl;
   email: AbstractControl;
+  passwords: AbstractControl;
   password: AbstractControl;
   confirm: AbstractControl;
+  location: AbstractControl;
   state: AbstractControl;
   city: AbstractControl;
+  contact: AbstractControl;
+  whatsapp: AbstractControl;
+  facebook: AbstractControl;
+  phone: AbstractControl;
   signAsSeller : AbstractControl;
   formSubmitted: boolean = false;
 
@@ -44,6 +48,11 @@ export class SignInPage {
         state: ['', Validators.required],
         city: ['', Validators.required]
       }),
+      contact: fb.group({
+        whatsapp: [''],
+        facebook: [''],
+        phone: ['']
+      }),
       signAsSeller: [false]
     });
     this.name = this.signInForm.controls['name'];
@@ -56,6 +65,11 @@ export class SignInPage {
     this.location = this.signInForm.controls['location'];
     this.state = this.signInForm.controls['location']['controls']['state'];
     this.city = this.signInForm.controls['location']['controls']['city'];
+
+    this.contact = this.signInForm.controls['contact'];
+    this.whatsapp = this.signInForm.controls['contact']['controls']['whatsapp'];
+    this.facebook = this.signInForm.controls['contact']['controls']['facebook'];
+    this.phone = this.signInForm.controls['contact']['controls']['phone'];
 
     this.signAsSeller = this.signInForm.controls['signAsSeller'];
 
