@@ -13,40 +13,42 @@
 
     <ion-list>
       <ion-item>
-        <ion-label floating>Nome*</ion-label>
+        <ion-label>Nome*</ion-label>
         <ion-input [formControl]="name" type="text"></ion-input>
       </ion-item>
       <div *ngIf="!name.valid && (name.touched || formSubmitted)">
-        <p padding-left danger *ngIf="name.errors.required">Este campo é obrigatório</p>
-        <p padding-left danger *ngIf="name.errors.minlength">Este campo deve ter pelo menos 8 caracteres</p>
+        <p padding-left danger *ngIf="name.errors?.required">Este campo é obrigatório</p>
+        <p padding-left danger *ngIf="name.errors?.minlength">Este campo deve ter pelo menos 8 caracteres</p>
       </div>
 
       <ion-item>
-        <ion-label floating>Email*</ion-label>
+        <ion-label>Email*</ion-label>
         <ion-input [formControl]="email" type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"></ion-input>
       </ion-item>
+      <!-- <p>{{email.errors | json}}</p> -->
       <div *ngIf="!email.valid && (email.touched || formSubmitted)">
-        <p padding-left danger *ngIf="email.errors.required">Este campo é obrigatório</p>
-        <p padding-left danger *ngIf="email.errors.minlength">Este campo deve ter pelo menos 8 caracteres</p>
-        <p padding-left danger *ngIf="email.errors.pattern">Este campo deve ser um email válido</p>
+        <p padding-left danger *ngIf="email.errors?.required">Este campo é obrigatório</p>
+        <p padding-left danger *ngIf="email.errors?.minlength">Este campo deve ter pelo menos 8 caracteres</p>
+        <p padding-left danger *ngIf="email.errors?.pattern">Este campo deve ser um email válido</p>
+        <p padding-left danger *ngIf="email.errors?.taken">Este email já está cadastrado</p>
       </div>
 
       <ion-item ngControlGroup="passwords">
-        <ion-label floating>Senha*</ion-label>
+        <ion-label>Senha*</ion-label>
         <ion-input [formControl]="password" type="password"></ion-input>
       </ion-item>
       <div *ngIf="!password.valid && (password.touched || formSubmitted)">
-        <p padding-left danger *ngIf="password.errors.required">Este campo é obrigatório</p>
-        <p padding-left danger *ngIf="password.errors.minlength">Este campo deve ter pelo menos 8 caracteres</p>
+        <p padding-left danger *ngIf="password.errors?.required">Este campo é obrigatório</p>
+        <p padding-left danger *ngIf="password.errors?.minlength">Este campo deve ter pelo menos 8 caracteres</p>
       </div>
       <ion-item ngControlGroup="passwords">
-        <ion-label floating>Repita a Senha*</ion-label>
+        <ion-label>Repita a Senha*</ion-label>
         <ion-input [formControl]="confirm" type="password"></ion-input>
       </ion-item>
       <div *ngIf="!confirm.valid && (confirm.touched || formSubmitted)">
-        <p padding-left danger *ngIf="confirm.errors.required">Este campo é obrigatório</p>
-        <p padding-left danger *ngIf="confirm.errors.minlength">Este campo deve ter pelo menos 8 caracteres</p>
-        <p padding-left danger *ngIf="confirm.errors.notEqual">Os campos não são idênticos</p>
+        <p padding-left danger *ngIf="confirm.errors?.required">Este campo é obrigatório</p>
+        <p padding-left danger *ngIf="confirm.errors?.minlength">Este campo deve ter pelo menos 8 caracteres</p>
+        <p padding-left danger *ngIf="confirm.errors?.notEqual">Os campos não são idênticos</p>
       </div>
 
       <ion-item ngControlGroup="location">
@@ -55,24 +57,32 @@
           <ion-option *ngFor="let uf of ufs; let i = index" [value]="i">{{uf.name}}</ion-option>
         </ion-select>
       </ion-item>
+      <div *ngIf="!state.valid && (state.touched || formSubmitted)">
+        <p padding-left danger *ngIf="state.errors?.required">Este campo é obrigatório</p>
+      </div>
 
       <ion-item ngControlGroup="location">
         <ion-label>Cidade</ion-label>
-        <ion-select [disabled]="state.value.length < 1" multiple="false" cancelText="Cancelar" okText="Selecionar">
+        <ion-select [formControl]="city" [disabled]="state.value.length < 1" multiple="false" cancelText="Cancelar" okText="Selecionar">
           <ion-option *ngFor="let city of cities; let i = index" [value]="i">{{city.name}}</ion-option>
         </ion-select>
       </ion-item>
-
-      <div *ngIf="!name.valid && (name.touched || formSubmitted)">
-        <p padding-left danger *ngIf="name.errors.required">Este campo é obrigatório</p>
-        <p padding-left danger *ngIf="name.errors.minlength">Este campo deve ter pelo menos 8 caracteres</p>
+      <div *ngIf="!city.valid && (city.touched || formSubmitted)">
+        <p padding-left danger *ngIf="city.errors?.required">Este campo é obrigatório</p>
       </div>
+
+      <ion-item>
+        <ion-label> Cadastrar como Vendedor</ion-label>
+        <ion-toggle [formControl]="signAsSeller" checked="false"></ion-toggle>
+      </ion-item>
 
     </ion-list>
 
+    <p>Os campos com * são obrigatórios</p>
+
 
     <div padding class="submit-block">
-      <button primary block  (click)="signIn()">Autenticar</button>
+      <button primary block  (click)="signIn()">Cadastrar</button>
     </div>
   </form>
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
 import { REACTIVE_FORM_DIRECTIVES, FORM_DIRECTIVES, FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { AuthService } from '../../providers/auth/auth';
 import { SignService } from '../../providers/sign/sign';
@@ -11,7 +11,6 @@ import { SignService } from '../../providers/sign/sign';
 })
 export class SignInPage {
 
-
   signInForm: FormGroup;
   passwords: AbstractControl;
   location: AbstractControl;
@@ -21,19 +20,22 @@ export class SignInPage {
   confirm: AbstractControl;
   state: AbstractControl;
   city: AbstractControl;
+  signAsSeller : AbstractControl;
   formSubmitted: boolean = false;
 
   ufs: any;
   cities: any;
+  loading: any;
 
   constructor(
     private fb: FormBuilder,
     private signService: SignService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private loadingCtrl: LoadingController
   ) {
     this.signInForm = fb.group({
       name: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', Validators.required, this.emailExists.bind(this)],
       passwords:  fb.group({
         password: ['', Validators.required],
         confirm: ['', Validators.required]
@@ -41,7 +43,8 @@ export class SignInPage {
       location: fb.group({
         state: ['', Validators.required],
         city: ['', Validators.required]
-      })
+      }),
+      signAsSeller: [false]
     });
     this.name = this.signInForm.controls['name'];
     this.email = this.signInForm.controls['email'];
@@ -53,28 +56,66 @@ export class SignInPage {
     this.location = this.signInForm.controls['location'];
     this.state = this.signInForm.controls['location']['controls']['state'];
     this.city = this.signInForm.controls['location']['controls']['city'];
+
+    this.signAsSeller = this.signInForm.controls['signAsSeller'];
+
+    this.loading = loadingCtrl.create({
+      content: "Carregando..."
+    });
   }
 
   ngOnInit() {
+    this.loading.present();
     this.signService.getUfs().subscribe(
       (data) => {
-        console.log(data);
+        this.loading.dismiss();
         this.ufs = data;
+      },
+      (error) => {
+        this.loading.dismiss();
+        console.info(error);
       }
     );
   }
 
   getCities() {
+    this.loading.present();
     let selectedUF = this.ufs[this.state.value];
     this.signService.getCities(selectedUF.id).subscribe(
       (cities) => {
+        this.loading.dismiss();
         this.cities = cities;
+      },
+      (error) => {
+        this.loading.dismiss();
+        console.info(error);
       }
     );
   }
 
   signIn() {
+    this.formSubmitted = true;
     console.log(this.signInForm);
+
+    if (this.signInForm.valid) {
+      let signValues = Object.assign({}, this.signInForm.value);
+      let signAsSeller = signValues.signAsSeller;
+      let params = {
+        name: signValues.name,
+        email: signValues.email,
+        password: signValues.passwords.password,
+        location: {
+          state: this.ufs[signValues.location.state].uf,
+          city: this.cities[signValues.location.city].name,
+        }
+      };
+
+      if (!signAsSeller) {
+        console.info('Send this as user', params);
+      } else {
+        console.info('Send this as seller', params);
+      }
+    }
   }
 
   areEqual(control: FormGroup): void {
@@ -87,7 +128,24 @@ export class SignInPage {
     }
 
     return null;
+  }
 
+  emailExists(control: FormGroup) {
+    let requestedEmail = control.value;
+    return new Promise((resolve, reject) => {
+      this.signService.checkIfEmailExists(requestedEmail).subscribe(
+        (response) => {
+          if (response.taken) {
+            resolve({taken: true});
+          } else {
+            resolve(null);
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+    });
   }
 
 }
