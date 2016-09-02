@@ -3,10 +3,11 @@ import { NavController, LoadingController } from 'ionic-angular';
 import { REACTIVE_FORM_DIRECTIVES, FORM_DIRECTIVES, FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { AuthService } from '../../providers/auth/auth';
 import { SignService } from '../../providers/sign/sign';
+import MaskedInput from 'angular2-text-mask'
 
 @Component({
   templateUrl: 'build/pages/sign-in/sign-in.html',
-  directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES],
+  directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, MaskedInput],
   providers: [SignService]
 })
 export class SignInPage {
@@ -30,6 +31,8 @@ export class SignInPage {
   ufs: any;
   cities: any;
   loading: any;
+
+  mask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
   constructor(
     private fb: FormBuilder,
