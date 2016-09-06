@@ -53,10 +53,11 @@
 
       <ion-item ngControlGroup="contact">
         <ion-label>Whatsapp</ion-label>
-        <ion-input [formControl]="whatsapp" type="text" [textMask]="{mask: mask}" pattern="^\([1-9]{2}\) [2-9][0-9]{3,4}\-[0-9]{4}$"></ion-input>
+        <ion-input [formControl]="whatsapp" type="text" [textMask]="{mask: cellphoneMask, guide: false, modelClean: true}" pattern="^\([1-9]{2}\) [2-9][0-9]{3,4}\-[0-9]{4}$"></ion-input>
       </ion-item>
+      <p padding-left danger>Field value -> {{whatsapp.value}}</p>
       <div *ngIf="!whatsapp.valid && (whatsapp.touched || formSubmitted)">
-        <p padding-left danger *ngIf="whatsapp.errors?.pattern">Digite um número válido</p>
+        <p padding-left danger *ngIf="whatsapp.errors?.pattern">Invalid number -> {{whatsapp.value}}</p>
       </div>
       <ion-item ngControlGroup="contact">
         <ion-label>Outro Telefone</ion-label>

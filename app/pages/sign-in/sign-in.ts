@@ -32,7 +32,8 @@ export class SignInPage {
   cities: any;
   loading: any;
 
-  mask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+  // mask = ['(', '/[1-9]{2}/', ')', '/[2-9][0-9]{3,4}/', '-', '/[0-9]{4}/'];
+  // mask = ['(', /[1-9]/, /[1-9]/, ')', ' ', /\d?/ , /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
   constructor(
     private fb: FormBuilder,
@@ -93,6 +94,25 @@ export class SignInPage {
         console.info(error);
       }
     );
+  }
+
+  cellphoneMask(userInput) {
+    // let userInput = this.whatsapp.value;
+    let numbers = userInput.match(/\d/g);
+    let numberLength = 0;
+    if (numbers) {
+      numberLength = numbers.join("").length;
+    }
+
+    if (numberLength > 10) {
+      return ['(', /[1-9]/, /[1-9]/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+    } else {
+      return ['(', /[1-9]/, /[1-9]/, ')', ' ', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+    }
+  }
+
+  unmask() {
+    console.log(this.whatsapp.value);
   }
 
   getCities() {
