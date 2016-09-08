@@ -40,11 +40,11 @@
           <ion-icon name="mail" danger item-left></ion-icon>
           {{user.email}}
         </ion-item>
-        <ion-item>
+        <ion-item *ngIf="user.contact != null && user.contact.whatsapp != null">
           <ion-icon name="logo-whatsapp" secondary item-left></ion-icon>
           {{user.contact.whatsapp}}
         </ion-item>
-        <ion-item>
+        <ion-item *ngIf="user.contact != null && user.contact.phone != null">
           <ion-icon name="call" primary item-left></ion-icon>
           {{user.contact.phone}}
         </ion-item>

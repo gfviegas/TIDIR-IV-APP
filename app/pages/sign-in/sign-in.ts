@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController, LoadingController, AlertController } from 'ionic-angular';
 import { REACTIVE_FORM_DIRECTIVES, FORM_DIRECTIVES, FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { AuthService } from '../../providers/auth/auth';
 import { SignService } from '../../providers/sign/sign';
-import MaskedInput from 'angular2-text-mask'
+import MaskedInput from 'angular2-text-mask';
+
+import { TabsPage } from '../tabs/tabs';
 
 @Component({
   templateUrl: 'build/pages/sign-in/sign-in.html',
@@ -32,12 +34,11 @@ export class SignInPage {
   cities: any;
   loading: any;
 
-  // mask = ['(', '/[1-9]{2}/', ')', '/[2-9][0-9]{3,4}/', '-', '/[0-9]{4}/'];
-  // mask = ['(', /[1-9]/, /[1-9]/, ')', ' ', /\d?/ , /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
-
   constructor(
     private fb: FormBuilder,
+    private alertCtrl: AlertController,
     private signService: SignService,
+    private authService: AuthService,
     private navCtrl: NavController,
     private loadingCtrl: LoadingController
   ) {
@@ -111,10 +112,6 @@ export class SignInPage {
     }
   }
 
-  unmask() {
-    console.log(this.whatsapp.value);
-  }
-
   getCities() {
     this.loading.present();
     let selectedUF = this.ufs[this.state.value];
@@ -148,9 +145,27 @@ export class SignInPage {
       };
 
       if (!signAsSeller) {
-        console.info('Send this as user', params);
+        this.signService.signUser(params).subscribe(
+          response => {
+            if (response) {
+              this.loginSignedUser(params, 'user');
+            }
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
       } else {
-        console.info('Send this as seller', params);
+        this.signService.signSeller(params).subscribe(
+          response => {
+            if (response) {
+              this.loginSignedUser(params, 'seller');
+            }
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
       }
     }
   }
@@ -184,5 +199,29 @@ export class SignInPage {
       )
     });
   }
+
+  loginSignedUser(params: any, type: string) {
+    console.log(params);
+    // this.loading.present();
+    this.authService.login(params.email, params.password, type).subscribe(
+      success => {
+        // this.loading.dismiss();
+        this.presentAlert('Sucesso!', 'Cadastrado com sucesso!');
+        this.navCtrl.setRoot(TabsPage);
+      },
+      error => {
+      }
+    );
+  }
+
+  presentAlert(title: string, subTitle: string) {
+    let alert = this.alertCtrl.create({
+      title: title,
+      subTitle: subTitle,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
 
 }

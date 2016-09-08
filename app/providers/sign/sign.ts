@@ -20,8 +20,15 @@ export class SignService {
   }
 
   checkIfEmailExists(reqEmail: string) {
-    console.log(reqEmail);
     return this.http.get(API_URL + 'users/check/' + reqEmail).map(res => res.json());
+  }
+
+  signUser(reqData: any) {
+    return this.http.post(API_URL + 'users', reqData).map(res => res.json());
+  }
+
+  signSeller(reqData: any) {
+    return this.http.post(API_URL + 'sellers', reqData).map(res => res.json());
   }
 
 }
