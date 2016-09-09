@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar gold>
     <ion-title text-center> Meu Perfil </ion-title>
   </ion-navbar>
 </ion-header>
@@ -10,7 +10,7 @@
     <img [src]="user.photo ? IMG_URL + user.photo : IMG_URL + 'person.jpeg'">
   </ion-toolbar>
   <div padding>
-    <ion-segment [(ngModel)]="page">
+    <ion-segment dark [(ngModel)]="page">
       <ion-segment-button value="overview">
         Perfil
       </ion-segment-button>

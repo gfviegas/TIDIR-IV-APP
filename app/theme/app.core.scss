@@ -12,4 +12,14 @@
 @import "../pages/home/home";
 @import "../pages/login/login";
 @import "../pages/sign-in/sign-in";
+@import "../pages/sellers/sellers";
+@import "../pages/products/products";
 @import "../pages/profile/profile";
+
+ion-tabbar {
+  .tab-button[aria-selected=true] {
+    transform: scale(1.15);
+    font-weight: bold;
+    color: color($colors, gold)!important;
+  }
+}

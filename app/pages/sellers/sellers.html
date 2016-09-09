@@ -1,0 +1,44 @@
+<ion-header>
+
+  <!-- <ion-navbar gold > -->
+    <ion-toolbar gold *ngIf="!searchVisible">
+      <ion-buttons start>
+        <button (click)="toggleSearchBar()">
+          <ion-icon name="search"></ion-icon>
+        </button>
+      </ion-buttons>
+
+      <ion-title>Vendedores</ion-title>
+
+      <ion-buttons end>
+        <button>
+          <ion-icon name="more"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+
+    <ion-toolbar gold *ngIf="searchVisible">
+      <ion-searchbar (input)="getItems($event)"></ion-searchbar>
+      <ion-buttons end>
+        <button (click)="toggleSearchBar()">
+          Cancelar
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+  <!-- </ion-navbar> -->
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list *ngIf="sellers.length > 0">
+    <ion-item *ngFor="let seller of sellers; let i = index;">
+      <ion-avatar item-left>
+        <img [src]="seller.photo ? IMG_URL + seller.photo : IMG_URL + 'person.jpeg'">
+      </ion-avatar>
+      <h2>{{seller.name}}</h2>
+      <p>{{seller.location.city}} - {{seller.location.state}}</p>
+      <ion-icon name="arrow-forward" item-right></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>
