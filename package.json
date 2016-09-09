@@ -47,6 +47,6 @@
       "locator": "ios"
     }
   ],
-  "name": "client",
-  "description": "Client: An Ionic project"
+  "name": "aVender",
+  "description": "aVender - Folheto Virtual para Ambulantes"
 }
