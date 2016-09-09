@@ -1,5 +1,10 @@
 <ion-header>
   <ion-navbar gold>
+    <ion-buttons end>
+      <button (click)="dismiss()">
+        OK
+      </button>
+    </ion-buttons>
     <ion-title>Filtrar</ion-title>
   </ion-navbar>
 </ion-header>
@@ -7,8 +12,20 @@
 
 <ion-content>
   <ion-list>
-    <ion-item>
 
+    <ion-item>
+      Categoria
+      <ion-note (click)="presentCategoriesModal()" item-right>
+        {{(category ? category : 'Nenhum Selecionado')}}
+        <ion-icon name="arrow-forward"></ion-icon>
+      </ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name='body' item-left></ion-icon>
+      <ion-toggle checked="false"></ion-toggle>
+      <ion-label>
+        Somente Quem Eu Sigo
+      </ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

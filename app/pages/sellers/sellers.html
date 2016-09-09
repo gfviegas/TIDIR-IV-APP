@@ -28,8 +28,11 @@
 </ion-header>
 
 
-<ion-content>
-  <ion-list *ngIf="sellers.length > 0">
+<ion-content class="sellers-page">
+  <div class="spinner-container" padding text-center *ngIf="loading">
+    <ion-spinner></ion-spinner>
+  </div>
+  <ion-list *ngIf="sellers.length > 0 && !loading">
     <ion-item *ngFor="let seller of sellers; let i = index;">
       <ion-avatar item-left>
         <img [src]="seller.photo ? IMG_URL + seller.photo : IMG_URL + 'person.jpeg'">

@@ -17,6 +17,7 @@ export class SellersPage {
   searchVisible: boolean = false;
 
   sellers: Array<any> = [];
+  loading: boolean = false;
 
   constructor(
     public modalCtrl: ModalController,
@@ -31,11 +32,14 @@ export class SellersPage {
   }
 
   loadInit(): void {
+    this.loading = true;
     this.sellersService.getAll().subscribe(
       sellers => {
         this.sellers = sellers;
+        this.loading = false;
       },
       error => {
+        this.loading = false;
         console.error(error);
       }
     );
@@ -45,12 +49,15 @@ export class SellersPage {
     let query = event.target.value;
 
     if (query && query.trim() != '') {
+      this.loading = true;
       this.sellersService.findSeller(query).subscribe(
         response => {
           this.sellers = response;
+          this.loading = false;
         },
         error => {
           console.error(error);
+          this.loading = false;
         }
       );
     } else {

@@ -1,41 +1,58 @@
 <ion-header>
   <ion-navbar gold>
     <ion-title>Categorias</ion-title>
+    <ion-buttons start>
+      <button (click)="cancel()">
+        Cancelar
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-item-group radio-group>
+  <ion-item-group radio-group [(ngModel)]="selectedCategory">
 
     <ion-item-divider light>Alimentos</ion-item-divider>
     <ion-item>
       <ion-label>Doce</ion-label>
-      <ion-radio value="go"></ion-radio>
+      <ion-radio value="Doce"></ion-radio>
     </ion-item>
     <ion-item>
       <ion-label>Salgado</ion-label>
-      <ion-radio value="rust"></ion-radio>
+      <ion-radio value="Salgado"></ion-radio>
     </ion-item>
     <ion-item>
       <ion-label>Hortifruti</ion-label>
-      <ion-radio value="python"></ion-radio>
+      <ion-radio value="Hortifruti"></ion-radio>
     </ion-item>
 
     <ion-item-divider light>Eletrônicos</ion-item-divider>
     <ion-item>
       <ion-label>DVDs</ion-label>
-      <ion-radio value="go"></ion-radio>
+      <ion-radio value="DVDs"></ion-radio>
     </ion-item>
     <ion-item>
       <ion-label>Jogos</ion-label>
-      <ion-radio value="rust"></ion-radio>
+      <ion-radio value="Jogos"></ion-radio>
     </ion-item>
     <ion-item>
       <ion-label>Celulares</ion-label>
-      <ion-radio value="python"></ion-radio>
+      <ion-radio value="Celulares"></ion-radio>
     </ion-item>
 
   </ion-item-group>
 
 
 </ion-content>
+
+
+<ion-footer>
+  <ion-toolbar gold>
+    <h4>Categoria Selecionada: <b>{{selectedCategory}}</b></h4>
+    <ion-buttons end>
+      <button (click)="dismiss()">
+        OK
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
