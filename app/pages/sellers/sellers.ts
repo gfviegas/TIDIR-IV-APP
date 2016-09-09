@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController, LoadingController, ModalController } from 'ionic-angular';
 
 import {IMG_URL} from '../../config.ts';
-
 import { SellersService } from '../../providers/sellers/sellers';
+
+import { FilterModalPage } from './modals/filter/filter';
 
 @Component({
   templateUrl: 'build/pages/sellers/sellers.html',
@@ -18,6 +19,7 @@ export class SellersPage {
   sellers: Array<any> = [];
 
   constructor(
+    public modalCtrl: ModalController,
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
     private sellersService: SellersService
@@ -25,18 +27,15 @@ export class SellersPage {
   }
 
   ngOnInit() {
-    let loading = this.loadingCtrl.create({
-      content: 'Pesquisando'
-    });
-    loading.present();
+    this.loadInit();
+  }
 
+  loadInit(): void {
     this.sellersService.getAll().subscribe(
       sellers => {
-        loading.dismiss();
         this.sellers = sellers;
       },
       error => {
-        loading.dismiss();
         console.error(error);
       }
     );
@@ -44,29 +43,30 @@ export class SellersPage {
 
   getItems(event) {
     let query = event.target.value;
-    this.searchQuery = query;
-
-    let loading = this.loadingCtrl.create({
-      content: 'Pesquisando'
-    });
-    loading.present();
 
     if (query && query.trim() != '') {
       this.sellersService.findSeller(query).subscribe(
         response => {
-          loading.dismiss();
           this.sellers = response;
         },
         error => {
-          loading.dismiss();
           console.error(error);
         }
       );
+    } else {
+      this.loadInit();
     }
   }
 
   toggleSearchBar() {
+    this.searchQuery = '';
+    this.loadInit();
     this.searchVisible = !this.searchVisible;
+  }
+
+  presentFilterModal() {
+    let modal = this.modalCtrl.create(FilterModalPage);
+    modal.present();
   }
 
 }

@@ -1,6 +1,5 @@
 <ion-header>
 
-  <!-- <ion-navbar gold > -->
     <ion-toolbar gold *ngIf="!searchVisible">
       <ion-buttons start>
         <button (click)="toggleSearchBar()">
@@ -11,21 +10,20 @@
       <ion-title>Vendedores</ion-title>
 
       <ion-buttons end>
-        <button>
+        <button (click)="presentFilterModal()">
           <ion-icon name="more"></ion-icon>
         </button>
       </ion-buttons>
     </ion-toolbar>
 
     <ion-toolbar gold *ngIf="searchVisible">
-      <ion-searchbar (input)="getItems($event)"></ion-searchbar>
+      <ion-searchbar [(ngModel)]="searchQuery" (input)="getItems($event)"></ion-searchbar>
       <ion-buttons end>
         <button (click)="toggleSearchBar()">
           Cancelar
         </button>
       </ion-buttons>
     </ion-toolbar>
-  <!-- </ion-navbar> -->
 
 </ion-header>
 
