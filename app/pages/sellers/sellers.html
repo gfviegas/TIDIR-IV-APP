@@ -42,4 +42,7 @@
       <ion-icon name="arrow-forward" item-right></ion-icon>
     </ion-item>
   </ion-list>
+  <div class="not-found-container" padding text-center *ngIf="sellers.length < 1 && !loading">
+    <h6> Não foi encontrado nenhum vendedor com os filtros aplicados </h6>
+  </div>
 </ion-content>

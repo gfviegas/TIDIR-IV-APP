@@ -17,7 +17,21 @@ export class SellersService {
     return this.http.get(API_URL + 'sellers', options).map(res => res.json());
   }
 
-  getAll() {
-    return this.http.get(API_URL + 'sellers').map(res => res.json());
+  getAll(filters?) {
+    let params = new URLSearchParams();
+
+    for (let key in filters) {
+      if (key == 'sort') {
+        params.set(key, filters[key].value);
+      } else if (filters[key] != '') {
+        params.set(key, filters[key]);
+      }
+    }
+
+    let options = new RequestOptions({
+      search: params
+    });
+
+    return this.http.get(API_URL + 'sellers', options).map(res => res.json());
   }
 }

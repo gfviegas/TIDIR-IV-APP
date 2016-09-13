@@ -10,49 +10,14 @@
 </ion-header>
 
 <ion-content>
-  <ion-item-group radio-group [(ngModel)]="selectedCategory">
-
-    <ion-item-divider light>Alimentos</ion-item-divider>
-    <ion-item>
-      <ion-label>Doce</ion-label>
-      <ion-radio value="Doce"></ion-radio>
-    </ion-item>
-    <ion-item>
-      <ion-label>Salgado</ion-label>
-      <ion-radio value="Salgado"></ion-radio>
-    </ion-item>
-    <ion-item>
-      <ion-label>Hortifruti</ion-label>
-      <ion-radio value="Hortifruti"></ion-radio>
-    </ion-item>
-
-    <ion-item-divider light>Eletrônicos</ion-item-divider>
-    <ion-item>
-      <ion-label>DVDs</ion-label>
-      <ion-radio value="DVDs"></ion-radio>
-    </ion-item>
-    <ion-item>
-      <ion-label>Jogos</ion-label>
-      <ion-radio value="Jogos"></ion-radio>
-    </ion-item>
-    <ion-item>
-      <ion-label>Celulares</ion-label>
-      <ion-radio value="Celulares"></ion-radio>
-    </ion-item>
-
+  <ion-item-group radio-group [(ngModel)]="selectedCategory" (ionChange)="select()">
+    <div *ngFor="let category of categories">
+      <ion-item-divider text-center light>{{category.name}}</ion-item-divider>
+      <ion-item *ngFor="let subcategory of category.subcategories">
+        <ion-label>{{subcategory}}</ion-label>
+        <ion-radio [value]="subcategory"></ion-radio>
+      </ion-item>
+    </div>
   </ion-item-group>
 
-
 </ion-content>
-
-
-<ion-footer>
-  <ion-toolbar gold>
-    <h4>Categoria Selecionada: <b>{{selectedCategory}}</b></h4>
-    <ion-buttons end>
-      <button (click)="dismiss()">
-        OK
-      </button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-footer>

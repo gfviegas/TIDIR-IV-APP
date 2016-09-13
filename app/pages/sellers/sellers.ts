@@ -19,6 +19,12 @@ export class SellersPage {
   sellers: Array<any> = [];
   loading: boolean = false;
 
+  filter: Object = {
+    category: '',
+    sort : {name: 'Cadastrados Mais Recentemente', value: '-date'},
+    onlyFollowedSellers: false
+  };
+
   constructor(
     public modalCtrl: ModalController,
     private navCtrl: NavController,
@@ -33,7 +39,7 @@ export class SellersPage {
 
   loadInit(): void {
     this.loading = true;
-    this.sellersService.getAll().subscribe(
+    this.sellersService.getAll(this.filter).subscribe(
       sellers => {
         this.sellers = sellers;
         this.loading = false;
@@ -72,7 +78,11 @@ export class SellersPage {
   }
 
   presentFilterModal() {
-    let modal = this.modalCtrl.create(FilterModalPage);
+    let modal = this.modalCtrl.create(FilterModalPage, this.filter);
+    modal.onDidDismiss(data => {
+     this.filter = data;
+     this.loadInit();
+   });
     modal.present();
   }
 

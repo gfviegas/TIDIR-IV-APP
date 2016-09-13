@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar gold>
+    <ion-title>Categorias</ion-title>
+    <ion-buttons start>
+      <button (click)="cancel()">
+        Cancelar
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-item-group radio-group [(ngModel)]="selectedSort" (ionChange)="select()">
+    <div *ngFor="let option of options">
+      <ion-item-divider text-center light>{{option.name}}</ion-item-divider>
+      <ion-item *ngFor="let suboption of option.suboptions">
+        <ion-label>{{suboption.name}}</ion-label>
+        <ion-radio [value]="suboption"></ion-radio>
+      </ion-item>
+    </div>
+  </ion-item-group>
+
+</ion-content>
