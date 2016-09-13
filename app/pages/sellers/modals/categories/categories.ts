@@ -34,7 +34,6 @@ export class CategoriesModalPage {
   }
 
   select() {
-    console.log('changed', this.selectedCategory);
     if (this.selectedCategory != '' && this.selectedCategory != this.params.get('category')) {
       this.dismiss();
     }

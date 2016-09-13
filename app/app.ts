@@ -42,4 +42,7 @@ export class MyApp {
   }
 }
 
-ionicBootstrap(MyApp);
+ionicBootstrap(MyApp, [], {
+  backButtonText: 'Voltar',
+  tabsPlacement: 'bottom'
+});

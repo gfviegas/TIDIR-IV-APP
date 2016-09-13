@@ -5,6 +5,7 @@ import {IMG_URL} from '../../config.ts';
 import { SellersService } from '../../providers/sellers/sellers';
 
 import { FilterModalPage } from './modals/filter/filter';
+import { SellerPage } from '../seller/seller';
 
 @Component({
   templateUrl: 'build/pages/sellers/sellers.html',
@@ -80,10 +81,14 @@ export class SellersPage {
   presentFilterModal() {
     let modal = this.modalCtrl.create(FilterModalPage, this.filter);
     modal.onDidDismiss(data => {
-     this.filter = data;
-     this.loadInit();
-   });
+      this.filter = data;
+      this.loadInit();
+    });
     modal.present();
+  }
+
+  showSeller(seller) {
+    this.navCtrl.push(SellerPage, {id : seller._id});
   }
 
 }

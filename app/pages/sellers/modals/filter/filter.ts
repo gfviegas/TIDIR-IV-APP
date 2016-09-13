@@ -50,4 +50,10 @@ export class FilterModalPage {
 
     this.viewCtrl.dismiss(filter);
   }
+
+  clear() {
+    this.category = '';
+    this.sort = {name: 'Cadastrados Mais Recentemente', value: '-date'};
+    this.onlyFollowedSellers = false;
+  }
 }

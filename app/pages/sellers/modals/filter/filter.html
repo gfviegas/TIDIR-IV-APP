@@ -1,11 +1,16 @@
 <ion-header>
-  <ion-navbar gold>
-    <ion-buttons end>
+  <ion-navbar gold align-title="center">
+    <ion-buttons left>
+      <button (click)="clear()">
+        Limpar
+      </button>
+    </ion-buttons>
+    <ion-title>Filtrar</ion-title>
+    <ion-buttons right>
       <button (click)="dismiss()">
         OK
       </button>
     </ion-buttons>
-    <ion-title>Filtrar</ion-title>
   </ion-navbar>
 </ion-header>
 
