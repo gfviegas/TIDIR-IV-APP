@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, LoadingController } from 'ionic-angular';
-import {AuthService} from '../../providers/auth/auth';
-import {IMG_URL} from '../../config.ts';
-import {LoginPage} from '../login/login';
+import { AuthService, UserObject, AuthUser } from '../../providers/auth/auth';
+import { IMG_URL } from '../../config.ts';
+import { LoginPage } from '../login/login';
 import * as moment from 'moment';
 
 
@@ -12,26 +12,7 @@ import * as moment from 'moment';
 export class ProfilePage {
 
     IMG_URL: string = IMG_URL;
-    user: Object = {
-        "_id": "",
-        "updatedAt": "",
-        "createdAt": "",
-        "name": "",
-        "age": null,
-        "email": "",
-        "password": "",
-        "contact": {
-            "whatsapp": "",
-            "facebook": "",
-            "phone": ""
-        },
-        "followedSellers": [],
-        "photo": "",
-        "location": {
-            "city": "",
-            "state": ""
-        }
-    };
+    user: UserObject = new AuthUser();
     createdFromNow: string;
     page: string = 'overview';
     loading: any;
@@ -43,6 +24,7 @@ export class ProfilePage {
       private alertCtrl: AlertController,
       private loadingCtrl: LoadingController
   ) {
+      console.log(this.user);
       this.loading = loadingCtrl.create({
         content: "Carregando..."
       });

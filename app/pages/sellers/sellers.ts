@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, LoadingController, ModalController } from 'ionic-angular';
 
 import {IMG_URL} from '../../config.ts';
-import { SellersService } from '../../providers/sellers/sellers';
+import { SellersService, SellerObject, Seller } from '../../providers/sellers/sellers';
 
 import { FilterModalPage } from './modals/filter/filter';
 import { SellerPage } from '../seller/seller';
@@ -17,7 +17,7 @@ export class SellersPage {
   searchQuery:string = '';
   searchVisible: boolean = false;
 
-  sellers: Array<any> = [];
+  sellers: Array<SellerObject> = [];
   loading: boolean = false;
 
   filter: Object = {

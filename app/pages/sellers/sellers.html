@@ -32,13 +32,13 @@
   <div class="spinner-container" padding text-center *ngIf="loading">
     <ion-spinner></ion-spinner>
   </div>
-  <ion-list *ngIf="sellers.length > 0 && !loading">
-    <ion-item *ngFor="let seller of sellers; let i = index;">
+  <ion-list *ngIf="sellers.length > 0 && !loading" [virtualScroll]="sellers">
+    <ion-item *virtualItem="let seller">
       <ion-avatar item-left>
-        <img [src]="seller.photo ? IMG_URL + seller.photo : IMG_URL + 'person.jpeg'">
+        <ion-img [src]="seller.photo ? IMG_URL + seller.photo : IMG_URL + 'person.jpeg'"></ion-img>
       </ion-avatar>
-      <h2>{{seller.name}}</h2>
-      <p>{{seller.location.city}} - {{seller.location.state}}</p>
+      <h2>{{seller?.name}}</h2>
+      <p>{{seller?.location?.city}} - {{seller?.location?.state}}</p>
       <ion-icon (click)="showSeller(seller)" name="arrow-forward" item-right></ion-icon>
     </ion-item>
   </ion-list>

@@ -4,6 +4,73 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="seller-page">
-  {{seller | json}}
+<ion-content class="seller-page" *ngIf="seller != {}">
+  <ion-toolbar dark text-center class="seller-image-toolbar">
+      <img [src]="seller.photo ? IMG_URL + seller.photo : IMG_URL + 'person.jpeg'">
+  </ion-toolbar>
+
+  <ion-list>
+    <ion-list-header>
+      Nome
+    </ion-list-header>
+    <ion-item>
+      {{seller.name}}
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      Contato
+    </ion-list-header>
+    <ion-item *ngIf="seller.email != null">
+      <ion-icon name="mail" danger item-left></ion-icon>
+      {{seller.email}}
+      <button clear item-right (click)="mail(seller.email)"> Enviar Email </button>
+    </ion-item>
+    <ion-item *ngIf="seller.contact != null && seller.contact.whatsapp != null">
+      <ion-icon name="logo-whatsapp" secondary item-left></ion-icon>
+      {{seller.contact.whatsapp}}
+      <button clear item-right (click)="chat(seller.contact.whatsapp)"> Enviar Mensagem </button>
+    </ion-item>
+    <ion-item *ngIf="seller.contact != null && seller.contact.phone != null">
+      <ion-icon name="call" primary item-left></ion-icon>
+      {{seller.contact.phone}}
+      <button clear item-right (call)="call(seller.contact.phone)"> Ligar </button>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      Localização
+    </ion-list-header>
+    <ion-item>
+      <ion-icon name="md-globe" item-left></ion-icon>
+      {{seller.location?.city}} / {{seller.location?.state}}
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="seller.category.length > 0">
+    <ion-list-header>
+      Categorias
+    </ion-list-header>
+    <ion-item text-wrap>
+      {{seller.category.join(', ')}}
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      Dados Adicionais
+    </ion-list-header>
+    <ion-item>
+      <ion-icon name="contacts" warning item-left></ion-icon>
+      <b>{{seller.products}}</b> produtos cadastrados
+      <button clear item-right (click)="presentProductsModal()" [disabled]="seller.products < 1">Ver</button>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="calendar" item-left></ion-icon>
+      Registrado <b> {{createdFromNow}} </b>
+    </ion-item>
+  </ion-list>
+
 </ion-content>

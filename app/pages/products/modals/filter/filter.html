@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar gold align-title="center">
+    <ion-buttons left>
+      <button (click)="clear()">
+        Limpar
+      </button>
+    </ion-buttons>
+    <ion-title>Filtrar</ion-title>
+    <ion-buttons right>
+      <button (click)="dismiss()">
+        OK
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      Categoria
+      <ion-note (click)="presentCategoriesModal()" item-right>
+        {{(category ? category : 'Nenhum Selecionado')}}
+        <ion-icon name="arrow-forward"></ion-icon>
+      </ion-note>
+    </ion-item>
+
+    <ion-item>
+      Ordenar Por
+      <ion-note (click)="presentSortModal()" item-right>
+        {{(sort ? sort.name : 'Nenhum Selecionado')}}
+        <ion-icon name="arrow-forward"></ion-icon>
+      </ion-note>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        Somente Vendedores que eu sigo
+      </ion-label>
+      <ion-toggle [(ngModel)]="onlyFollowedSellers"></ion-toggle>
+    </ion-item>
+  </ion-list>
+</ion-content>

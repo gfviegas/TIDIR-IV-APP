@@ -3,6 +3,42 @@ import { Http, RequestOptions, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { JSON_URL, API_URL } from '../../config';
 
+export interface SellerObject {
+  _id: string;
+  updatedAt: string;
+  createdAt: string;
+  name: string;
+  email: string;
+  password?: string;
+  contact?: {
+    whatsapp?: string;
+    facebook?: string;
+    phone?: string;
+  };
+  photo: string;
+  location: {
+    city: string
+    state: string
+  };
+  category: string[];
+  products?: number;
+};
+
+export class Seller implements SellerObject {
+  _id = '';
+  updatedAt = '';
+  createdAt = '';
+  name = '';
+  email = '';
+  followedSellers = [];
+  photo = '';
+  location = {
+    city: '',
+    state: ''
+  };
+  category = [];
+}
+
 @Injectable()
 export class SellersService {
 
@@ -50,20 +86,20 @@ export class SellersService {
   /**
    * Get a seller by his Id
    * @method getById
-   * @param  {number} sellerId The ID of the seller to be found
+   * @param  {string} sellerId The ID of the seller to be found
    * @return {Observable}          The HTTP GET Request Observable
    */
-  getById(sellerId: number) {
+  getById(sellerId: string) {
     return this.http.get(API_URL + 'sellers/' + sellerId).map(res => res.json());
   }
 
   /**
    * Get the products of a specific seller
    * @method getProducts
-   * @param  {number}    sellerId The seller ID
+   * @param  {string}    sellerId The seller ID
    * @return {Observable}             THe HTTP GET Request Observable
    */
-  getProducts(sellerId: number) {
+  getProducts(sellerId: string) {
     return this.http.get(API_URL + 'sellers/' + sellerId + '/products').map(res => res.json());
   }
 }

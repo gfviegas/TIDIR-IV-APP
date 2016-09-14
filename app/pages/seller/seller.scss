@@ -1,3 +1,18 @@
 .seller-page {
+  .seller-image-toolbar {
+    img {
+      text-align: center;
+      width: 15rem;
+      height: 15rem;
+      border-radius: 15rem;
+      margin: 3rem;
+    }
+  }
+  .bg-primary {
+    background : color($colors, primary, base);
 
+    [ion-card] {
+      background: transparent;
+    }
+  }
 }
