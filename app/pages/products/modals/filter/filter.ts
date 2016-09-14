@@ -10,8 +10,8 @@ import { SortModalPage } from '../sort/sort';
 export class FilterModalPage {
 
   category: string = '';
-  sort: Object = {name: 'Cadastrados Mais Recentemente', value: '-date'};
-  onlyFollowedSellers: boolean = false;
+  sort: Object = {name: 'Cadastrados Mais Recentemente', value: '-created_at'};
+  onlyFollowedSellers: boolean = true;
 
   constructor(
     public modalCtrl: ModalController,
@@ -53,7 +53,7 @@ export class FilterModalPage {
 
   clear() {
     this.category = '';
-    this.sort = {name: 'Cadastrados Mais Recentemente', value: '-date'};
-    this.onlyFollowedSellers = false;
+    this.sort = {name: 'Cadastrados Mais Recentemente', value: '-created_at'};
+    this.onlyFollowedSellers = true;
   }
 }

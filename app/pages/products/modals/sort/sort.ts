@@ -16,10 +16,24 @@ export class SortModalPage {
 
     this.options = [
       {
+        name: 'Preço',
+        suboptions: [
+          {name: 'Mais Barato', value: 'price'},
+          {name: 'Mais Caro', value: '-price'}
+        ]
+      },
+      {
+        name: 'Estoque',
+        suboptions: [
+          {name: 'Maior Estoque', value: '-stock_avaible'},
+          {name: 'Menor Estoque', value: 'stock_avaible'}
+        ]
+      },
+      {
         name: 'Data de Cadastro',
         suboptions: [
-          {name: 'Cadastrados Mais Recentemente', value: '-date'},
-          {name: 'Cadastrados Mais Anteriormente', value: 'date'}
+          {name: 'Cadastrados Mais Recentemente', value: '-created_at'},
+          {name: 'Cadastrados Mais Anteriormente', value: 'created_at'}
         ]
       },
       {

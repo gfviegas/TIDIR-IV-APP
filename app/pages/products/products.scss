@@ -20,7 +20,10 @@
     }
   }
 
-  .align-self-center {
-    align-self: center;
+  .product-thumbnail {
+    img, ion-img {
+      height: 19rem;
+      width: 100%;
+    }
   }
 }

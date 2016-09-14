@@ -24,7 +24,8 @@ export class ProductsPage {
 
   filter: Object = {
     category: '',
-    sort : {name: 'Cadastrados Mais Recentemente', value: '-date'}
+    sort : {name: 'Cadastrados Mais Recentemente', value: '-created_at'},
+    onlyFollowedSellers: true
   };
 
   constructor(

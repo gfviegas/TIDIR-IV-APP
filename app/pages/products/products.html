@@ -37,8 +37,8 @@
   <ion-list *ngIf="products.length > 0 && !loading" [virtualScroll]="products">
     <ion-item *virtualItem="let product" text-wrap>
       <!-- Product Image -->
-      <ion-row>
-        <ion-col class="align-self-center">
+      <ion-row center>
+        <ion-col class="product-thumbnail" width-80 offset-10>
           <ion-img [src]="product.images[0] ? IMG_URL + product.images[0] : IMG_URL + 'person.jpeg'"></ion-img>
         </ion-col>
       </ion-row>
