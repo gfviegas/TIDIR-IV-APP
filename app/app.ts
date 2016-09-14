@@ -1,11 +1,12 @@
-import {Component} from '@angular/core';
-import {Platform, ionicBootstrap} from 'ionic-angular';
-import {StatusBar} from 'ionic-native';
+import { Component } from '@angular/core';
+import { Platform, ionicBootstrap } from 'ionic-angular';
+import { StatusBar } from 'ionic-native';
+import { AuthHttp, AuthConfig, AUTH_PROVIDERS } from 'angular2-jwt';
 
-import {LoginPage} from './pages/login/login';
-import {TabsPage} from './pages/tabs/tabs';
+import { LoginPage } from './pages/login/login';
+import { TabsPage } from './pages/tabs/tabs';
 
-import {AuthService} from './providers/auth/auth';
+import { AuthService } from './providers/auth/auth';
 
 import * as moment from 'moment';
 import 'moment/locale/pt-br';
@@ -13,7 +14,7 @@ import 'moment/locale/pt-br';
 
 @Component({
   template: '<ion-nav [root]="rootPage"></ion-nav>',
-  providers: [AuthService]
+  providers: [AuthService, AUTH_PROVIDERS]
 })
 export class MyApp {
 

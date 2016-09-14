@@ -5,13 +5,14 @@ import { CategoriesModalPage } from '../categories/categories';
 import { SortModalPage } from '../sort/sort';
 
 @Component({
-  templateUrl: 'build/pages/sellers/modals/filter/filter.html'
+  templateUrl: 'build/pages/products/modals/filter/filter.html'
 })
 export class FilterModalPage {
 
   category: string = '';
-  sort: Object = {name: 'Cadastrados Mais Recentemente', value: '-created_at'};
+  sort: Object = {name: 'Mais Novos', value: '-created_at'};
   onlyFollowedSellers: boolean = true;
+  onlyInStock: boolean = true;
 
   constructor(
     public modalCtrl: ModalController,
@@ -21,6 +22,7 @@ export class FilterModalPage {
     this.category = params.get('category');
     this.sort = params.get('sort');
     this.onlyFollowedSellers = params.get('onlyFollowedSellers');
+    this.onlyInStock = params.get('onlyInStock');
   }
 
   presentCategoriesModal() {
@@ -45,7 +47,8 @@ export class FilterModalPage {
     let filter = {
       category: this.category,
       sort: this.sort,
-      onlyFollowedSellers: this.onlyFollowedSellers
+      onlyFollowedSellers: this.onlyFollowedSellers,
+      onlyInStock: this.onlyInStock
     };
 
     this.viewCtrl.dismiss(filter);
@@ -53,7 +56,8 @@ export class FilterModalPage {
 
   clear() {
     this.category = '';
-    this.sort = {name: 'Cadastrados Mais Recentemente', value: '-created_at'};
+    this.sort = {name: 'Mais Novos', value: '-created_at'};
     this.onlyFollowedSellers = true;
+    this.onlyInStock = true;
   }
 }

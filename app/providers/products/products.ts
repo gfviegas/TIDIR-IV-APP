@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, URLSearchParams } from '@angular/http';
+import { AuthHttp, AuthConfig, AUTH_PROVIDERS } from 'angular2-jwt';
 import 'rxjs/add/operator/map';
 import { JSON_URL, API_URL } from '../../config';
 
@@ -40,7 +41,7 @@ export class Product implements ProductObject {
 export class ProductsService {
 
   constructor(
-    private http: Http
+    private http: AuthHttp
   ) {
   }
 

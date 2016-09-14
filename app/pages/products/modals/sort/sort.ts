@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ViewController, NavParams } from 'ionic-angular';
 
 @Component({
-  templateUrl: 'build/pages/sellers/modals/sort/sort.html',
+  templateUrl: 'build/pages/products/modals/sort/sort.html',
 })
 export class SortModalPage {
   selectedSort: any = {};
@@ -32,8 +32,8 @@ export class SortModalPage {
       {
         name: 'Data de Cadastro',
         suboptions: [
-          {name: 'Cadastrados Mais Recentemente', value: '-created_at'},
-          {name: 'Cadastrados Mais Anteriormente', value: 'created_at'}
+          {name: 'Mais Novos', value: '-created_at'},
+          {name: 'Mais Antigos', value: 'created_at'}
         ]
       },
       {
@@ -52,7 +52,6 @@ export class SortModalPage {
   }
 
   select() {
-    console.log('changed', this.selectedSort);
     if (this.selectedSort != {} && this.selectedSort != this.params.get('sort')) {
       this.dismiss();
     }

@@ -24,8 +24,9 @@ export class ProductsPage {
 
   filter: Object = {
     category: '',
-    sort : {name: 'Cadastrados Mais Recentemente', value: '-created_at'},
-    onlyFollowedSellers: true
+    sort : {name: 'Mais Novos', value: '-created_at'},
+    onlyFollowedSellers: true,
+    onlyInStock: true
   };
 
   constructor(
@@ -47,7 +48,6 @@ export class ProductsPage {
   }
 
   loadInit(): void {
-    console.log(this.seller);
     this.loading = true;
 
     if (this.seller['_id'] != '') {

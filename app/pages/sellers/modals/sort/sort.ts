@@ -38,7 +38,6 @@ export class SortModalPage {
   }
 
   select() {
-    console.log('changed', this.selectedSort);
     if (this.selectedSort != {} && this.selectedSort != this.params.get('sort')) {
       this.dismiss();
     }
