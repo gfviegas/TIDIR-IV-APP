@@ -35,11 +35,11 @@
   </div>
 
   <ion-list *ngIf="products.length > 0 && !loading" [virtualScroll]="products">
-    <ion-item *virtualItem="let product" text-wrap>
+    <ion-item *virtualItem="let product" text-wrap (click)="presentProduct(product)">
       <!-- Product Image -->
       <ion-row center>
         <ion-col class="product-thumbnail" width-80 offset-10>
-          <ion-img [src]="product.images[0] ? IMG_URL + product.images[0] : IMG_URL + 'person.jpeg'"></ion-img>
+          <ion-img [src]="product?.images?.length > 0 ? IMG_URL + product.images[0] : IMG_URL + 'person.jpeg'"></ion-img>
         </ion-col>
       </ion-row>
       <!-- Product Data -->
@@ -53,14 +53,14 @@
 
           <ion-row>
             <ion-col>
-              <p> <b>Categoria:</b> {{product.category}} </p>
-              <p *ngIf="!seller.name"> <b>Vendido por:</b> {{product.seller.name}} </p>
+              <p> <b>Categoria:</b> {{product?.category}} </p>
+              <p *ngIf="!seller.name"> <b>Vendido por:</b> {{product?.seller?.name}} </p>
             </ion-col>
           </ion-row>
 
           <ion-row>
             <ion-col>
-              <p>{{product.description}}</p>
+              <p>{{product?.description}}</p>
             </ion-col>
           </ion-row>
 
@@ -68,14 +68,14 @@
             <ion-col>
               <button primary clear small>
                 <ion-icon favorite name="cash"></ion-icon>
-                <div>{{product.price | currency:'BRL':true:'1.2-2'}}</div>
+                <div>{{product?.price | currency:'BRL':true:'1.2-2'}}</div>
               </button>
             </ion-col>
 
             <ion-col>
               <button [color]="product.stock_avaible > 0 ? 'primary' : 'danger'" clear small>
                 <ion-icon [color]="product.stock_avaible > 0 ? 'warning' : 'danger'" name="logo-buffer"></ion-icon>
-                <div> <b>{{product.stock_avaible}}</b> em estoque</div>
+                <div> <b>{{product?.stock_avaible}}</b> em estoque</div>
               </button>
             </ion-col>
           </ion-row>

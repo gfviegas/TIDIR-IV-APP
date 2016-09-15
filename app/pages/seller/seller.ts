@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController, NavParams, AlertController } from 'ionic-angular';
+import * as moment from 'moment';
 
 import {IMG_URL} from '../../config.ts';
 import { SellersService, SellerObject, Seller } from '../../providers/sellers/sellers';
@@ -14,8 +15,8 @@ import { ProductsPage } from '../products/products';
 export class SellerPage {
 
   IMG_URL: string = IMG_URL;
-
   seller: SellerObject = new Seller();
+  createdFromNow: string;
   following: boolean = false;
 
   constructor(
@@ -43,6 +44,7 @@ export class SellerPage {
     this.sellersService.getById(sellerId).subscribe(
       seller => {
         this.seller = seller;
+        this.createdFromNow = moment(seller.createdAt).fromNow();
         loading.dismiss();
       },
       error => {

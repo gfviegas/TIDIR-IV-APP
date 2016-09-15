@@ -7,6 +7,7 @@ import { ProductsService, ProductObject, Product } from '../../providers/product
 
 import { FilterModalPage } from './modals/filter/filter';
 import { SellerPage } from '../seller/seller';
+import { ProductPage } from '../product/product';
 
 @Component({
   templateUrl: 'build/pages/products/products.html',
@@ -108,6 +109,10 @@ export class ProductsPage {
       this.loadInit();
     });
     modal.present();
+  }
+
+  presentProduct(product: ProductObject) {
+    this.navCtrl.push(ProductPage, {product: product});
   }
 
 }
