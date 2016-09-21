@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController, NavParams, AlertController } from 'ionic-angular';
 import * as moment from 'moment';
+import { SocialSharing } from 'ionic-native';
 
 import {IMG_URL} from '../../config.ts';
 import { SellersService, SellerObject, Seller } from '../../providers/sellers/sellers';
@@ -69,11 +70,24 @@ export class SellerPage {
   }
 
   call(number: any) {
-    window.open(`tel:${number}`, '_system');
+    let filteredNumber = `tel:+55${number.match(/\d/g).join('')}`;
+    return filteredNumber;
   }
 
   chat(number: any) {
-    window.open(`tel:${number}`, '_system');
+    // window.open(`tel:${number}`, '_system');
+    let filteredNumber = `+55${number}`.trim();
+    SocialSharing.shareViaWhatsAppToReceiver(filteredNumber, '')
+      .then(
+        () => {
+          console.log('ok');
+        }
+      )
+      .catch(
+        () => {
+          console.log('impossible to open wpp')
+        }
+      );
   }
 
   presentProductsModal() {

@@ -39,12 +39,12 @@
     <ion-item *ngIf="seller.contact != null && seller.contact.whatsapp != null">
       <ion-icon name="logo-whatsapp" secondary item-left></ion-icon>
       {{seller.contact.whatsapp}}
-      <button clear item-right (click)="chat(seller.contact.whatsapp)"> Enviar Mensagem </button>
+      <a item-right [href]="call(seller.contact?.whatsapp)" > <button clear> Adicionar </button> </a>
     </ion-item>
     <ion-item *ngIf="seller.contact != null && seller.contact.phone != null">
       <ion-icon name="call" primary item-left></ion-icon>
       {{seller.contact.phone}}
-      <button clear item-right (call)="call(seller.contact.phone)"> Ligar </button>
+      <a item-right [href]="call(seller.contact?.phone)" > <button clear> Ligar </button> </a>
     </ion-item>
   </ion-list>
 

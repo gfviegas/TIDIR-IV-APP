@@ -1,4 +1,4 @@
-<ion-tabs primary>
+<ion-tabs (ionChange)="changedTab()" primary>
   <ion-tab [root]="tabHome" tabTitle="Home" tabIcon="home"></ion-tab>
   <ion-tab [root]="tabSellers" tabTitle="Vendedores" tabIcon="contacts"></ion-tab>
   <ion-tab [root]="tabProducts" tabTitle="Produtos" tabIcon="list-box"></ion-tab>

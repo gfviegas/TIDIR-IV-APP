@@ -43,10 +43,12 @@
         <ion-item *ngIf="user.contact != null && user.contact.whatsapp != null">
           <ion-icon name="logo-whatsapp" secondary item-left></ion-icon>
           {{user.contact.whatsapp}}
+          <button clear item-right> Editar </button>
         </ion-item>
         <ion-item *ngIf="user.contact != null && user.contact.phone != null">
           <ion-icon name="call" primary item-left></ion-icon>
           {{user.contact.phone}}
+          <button clear item-right> Editar </button>
         </ion-item>
       </ion-list>
 
@@ -57,6 +59,7 @@
         <ion-item>
           <ion-icon name="md-globe" item-left></ion-icon>
           {{user.location.city}} / {{user.location.state}}
+          <button clear item-right> Editar </button>
         </ion-item>
       </ion-list>
 
@@ -75,12 +78,6 @@
         </ion-item>
       </ion-list>
 
-      <div padding>
-        <button warning block>
-          <ion-icon name="md-create" item-left></ion-icon>
-          Editar Dados
-        </button>
-      </div>
     </div>
 
     <div *ngSwitchCase="'more'">
