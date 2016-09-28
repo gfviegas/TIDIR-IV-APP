@@ -89,6 +89,10 @@ export class AuthService {
     return tokenNotExpired();
   }
 
+  getLoggedUserId() {
+    return this.jwtHelper.decodeToken(localStorage.getItem('id_token')).sub;
+  }
+
   getLoggedUser() {
     return this.jwtHelper.decodeToken(localStorage.getItem('id_token')).user_data;
   }

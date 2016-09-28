@@ -4,9 +4,28 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="home">
+<ion-content class="home-page" padding>
   <h2>aVender</h2>
-  <p>
-    Bem vindo ao aVender. Essa é a Home, que ainda não está implementada.
-  </p>
+  
+
+  <div class="spinner-container" padding text-center *ngIf="loading">
+    <ion-spinner></ion-spinner>
+  </div>
+  <ion-list *ngIf="posts.length > 0 && !loading" [virtualScroll]="posts">
+    <ion-item *virtualItem="let post" text-wrap>
+      <ion-row>
+        <ion-col>
+          <p>{{post?.content}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <small>por {{post?.author?.name}} </small>
+        </ion-col>
+        <ion-col item-right>
+          <small> {{post?.createdAt}} </small>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
 </ion-content>
