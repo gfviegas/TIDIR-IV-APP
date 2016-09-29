@@ -31,14 +31,13 @@ export class ProductPage {
     public params: NavParams
   ) {
     this.product = this.params.get('product');
-    console.log(this.params.get('product'));
   }
 
   ngOnInit() {
     // this.loadInit();
   }
 
-  ionViewWillLeave() {
+  ionViewDidLeave() {
     this.navCtrl.popToRoot();
   }
 

@@ -2,8 +2,13 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { AuthHttp, tokenNotExpired, JwtHelper } from 'angular2-jwt';
 import { Storage, LocalStorage } from 'ionic-angular';
+
 import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Observable';
+
 import { JSON_URL, API_URL } from '../../config';
+
+import { SellerObject } from '../sellers/sellers';
 
 export interface UserObject {
   _id: string;
@@ -47,10 +52,14 @@ export class UsersService {
   private userId: string;
 
   constructor(
-    private http: AuthHttp
+    private http: Http
   ) {
     this.local = new Storage(LocalStorage);
     this.userId = this.jwtHelper.decodeToken(localStorage.getItem('id_token')).sub;
+  }
+
+  getFollowedSellers(): Observable<Array<SellerObject>> {
+    return this.http.get(API_URL + 'users/' + this.userId + '/followers').map(res => res.json());
   }
 
   checkFollowingSeller(sellerId: string) {

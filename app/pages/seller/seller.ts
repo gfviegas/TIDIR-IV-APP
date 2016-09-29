@@ -34,7 +34,7 @@ export class SellerPage {
     this.loadInit();
   }
 
-  ionViewWillLeave() {
+  ionViewDidLeave() {
     this.navCtrl.popToRoot();
   }
 

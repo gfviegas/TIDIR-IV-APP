@@ -1,0 +1,22 @@
+.following-page {
+  .seller-avatar {
+    ion-img, img {
+      height: 80%;
+      width: 80%;
+      border-radius: 50%;
+    }
+  }
+
+  .spinner-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    ion-spinner {
+      width: 6rem;
+      height: 6rem;
+    }
+  }
+}

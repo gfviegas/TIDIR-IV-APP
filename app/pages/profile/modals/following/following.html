@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar gold>
+    <ion-title text-center> Vendedores Seguidos </ion-title>
+    <ion-buttons right>
+      <button (click)="dismiss()">
+        OK
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="following-page">
+  <div class="spinner-container" padding text-center *ngIf="loading">
+    <ion-spinner></ion-spinner>
+  </div>
+  <ion-list *ngIf="followers.length > 0 && !loading" [virtualScroll]="followers">
+    <ion-item *virtualItem="let follower">
+
+      <ion-row>
+        <ion-col class="seller-avatar" width-33>
+          <ion-img [src]="follower.photo ? IMG_URL + follower.photo : IMG_URL + 'person.jpeg'"></ion-img>
+        </ion-col>
+        <ion-col>
+
+          <ion-row>
+            <ion-col>
+              <h2>{{follower?.name}}</h2>
+              <p>{{follower?.location?.city}} - {{follower?.location?.state}}</p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <!-- <ion-col width-25>
+              <button (click)="showSeller(follower)" clear item-right>Ver</button>
+            </ion-col> -->
+            <ion-col>
+              <button (click)="confirmUnfollow(follower)" clear item-right>Deixar de Seguir</button>
+            </ion-col>
+          </ion-row>
+
+        </ion-col>
+      </ion-row>
+
+
+    </ion-item>
+
+  </ion-list>
+</ion-content>
