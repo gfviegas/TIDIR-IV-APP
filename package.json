@@ -49,5 +49,8 @@
     }
   ],
   "name": "aVender",
-  "description": "aVender - Folheto Virtual para Ambulantes"
+  "description": "aVender - Folheto Virtual para Ambulantes",
+  "scripts": {
+    "preinstall": "node preinstall.js"
+  }
 }
