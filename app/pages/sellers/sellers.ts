@@ -34,7 +34,7 @@ export class SellersPage {
   ) {
   }
 
-  ngOnInit() {
+  ionViewDidEnter() {
     this.loadInit();
   }
 

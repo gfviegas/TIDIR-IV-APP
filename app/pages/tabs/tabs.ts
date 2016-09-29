@@ -22,7 +22,4 @@ export class TabsPage {
     this.tabProfile = ProfilePage;
   }
 
-  changedTab() {
-    console.log('changed tab');
-  }
 }

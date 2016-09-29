@@ -34,6 +34,10 @@ export class SellerPage {
     this.loadInit();
   }
 
+  ionViewWillLeave() {
+    this.navCtrl.popToRoot();
+  }
+
   loadInit(): void {
     let loading = this.loadingCtrl.create({
       content: 'Carregando...'

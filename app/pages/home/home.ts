@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import * as moment from 'moment';
 import 'rxjs/add/operator/map';
+import { IMG_URL } from '../../config.ts';
 
 import { PostsService, PostObject } from '../../providers/posts/posts';
 import { AuthService } from '../../providers/auth/auth';
@@ -13,6 +14,7 @@ import { AuthService } from '../../providers/auth/auth';
 export class HomePage {
   posts: Array<PostObject> = [];
   loading: boolean = false;
+  IMG_URL: string = IMG_URL;
 
   constructor(
     private navCtrl: NavController,
@@ -21,7 +23,7 @@ export class HomePage {
   ) {
   }
 
-  ngOnInit() {
+  ionViewDidEnter() {
     this.loadInit();
   }
 

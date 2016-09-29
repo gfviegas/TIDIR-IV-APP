@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController, ModalController, NavParams } from 'ionic-angular';
 
-import {IMG_URL} from '../../config.ts';
+import { IMG_URL } from '../../config.ts';
 import { SellersService, SellerObject, Seller } from '../../providers/sellers/sellers';
 import { ProductsService, ProductObject, Product } from '../../providers/products/products';
 
@@ -44,7 +44,7 @@ export class ProductsPage {
     }
   }
 
-  ngOnInit() {
+  ionViewDidEnter() {
     this.loadInit();
   }
 

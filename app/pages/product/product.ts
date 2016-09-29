@@ -38,6 +38,10 @@ export class ProductPage {
     // this.loadInit();
   }
 
+  ionViewWillLeave() {
+    this.navCtrl.popToRoot();
+  }
+
   loadInit(): void {
     // let loading = this.loadingCtrl.create({
     //   content: 'Carregando...'

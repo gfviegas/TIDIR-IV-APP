@@ -30,7 +30,7 @@ export class ProfilePage {
       });
   }
 
-  ngOnInit() {
+  ionViewDidEnter() {
       this.loading.present();
       this.authService.getLoggedUserData().subscribe(
           (user) => {
