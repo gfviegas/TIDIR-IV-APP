@@ -1,7 +1,8 @@
 {
-  "name": "ionic-hello-world",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "name": "aVender",
+  "description": "aVender - Folheto Virtual para Ambulantes",
+  "author": "Gustavo Viegas",
+  "homepage": "http://gfviegas.com/",
   "private": true,
   "scripts": {
     "build": "ionic-app-scripts build",
@@ -42,6 +43,5 @@
       "version": "",
       "locator": "ios"
     }
-  ],
-  "description": ": An Ionic project"
+  ]
 }
