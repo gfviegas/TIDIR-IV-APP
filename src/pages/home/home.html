@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar color="gold">
+    <ion-title text-center>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="home-page">
+  <img src="assets/img/splash.png" alt="">
+
+  <div class="spinner-container" padding text-center *ngIf="loading">
+    <ion-spinner></ion-spinner>
+  </div>
+  <ion-list *ngIf="posts.length > 0 && !loading" >
+    <ion-card *ngFor="let post of posts" text-wrap>
+      <ion-item>
+        <ion-avatar item-left>
+          <ion-img [src]="IMG_URL + post?.author?.photo"></ion-img>
+        </ion-avatar>
+        <h2>{{post?.author?.name}}</h2>
+        <p>{{post?.createdAt}}</p>
+        <button ion-button clear item-right> Ver Perfil </button>
+      </ion-item>
+
+      <ion-card-content>
+        <p>{{post?.content}}</p>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,48 @@
+<ion-header>
+
+    <ion-toolbar color="gold" *ngIf="!searchVisible" align-title="center">
+      <ion-buttons left>
+        <button ion-button (click)="toggleSearchBar()">
+          <ion-icon name="search"></ion-icon>
+        </button>
+      </ion-buttons>
+
+      <ion-title>Vendedores</ion-title>
+
+      <ion-buttons end>
+        <button ion-button (click)="presentFilterModal()">
+          <ion-icon name="more"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+
+    <ion-toolbar color="gold" *ngIf="searchVisible">
+      <ion-searchbar placeholder="Pesquisar Vendedor" [(ngModel)]="searchQuery" (input)="getItems($event)"></ion-searchbar>
+      <ion-buttons end>
+        <button ion-button (click)="toggleSearchBar()">
+          Cancelar
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content class="sellers-page">
+  <div class="spinner-container" padding text-center *ngIf="loading">
+    <ion-spinner></ion-spinner>
+  </div>
+  <ion-list *ngIf="sellers.length > 0 && !loading" [virtualScroll]="sellers" approxItemHeight="40px">
+    <ion-item *virtualItem="let seller">
+      <ion-avatar item-left>
+        <ion-img [src]="seller.photo ? IMG_URL + seller.photo : IMG_URL + 'person.jpeg'"></ion-img>
+      </ion-avatar>
+      <h2>{{seller?.name}}</h2>
+      <p>{{seller?.location?.city}} - {{seller?.location?.state}}</p>
+      <ion-icon (click)="showSeller(seller)" name="arrow-forward" item-right></ion-icon>
+    </ion-item>
+  </ion-list>
+  <div class="not-found-container" padding text-center *ngIf="sellers.length < 1 && !loading">
+    <h6> Não foi encontrado nenhum vendedor com os filtros aplicados </h6>
+  </div>
+</ion-content>

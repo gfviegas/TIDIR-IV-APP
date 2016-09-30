@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-navbar color="gold">
+    <ion-title>Perfil do Vendedor</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="seller-page" *ngIf="seller != {}">
+  <ion-toolbar clear text-center class="seller-image-toolbar">
+      <img [src]="seller.photo ? IMG_URL + seller.photo : IMG_URL + 'person.jpeg'">
+      <br>
+      <button ion-button (click)="confirmUnfollow()" color="primary" clear small *ngIf="following">
+        <ion-icon name="checkmark"></ion-icon>
+        <b>Seguindo</b>
+      </button>
+      <button ion-button (click)="confirmFollow()" color="primary" clear small *ngIf="!following">
+        <ion-icon name="person-add"></ion-icon>
+        <b>Seguir</b>
+      </button>
+  </ion-toolbar>
+
+  <ion-list>
+    <ion-list-header>
+      Nome
+    </ion-list-header>
+    <ion-item>
+      {{seller.name}}
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      Contato
+    </ion-list-header>
+    <ion-item *ngIf="seller.email != null">
+      <ion-icon name="mail" color="danger" item-left></ion-icon>
+      {{seller.email}}
+      <button ion-button clear item-right (click)="mail(seller.email)"> Enviar Email </button>
+    </ion-item>
+    <ion-item *ngIf="seller.contact != null && seller.contact.whatsapp != null">
+      <ion-icon name="logo-whatsapp" color="secondary" item-left></ion-icon>
+      {{seller.contact.whatsapp}}
+      <a item-right [href]="call(seller.contact?.whatsapp)" > <button ion-button clear> Adicionar </button> </a>
+    </ion-item>
+    <ion-item *ngIf="seller.contact != null && seller.contact.phone != null">
+      <ion-icon name="call" color="primary" item-left></ion-icon>
+      {{seller.contact.phone}}
+      <a item-right [href]="call(seller.contact?.phone)" > <button ion-button clear> Ligar </button> </a>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      Localização
+    </ion-list-header>
+    <ion-item>
+      <ion-icon name="md-globe" item-left></ion-icon>
+      {{seller.location?.city}} / {{seller.location?.state}}
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="seller.category.length > 0">
+    <ion-list-header>
+      Categorias
+    </ion-list-header>
+    <ion-item text-wrap>
+      {{seller.category.join(', ')}}
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      Dados Adicionais
+    </ion-list-header>
+    <ion-item>
+      <ion-icon name="contacts" warning item-left></ion-icon>
+      <b>{{seller.products}}</b> produtos cadastrados
+      <button ion-button clear item-right (click)="presentProductsModal()" [disabled]="seller.products < 1">Ver</button>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="calendar" item-left></ion-icon>
+      Registrado <b> {{createdFromNow}} </b>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

@@ -1,0 +1,104 @@
+<ion-header>
+  <ion-navbar color="gold">
+    <ion-title text-center> Meu Perfil </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="profile-page">
+
+  <ion-toolbar color="dark" text-center class="user-image-toolbar">
+    <img [src]="user.photo ? IMG_URL + user.photo : IMG_URL + 'person.jpeg'">
+  </ion-toolbar>
+  <div padding>
+    <ion-segment color="dark" [(ngModel)]="page">
+      <ion-segment-button value="overview">
+        Perfil
+      </ion-segment-button>
+      <ion-segment-button value="more">
+        Mais
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div [ngSwitch]="page">
+
+    <div *ngSwitchCase="'overview'">
+      <ion-list>
+        <ion-list-header>
+          Nome
+        </ion-list-header>
+        <ion-item>
+          {{user.name}}
+        </ion-item>
+      </ion-list>
+
+      <ion-list>
+        <ion-list-header>
+          Contato
+        </ion-list-header>
+        <ion-item *ngIf="user.email != null">
+          <ion-icon name="mail" color="danger" item-left></ion-icon>
+          {{user.email}}
+        </ion-item>
+        <ion-item *ngIf="user.contact != null && user.contact.whatsapp != null">
+          <ion-icon name="logo-whatsapp" color="secondary" item-left></ion-icon>
+          {{user.contact.whatsapp}}
+          <button ion-button clear item-right> Editar </button>
+        </ion-item>
+        <ion-item *ngIf="user.contact != null && user.contact.phone != null">
+          <ion-icon name="call" color="primary" item-left></ion-icon>
+          {{user.contact.phone}}
+          <button ion-button clear item-right> Editar </button>
+        </ion-item>
+      </ion-list>
+
+      <ion-list>
+        <ion-list-header>
+          Localização
+        </ion-list-header>
+        <ion-item>
+          <ion-icon name="md-globe" item-left></ion-icon>
+          {{user.location.city}} / {{user.location.state}}
+          <button ion-button clear item-right> Editar </button>
+        </ion-item>
+      </ion-list>
+
+      <ion-list>
+        <ion-list-header>
+          Dados Adicionais
+        </ion-list-header>
+        <ion-item>
+          <ion-icon name="contacts" warning item-left></ion-icon>
+          <b>{{user.followedSellers.length}}</b> vendedores seguidos
+          <button ion-button clear item-right (click)="presentFollowingModal()" [disabled]="user.followedSellers.length < 1">Ver</button>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="calendar" item-left></ion-icon>
+          Registrado <b> {{createdFromNow}} </b>
+        </ion-item>
+      </ion-list>
+
+    </div>
+
+    <div *ngSwitchCase="'more'">
+      <ion-list>
+        <ion-list-header>
+          Gerenciamento
+        </ion-list-header>
+        <ion-item>
+          <ion-icon name="document" item-left></ion-icon>
+          Ver Termos de Uso
+        </ion-item>
+        <ion-item>
+          <ion-icon name="key" color="danger" item-left></ion-icon>
+          Alterar minha Senha
+        </ion-item>
+        <ion-item (click)="logout()">
+          <ion-icon name="lock" warning item-left></ion-icon>
+          Desconectar
+        </ion-item>
+      </ion-list>
+    </div>
+
+  </div>
+</ion-content>

@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-navbar color="gold">
+    <ion-toolbar color="gold" *ngIf="!searchVisible" align-title="center">
+      <ion-buttons left>
+        <button ion-button (click)="toggleSearchBar()">
+          <ion-icon name="search"></ion-icon>
+        </button>
+      </ion-buttons>
+
+      <ion-title *ngIf="!seller.name">Produtos</ion-title>
+      <ion-title *ngIf="seller.name">Produtos de {{seller.name.split(' ')[0]}}</ion-title>
+
+      <ion-buttons end>
+        <button ion-button (click)="presentFilterModal()">
+          <ion-icon name="more"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+
+    <ion-toolbar color="gold" *ngIf="searchVisible">
+      <ion-searchbar placeholder="Pesquisar Vendedor" [(ngModel)]="searchQuery" (input)="getItems($event)"></ion-searchbar>
+      <ion-buttons end>
+        <button ion-button (click)="toggleSearchBar()">
+          Cancelar
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="products-page">
+  <div class="spinner-container" padding text-center *ngIf="loading">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <ion-list *ngIf="products.length > 0 && !loading" [virtualScroll]="products" approxItemHeight="40px">
+    <ion-item *virtualItem="let product" text-wrap (click)="presentProduct(product)">
+      <!-- Product Image -->
+      <ion-row center>
+        <ion-col class="product-thumbnail" width-80 offset-10>
+          <ion-img [src]="product?.images?.length > 0 ? IMG_URL + product.images[0] : IMG_URL + 'person.jpeg'"></ion-img>
+        </ion-col>
+      </ion-row>
+      <!-- Product Data -->
+      <ion-row>
+        <ion-col>
+          <ion-row>
+            <ion-col>
+              <h2>{{product.name}}</h2>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <p> <b>Categoria:</b> {{product?.category}} </p>
+              <p *ngIf="!seller.name"> <b>Vendido por:</b> {{product?.seller?.name}} </p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <p>{{product?.description}}</p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <button ion-button color="primary" clear small>
+                <ion-icon color="favorite" name="cash"></ion-icon>
+                <div>{{product?.price | currency:'BRL':true:'1.2-2'}}</div>
+              </button>
+            </ion-col>
+
+            <ion-col>
+              <button ion-button [color]="product.stock_avaible > 0 ? 'primary' : 'danger'" clear small>
+                <ion-icon [color]="product.stock_avaible > 0 ? 'warning' : 'danger'" name="logo-buffer"></ion-icon>
+                <div> <b>{{product?.stock_avaible}}</b> em estoque</div>
+              </button>
+            </ion-col>
+          </ion-row>
+
+        </ion-col>
+
+      </ion-row>
+    </ion-item>
+
+  </ion-list>
+  <div class="not-found-container" padding text-center *ngIf="products.length < 1 && !loading">
+    <h6> Não foi encontrado nenhum produto com os filtros aplicados </h6>
+  </div>
+</ion-content>

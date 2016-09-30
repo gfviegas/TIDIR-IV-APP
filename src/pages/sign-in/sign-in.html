@@ -1,0 +1,111 @@
+<ion-header>
+
+  <ion-navbar color="gold">
+    <ion-title text-center>Cadastro</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="login-page">
+  <p text-center>Faça seu cadastro!</p>
+  <form [formGroup]="signInForm" novalidate="">
+
+    <ion-list>
+      <ion-item>
+        <ion-label>Nome*</ion-label>
+        <ion-input [formControl]="name" type="text"></ion-input>
+      </ion-item>
+      <div *ngIf="!name.valid && (name.touched || formSubmitted)">
+        <p padding-left color="danger" *ngIf="name.errors?.required">Este campo é obrigatório</p>
+        <p padding-left color="danger" *ngIf="name.errors?.minlength">Este campo deve ter pelo menos 8 caracteres</p>
+      </div>
+
+      <ion-item>
+        <ion-label>Email*</ion-label>
+        <ion-input [formControl]="email" type="email" pattern="^\[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"></ion-input>
+      </ion-item>
+      <!-- <p>{{email.errors | json}}</p> -->
+      <div *ngIf="!email.valid && (email.touched || formSubmitted)">
+        <p padding-left color="danger" *ngIf="email.errors?.required">Este campo é obrigatório</p>
+        <p padding-left color="danger" *ngIf="email.errors?.minlength">Este campo deve ter pelo menos 8 caracteres</p>
+        <p padding-left color="danger" *ngIf="email.errors?.pattern">Este campo deve ser um email válido</p>
+        <p padding-left color="danger" *ngIf="email.errors?.taken">Este email já está cadastrado</p>
+      </div>
+
+      <ion-item ngControlGroup="passwords">
+        <ion-label>Senha*</ion-label>
+        <ion-input [formControl]="password" type="password"></ion-input>
+      </ion-item>
+      <div *ngIf="!password.valid && (password.touched || formSubmitted)">
+        <p padding-left color="danger" *ngIf="password.errors?.required">Este campo é obrigatório</p>
+        <p padding-left color="danger" *ngIf="password.errors?.minlength">Este campo deve ter pelo menos 8 caracteres</p>
+      </div>
+      <ion-item ngControlGroup="passwords">
+        <ion-label>Repita a Senha*</ion-label>
+        <ion-input [formControl]="confirm" type="password"></ion-input>
+      </ion-item>
+      <div *ngIf="!confirm.valid && (confirm.touched || formSubmitted)">
+        <p padding-left color="danger" *ngIf="confirm.errors?.required">Este campo é obrigatório</p>
+        <p padding-left color="danger" *ngIf="confirm.errors?.minlength">Este campo deve ter pelo menos 8 caracteres</p>
+        <p padding-left color="danger" *ngIf="confirm.errors?.notEqual">Os campos não são idênticos</p>
+      </div>
+
+      <ion-item ngControlGroup="contact">
+        <ion-label>Whatsapp</ion-label>
+        <ion-input [textMask]="{mask: cellphoneMask, guide: false, modelClean: true}" [formControl]="whatsapp" type="text" pattern="^\([1-9]{2}\) [2-9][0-9]{3,4}\-[0-9]{4}$"></ion-input>
+      </ion-item>
+      <div *ngIf="!whatsapp.valid && (whatsapp.touched || formSubmitted)">
+        <p padding-left color="danger" *ngIf="whatsapp.errors?.pattern">Invalid number -> {{whatsapp.value}}</p>
+      </div>
+      <ion-item ngControlGroup="contact">
+        <ion-label>Outro Telefone</ion-label>
+        <ion-input [formControl]="phone" type="text" pattern="^\([1-9]{2}\) [2-9][0-9]{3,4}\-[0-9]{4}$"></ion-input>
+      </ion-item>
+      <div *ngIf="!phone.valid && (phone.touched || formSubmitted)">
+        <p padding-left color="danger" *ngIf="phone.errors?.pattern">Digite um número válido</p>
+      </div>
+      <ion-item ngControlGroup="contact">
+        <ion-label>Link Facebook</ion-label>
+        <ion-input [formControl]="facebook" type="text"></ion-input>
+      </ion-item>
+      <div *ngIf="!facebook.valid && (facebook.touched || formSubmitted)">
+        <p padding-left color="danger" *ngIf="facebook.errors?.pattern">Este campo é obrigatório</p>
+      </div>
+
+      <ion-item ngControlGroup="location">
+        <ion-label>Estado*</ion-label>
+        <ion-select [formControl]="state" (ionChange)="getCities()" multiple="false" cancelText="Cancelar" okText="Selecionar">
+          <ion-option *ngFor="let uf of ufs; let i = index" [value]="i">{{uf.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <div *ngIf="!state.valid && (state.touched || formSubmitted)">
+        <p padding-left color="danger" *ngIf="state.errors?.required">Este campo é obrigatório</p>
+      </div>
+
+      <ion-item ngControlGroup="location">
+        <ion-label>Cidade*</ion-label>
+        <ion-select [formControl]="city" [disabled]="state.value.length < 1" multiple="false" cancelText="Cancelar" okText="Selecionar">
+          <ion-option *ngFor="let city of cities; let i = index" [value]="i">{{city.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <div *ngIf="!city.valid && (city.touched || formSubmitted)">
+        <p padding-left color="danger" *ngIf="city.errors?.required">Este campo é obrigatório</p>
+      </div>
+
+      <ion-item>
+        <ion-label> Cadastrar como Vendedor</ion-label>
+        <ion-toggle [formControl]="signAsSeller" checked="false"></ion-toggle>
+      </ion-item>
+
+    </ion-list>
+
+    <p>Os campos com * são obrigatórios</p>
+
+
+    <div padding class="submit-block">
+      <button ion-button color="primary" block  (click)="signIn()">Cadastrar</button>
+    </div>
+  </form>
+
+</ion-content>

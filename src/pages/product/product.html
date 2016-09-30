@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar color="gold">
+    <ion-title>Detalhes do Produto</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="product-page">
+  <ion-slides [options]="slideOptions" color="gold">
+    <ion-slide *ngFor="let image of product.images">
+      <img [src]="IMG_URL + image" imageViewer>
+    </ion-slide>
+  </ion-slides>
+
+  <ion-item text-wrap>
+    <h2>{{product?.name}}</h2>
+  </ion-item>
+  <ion-list>
+    <ion-item text-wrap>
+      {{product?.description}}
+    </ion-item>
+    <ion-item text-wrap>
+      Categoria:
+      <b item-right> {{product?.category}} </b>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="cash" color="favorite"></ion-icon>
+      <span class="product-item-text"> Preço Unitário </span>
+      <b item-right> {{product?.price | currency:'BRL':true:'1.2-2'}} </b>
+    </ion-item>
+    <ion-item>
+      <ion-icon [color]="product.stock_avaible > 0 ? 'warning' : 'danger'" name="logo-buffer"></ion-icon>
+      <span class="product-item-text"> Estoque Disponível </span>
+      <b item-right> {{product?.stock_avaible}} unidade{{product?.stock_avaible > 1 ? 's' : ''}} </b>
+    </ion-item>
+
+    <ion-item-divider>Vendido Por:</ion-item-divider>
+    <ion-item>
+      <ion-thumbnail item-left>
+        <img [src]="product?.seller?.photo ? IMG_URL + product.seller.photo : IMG_URL + 'person.jpeg'">
+      </ion-thumbnail>
+      <h2> {{product?.seller?.name}} </h2>
+      <p>{{product?.seller?.location?.city}} - {{product?.seller?.location?.state}}</p>
+      <button ion-button clear item-right (click)="showSeller()" > Ver </button>
+    </ion-item>
+  </ion-list>
+</ion-content>

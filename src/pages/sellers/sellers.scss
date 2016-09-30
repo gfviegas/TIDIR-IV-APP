@@ -1,0 +1,22 @@
+.sellers-page {
+  .not-found-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0 5rem;
+  }
+  .spinner-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    ion-spinner {
+      width: 6rem;
+      height: 6rem;
+    }
+  }
+}
