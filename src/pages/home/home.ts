@@ -28,8 +28,7 @@ export class HomePage {
 
   loadInit(): void {
     this.loading = true;
-    let userId = '832938923';
-    console.log(this.authService.getLoggedUserId());
+    let userId = this.authService.getLoggedUserId();
 
     this.postsService.getUserFollowedSellersPosts(userId)
     .subscribe(

@@ -8,11 +8,11 @@
   <ion-toolbar clear text-center class="seller-image-toolbar">
       <img [src]="seller.photo ? IMG_URL + seller.photo : IMG_URL + 'person.jpeg'">
       <br>
-      <button ion-button (click)="confirmUnfollow()" color="primary" clear small *ngIf="following">
+      <button ion-button (click)="confirmUnfollow()" color="primary" clear small *ngIf="following" icon-left>
         <ion-icon name="checkmark"></ion-icon>
         <b>Seguindo</b>
       </button>
-      <button ion-button (click)="confirmFollow()" color="primary" clear small *ngIf="!following">
+      <button ion-button (click)="confirmFollow()" color="primary" clear small *ngIf="!following" icon-left>
         <ion-icon name="person-add"></ion-icon>
         <b>Seguir</b>
       </button>

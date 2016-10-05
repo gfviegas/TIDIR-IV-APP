@@ -76,46 +76,44 @@ export class AuthService {
     .map(res => res.json())
     .map((res) => {
       if (res.token) {
-        console.log('setting id_token with value');
+        window.localStorage.setItem('id_token', res.token);
         this.local.set('id_token', res.token);
       }
     });
   }
 
   logout(): boolean {
+    window.localStorage.removeItem('id_token');
     this.local.remove('id_token');
     return true;
   }
 
   isLoggedIn(): any {
-    this.local.get('id_token').then(
-      (token) => {
-        console.log(token, tokenNotExpired(token));
-        return this.checkIfExpired(token);
-      }
-    )
+    console.log(window.localStorage);
+    return tokenNotExpired();
   }
 
   checkIfExpired(token) {
     return tokenNotExpired(token);
   }
 
-  getLoggedUserId(): Promise<any> {
-    return this.local.get('id_token').then(
-      (token) => {
-        return this.jwtHelper.decodeToken(token).sub;
-      }
-    )
+  getLoggedUserId(): any {
+    return this.jwtHelper.decodeToken(window.localStorage.getItem('id_token')).sub;
+    // return this.local.get('id_token').then(
+    //   (token) => {
+    //     return this.jwtHelper.decodeToken(token).sub;
+    //   }
+    // )
   }
 
   getLoggedUser(): any {
-    return this.jwtHelper.decodeToken(localStorage.getItem('id_token')).user_data;
+    return this.jwtHelper.decodeToken(window.localStorage.getItem('id_token')).user_data;
   }
 
   getLoggedUserData(): Observable<any> {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    let userId = this.jwtHelper.decodeToken(localStorage.getItem('id_token')).sub;
+    let userId = this.jwtHelper.decodeToken(window.localStorage.getItem('id_token')).sub;
 
     return this.http
     .get(

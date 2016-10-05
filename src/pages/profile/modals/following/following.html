@@ -14,7 +14,7 @@
   <div class="spinner-container" padding text-center *ngIf="loading">
     <ion-spinner></ion-spinner>
   </div>
-  <ion-list *ngIf="followers.length > 0 && !loading" [virtualScroll]="followers">
+  <ion-list *ngIf="followers.length > 0 && !loading" [virtualScroll]="followers" approxItemHeight="40px">
     <ion-item *virtualItem="let follower">
 
       <ion-row>

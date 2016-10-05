@@ -18,7 +18,7 @@ export class SignService {
     return this.http.get(JSON_URL + 'ufs/ufs.json').map(res => res.json());
   }
 
-  getCities(ufId: number): Observable<any> {
+  getCities(ufId: string): Observable<any> {
     return this.http.get(JSON_URL + 'ufs/' + ufId + '/cities.json').map(res => res.json());
   }
 

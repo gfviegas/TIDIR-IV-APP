@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { AuthHttp } from 'angular2-jwt';
 import { JwtHelper } from 'angular2-jwt';
 import { Storage } from '@ionic/storage';
 
@@ -51,10 +51,16 @@ export class UsersService {
   public userId: string;
 
   constructor(
-    public http: Http,
+    public http: AuthHttp,
     public local: Storage
   ) {
     this.userId = this.jwtHelper.decodeToken(localStorage.getItem('id_token')).sub;
+  }
+
+  update(field: string, value: any) :Observable<UserObject> {
+    let params = {};
+    params[field] = value;
+    return this.http.put(API_URL + '/users/' + this.userId, params).map(res => res.json());
   }
 
   getFollowedSellers(): Observable<Array<SellerObject>> {

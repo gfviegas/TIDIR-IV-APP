@@ -116,7 +116,7 @@ export class SignInPage {
     });
     loading.present();
     let selectedUF = this.ufs[this.state.value];
-    this.signService.getCities(selectedUF.id).subscribe(
+    this.signService.getCities(selectedUF.uf).subscribe(
       (cities) => {
         loading.dismiss();
         this.cities = cities;

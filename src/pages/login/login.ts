@@ -3,6 +3,7 @@ import { NavController, LoadingController, AlertController } from 'ionic-angular
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { AuthService } from '../../providers/auth/auth';
 import { TabsPage } from '../tabs/tabs';
+import { SellersTabsPage } from '../sellers-tabs/sellers-tabs';
 import { SignInPage } from '../sign-in/sign-in';
 
 @Component ({
@@ -90,7 +91,7 @@ export class LoginPage {
         success => {
           loading.dismiss();
           this.presentAlert('Sucesso!', 'Autenticado com sucesso!');
-          this.navCtrl.setRoot(TabsPage);
+          this.navCtrl.setRoot(SellersTabsPage);
         },
         error => {
           loading.dismiss();

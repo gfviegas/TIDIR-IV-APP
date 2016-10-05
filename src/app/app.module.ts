@@ -16,6 +16,8 @@ import { ProductsFilterModalPage } from '../pages/products/modals/filter/filter'
 import { ProductsSortModalPage } from '../pages/products/modals/sort/sort';
 import { ProfilePage } from '../pages/profile/profile';
 import { FollowingPage } from '../pages/profile/modals/following/following';
+import { TermsPage } from '../pages/profile/modals/terms/terms';
+import { EditUserPage } from '../pages/profile/modals/edit/edit';
 import { SellerPage } from '../pages/seller/seller';
 import { SellersPage } from '../pages/sellers/sellers';
 import { SellersCategoriesModalPage } from '../pages/sellers/modals/categories/categories';
@@ -23,6 +25,7 @@ import { SellersFilterModalPage } from '../pages/sellers/modals/filter/filter';
 import { SellersSortModalPage } from '../pages/sellers/modals/sort/sort';
 import { SignInPage } from '../pages/sign-in/sign-in';
 import { TabsPage } from '../pages/tabs/tabs';
+import { SellersTabsPage } from '../pages/sellers-tabs/sellers-tabs';
 
 /**
  * PROVIDERS
@@ -38,7 +41,7 @@ import { UsersService } from '../providers/users/users';
 /**
  * PLUGINS
  */
-import { AuthHttp, AuthConfig, AUTH_PROVIDERS } from 'angular2-jwt';
+import { AuthHttp, AUTH_PROVIDERS } from 'angular2-jwt';
 import { Storage } from '@ionic/storage';
 // import { ImageViewerDirective } from 'ionic-img-viewer';
 import MaskedInput from 'angular2-text-mask'
@@ -57,6 +60,8 @@ import MaskedInput from 'angular2-text-mask'
     ProductsSortModalPage,
     ProfilePage,
     FollowingPage,
+    TermsPage,
+    EditUserPage,
     SellerPage,
     SellersPage,
     SellersCategoriesModalPage,
@@ -64,6 +69,7 @@ import MaskedInput from 'angular2-text-mask'
     SellersSortModalPage,
     SignInPage,
     TabsPage,
+    SellersTabsPage,
     MaskedInput
   ],
   imports: [
@@ -86,13 +92,16 @@ import MaskedInput from 'angular2-text-mask'
     ProductsSortModalPage,
     ProfilePage,
     FollowingPage,
+    TermsPage,
+    EditUserPage,
     SellerPage,
     SellersPage,
     SellersCategoriesModalPage,
     SellersFilterModalPage,
     SellersSortModalPage,
     SignInPage,
-    TabsPage
+    TabsPage,
+    SellersTabsPage
   ],
   providers: [
     AuthService,
