@@ -74,12 +74,14 @@ export class EditUserPage {
         loading.dismiss();
         this.ufs = data;
         let selectedUF = data.find((uf) => { return uf.uf === this.user.location.state });
-        this.location.patchValue({state: selectedUF});
+        this.state.reset(selectedUF);
         console.info(this.state.value);
         // this.state.value = this.user.location.state;
         this.signService.getCities(this.user.location.state).subscribe(
           (cities) => {
             this.cities = cities;
+            let selectedCity = cities.find((city) => { return city.name === this.user.location.city });
+            this.city.reset(selectedCity);
           }
         );
       },
@@ -111,7 +113,7 @@ export class EditUserPage {
     });
     loading.present();
     let selectedUF = this.ufs[this.state.value];
-    this.signService.getCities(selectedUF.id).subscribe(
+    this.signService.getCities(selectedUF.uf).subscribe(
       (cities) => {
         loading.dismiss();
         this.cities = cities;

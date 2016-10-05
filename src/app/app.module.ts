@@ -44,7 +44,7 @@ import { UsersService } from '../providers/users/users';
 import { AuthHttp, AUTH_PROVIDERS } from 'angular2-jwt';
 import { Storage } from '@ionic/storage';
 // import { ImageViewerDirective } from 'ionic-img-viewer';
-import MaskedInput from 'angular2-text-mask'
+import MaskedInput from 'angular2-text-mask';
 
 @NgModule({
   declarations: [
