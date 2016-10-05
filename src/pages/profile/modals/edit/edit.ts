@@ -37,7 +37,6 @@ export class EditUserPage {
     public loadingCtrl: LoadingController
   ) {
     this.user = params.get('user');
-    console.log(this.user);
 
     this.editForm = fb.group({
       name: [this.user.name, Validators.required],
@@ -68,6 +67,8 @@ export class EditUserPage {
       content: "Carregando..."
     });
     loading.present();
+    this.editForm.markAsUntouched();
+    this.editForm.markAsPristine();
 
     this.signService.getUfs().subscribe(
       (data) => {
@@ -130,18 +131,25 @@ export class EditUserPage {
     console.log(this.editForm);
 
     if (this.editForm.valid) {
-      let signValues = Object.assign({}, this.editForm.value);
+      let editValues = Object.assign({}, this.editForm.value);
       let params = {
-        name: signValues.name,
-        email: signValues.email,
-        password: signValues.passwords.password,
+        name: editValues.name,
+        contact: {
+          whatsapp: editValues.contact.whatsapp,
+          facebook: editValues.contact.facebook,
+          phone: editValues.contact.phone
+        },
         location: {
-          state: this.ufs[signValues.location.state].uf,
-          city: this.cities[signValues.location.city].name,
+          state: editValues.location.state.uf,
+          city: editValues.location.city.name,
         }
       };
 
-      console.info('ok', params);
+      this.usersService.update(params).subscribe(
+        (user) => {
+          this.viewCtrl.dismiss(user);
+        }
+      );
 
     }
   }
@@ -159,7 +167,7 @@ export class EditUserPage {
   }
 
   dismiss() {
-    return this.viewCtrl.dismiss();
+    return this.viewCtrl.dismiss(false);
   }
 
 }

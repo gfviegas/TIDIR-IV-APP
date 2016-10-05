@@ -57,9 +57,8 @@ export class UsersService {
     this.userId = this.jwtHelper.decodeToken(localStorage.getItem('id_token')).sub;
   }
 
-  update(field: string, value: any) :Observable<UserObject> {
-    let params = {};
-    params[field] = value;
+  update(values: any) :Observable<UserObject> {
+    let params = values;
     return this.http.put(API_URL + '/users/' + this.userId, params).map(res => res.json());
   }
 
