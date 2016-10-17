@@ -6,6 +6,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 
 import { AuthService } from '../providers/auth/auth';
+import moment from 'moment';
+import 'moment/locale/pt-br';
 
 @Component({
   template: `<ion-nav [root]="rootPage"></ion-nav>`
@@ -14,9 +16,13 @@ export class MyApp {
   rootPage: any;
 
   constructor(
-    platform: Platform,
+    public platform: Platform,
     public authService: AuthService
   ) {
+    moment.locale('pt-br');
+    console.log(moment.locales());
+    console.log(moment.locale('pt-br'));
+    console.log(moment.locale('pt-BR'));
     let userLogged = this.authService.isLoggedIn();
 
     if (! userLogged) {
