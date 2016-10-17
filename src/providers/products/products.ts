@@ -17,6 +17,10 @@ export interface ProductObject {
     _id: string;
     name: string;
     photo?: string;
+    location: {
+      city?: string;
+      state?: string;
+    }
   };
   stock_reserved: number;
   stock_avaible: number;
@@ -32,7 +36,11 @@ export class Product implements ProductObject {
   category = '';
   seller = {
     _id : '',
-    name : ''
+    name : '',
+    location: {
+      city: '',
+      state: '',
+    }
   };
   stock_reserved = 0;
   stock_avaible = 0;

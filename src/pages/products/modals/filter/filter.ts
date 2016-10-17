@@ -4,13 +4,18 @@ import { ViewController, ModalController, NavParams } from 'ionic-angular';
 import { ProductsSortModalPage } from '../sort/sort';
 import { ProductsCategoriesModalPage } from '../categories/categories';
 
+export interface SortProducts {
+  name: string;
+  value: string;
+};
+
 @Component({
   templateUrl: 'filter.html'
 })
 export class ProductsFilterModalPage {
 
   category: string = '';
-  sort: Object = {name: 'Mais Novos', value: '-created_at'};
+  sort: SortProducts = {name: 'Mais Novos', value: '-created_at'};
   onlyFollowedSellers: boolean = true;
   onlyInStock: boolean = true;
 

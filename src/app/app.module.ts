@@ -41,10 +41,21 @@ import { UsersService } from '../providers/users/users';
 /**
  * PLUGINS
  */
-import { AuthHttp, AUTH_PROVIDERS } from 'angular2-jwt';
+import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { Storage } from '@ionic/storage';
+import { Http } from '@angular/http';
+
+let storage = new Storage();
+
+export function getAuthHttp(http) {
+  return new AuthHttp(new AuthConfig({
+    globalHeaders: [{'Accept': 'application/json'}],
+    tokenGetter: (() => storage.get('id_token')),
+  }), http);
+}
+
 // import { ImageViewerDirective } from 'ionic-img-viewer';
-import MaskedInput from 'angular2-text-mask';
+// import MaskedInput from 'angular2-text-mask';
 
 @NgModule({
   declarations: [
@@ -69,8 +80,7 @@ import MaskedInput from 'angular2-text-mask';
     SellersSortModalPage,
     SignInPage,
     TabsPage,
-    SellersTabsPage,
-    MaskedInput
+    SellersTabsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp, {
@@ -111,8 +121,11 @@ import MaskedInput from 'angular2-text-mask';
     SellersService,
     SignService,
     UsersService,
-    AuthHttp,
-    AUTH_PROVIDERS,
+    {
+      provide: AuthHttp,
+      useFactory: getAuthHttp,
+      deps: [Http]
+    },
     Storage
   ]
 })

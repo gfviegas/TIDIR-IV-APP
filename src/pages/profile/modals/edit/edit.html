@@ -27,7 +27,7 @@
 
       <ion-item ngControlGroup="contact">
         <ion-label>Whatsapp</ion-label>
-        <ion-input [textMask]="{mask: cellphoneMask, guide: false, modelClean: true}" [formControl]="whatsapp" type="text"></ion-input>
+        <ion-input [formControl]="whatsapp" type="text"></ion-input>
       </ion-item>
       <div *ngIf="!whatsapp.valid && (whatsapp.touched || formSubmitted)">
         <p padding-left color="danger" *ngIf="whatsapp.errors?.pattern">Invalid number -> {{whatsapp.value}}</p>

@@ -4,13 +4,18 @@ import { ViewController, ModalController, NavParams } from 'ionic-angular';
 import { SellersCategoriesModalPage } from '../categories/categories';
 import { SellersSortModalPage } from '../sort/sort';
 
+export interface SortSellers {
+  name: string;
+  value: string;
+};
+
 @Component({
   templateUrl: 'filter.html'
 })
 export class SellersFilterModalPage {
 
   category: string = '';
-  sort: Object = {name: 'Cadastrados Mais Recentemente', value: '-date'};
+  sort: SortSellers = {name: 'Cadastrados Mais Recentemente', value: '-date'};
   onlyFollowedSellers: boolean = false;
 
   constructor(
