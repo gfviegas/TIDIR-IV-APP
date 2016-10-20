@@ -114,12 +114,8 @@ export class AuthService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let userId = this.jwtHelper.decodeToken(window.localStorage.getItem('id_token')).sub;
+    let userType = this.getLoggedUser().type === 'seller' ? 'sellers' : 'users';
 
-    return this.http
-    .get(
-      API_URL + 'users/' + userId,
-      { headers }
-    )
-    .map(res => res.json())
+    return this.http.get(API_URL + userType + '/' + userId, { headers }).map(res => res.json());
   }
 }

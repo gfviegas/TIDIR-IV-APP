@@ -64,7 +64,7 @@
         <ion-list-header>
           Dados Adicionais
         </ion-list-header>
-        <ion-item>
+        <ion-item *ngIf="userType === 'user'">
           <ion-icon name="contacts" warning item-left></ion-icon>
           <b>{{user.followedSellers.length}}</b> vendedores seguidos
           <button ion-button clear item-right (click)="presentFollowingModal()" [disabled]="user.followedSellers.length < 1">Ver</button>

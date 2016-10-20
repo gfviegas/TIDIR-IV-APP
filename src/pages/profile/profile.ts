@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { AuthService, UserObject, AuthUser } from '../../providers/auth/auth';
 import { UsersService } from '../../providers/users/users';
+// import { SellersService } from '../../providers/sellers/sellers';
 
 import { LoginPage } from '../login/login';
 import { FollowingPage } from './modals/following/following';
@@ -19,6 +20,7 @@ export class ProfilePage {
 
   IMG_URL: string = IMG_URL;
   user: UserObject = new AuthUser();
+  userType: string;
   createdFromNow: string;
   page: string = 'overview';
 
@@ -30,8 +32,10 @@ export class ProfilePage {
     public alertCtrl: AlertController,
     public modalCtrl: ModalController,
     public loadingCtrl: LoadingController,
-    public userService: UsersService
+    // public sellersService: SellersService,
+    public usersService: UsersService
   ) {
+    this.userType = authService.getLoggedUser().type;
   }
 
   ionViewDidEnter() {
@@ -147,7 +151,7 @@ export class ProfilePage {
   //   });
   //
   //   return new Promise((resolve, reject) => {
-  //     this.userService.update(field, newValue).subscribe(
+  //     this.usersService.update(field, newValue).subscribe(
   //       user => {
   //         toast.present();
   //         resolve(user);
