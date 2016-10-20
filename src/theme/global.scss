@@ -10,7 +10,6 @@
 // automatically applied to the <body> element in the app.
 //
 // App Shared Sass variables belong in app.variables.scss.
-@import "../pages/about/about";
 
 @import "../pages/home/home";
 
@@ -27,6 +26,7 @@
 @import "../pages/profile/profile";
 @import "../pages/profile/modals/following/following";
 
+@import "../pages/seller-posts/seller-posts";
 
   .tab-button[aria-selected=true] {
     transform: scale(1.15);

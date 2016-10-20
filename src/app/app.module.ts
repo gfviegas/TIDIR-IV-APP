@@ -5,8 +5,6 @@ import { IonicApp, IonicModule } from 'ionic-angular';
  * PAGES
  */
 import { MyApp } from './app.component';
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { ProductPage } from '../pages/product/product';
@@ -25,7 +23,13 @@ import { SellersFilterModalPage } from '../pages/sellers/modals/filter/filter';
 import { SellersSortModalPage } from '../pages/sellers/modals/sort/sort';
 import { SignInPage } from '../pages/sign-in/sign-in';
 import { TabsPage } from '../pages/tabs/tabs';
+
+/**
+ * SELLER PAGES
+ */
 import { SellersTabsPage } from '../pages/sellers-tabs/sellers-tabs';
+import { SellerPostsPage } from '../pages/seller-posts/seller-posts';
+import { UpdatePostPage } from '../pages/seller-posts/popovers/update/update';
 
 /**
  * PROVIDERS
@@ -60,8 +64,6 @@ export function getAuthHttp(http) {
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
-    ContactPage,
     HomePage,
     LoginPage,
     ProductPage,
@@ -80,7 +82,10 @@ export function getAuthHttp(http) {
     SellersSortModalPage,
     SignInPage,
     TabsPage,
-    SellersTabsPage
+
+    SellersTabsPage,
+    SellerPostsPage,
+    UpdatePostPage
   ],
   imports: [
     IonicModule.forRoot(MyApp, {
@@ -91,8 +96,6 @@ export function getAuthHttp(http) {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
-    ContactPage,
     HomePage,
     LoginPage,
     ProductPage,
@@ -111,7 +114,10 @@ export function getAuthHttp(http) {
     SellersSortModalPage,
     SignInPage,
     TabsPage,
-    SellersTabsPage
+
+    SellersTabsPage,
+    SellerPostsPage,
+    UpdatePostPage
   ],
   providers: [
     AuthService,

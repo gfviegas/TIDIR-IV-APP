@@ -3,6 +3,7 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 
 import { TabsPage } from '../pages/tabs/tabs';
+import { SellersTabsPage } from '../pages/sellers-tabs/sellers-tabs';
 import { LoginPage } from '../pages/login/login';
 
 import { AuthService } from '../providers/auth/auth';
@@ -21,14 +22,19 @@ export class MyApp {
   ) {
     moment.locale('pt-br');
     // console.log(moment.locales());
-    console.log(moment.locale('pt-br'));
-    console.log(moment.locale('pt-BR'));
+    // console.log(moment.locale('pt-br'));
+    // console.log(moment.locale('pt-BR'));
     let userLogged = this.authService.isLoggedIn();
 
     if (! userLogged) {
       this.rootPage = LoginPage;
     } else {
-      this.rootPage = TabsPage;
+      let type = this.authService.getLoggedUser().type;
+      if (type === 'seller') {
+        this.rootPage = SellersTabsPage;
+      } else {
+        this.rootPage = TabsPage;
+      }
     }
 
     platform.ready().then(() => {

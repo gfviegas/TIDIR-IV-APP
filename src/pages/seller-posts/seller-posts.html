@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar color="gold">
+    <ion-title>
+      Posts
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="postForm" novalidate="">
+    <ion-list>
+      <ion-list-header>Crie um novo post</ion-list-header>
+      <ion-item>
+        <ion-label stacked>Conteúdo</ion-label>
+        <ion-textarea [formControl]="postContent" maxlength="250" rows="6" placeholder="Compartilhe algo com seus seguidores!"></ion-textarea>
+      </ion-item>
+      <div *ngIf="!postContent.valid && (postContent.touched || clientFormSubmitted)">
+        <p padding-left color="danger" *ngIf="postContent.errors.required">Este campo é obrigatório</p>
+        <p padding-left color="danger" *ngIf="postContent.errors.maxlength">Este campo deve ter no máximo 250 caracteres</p>
+      </div>
+
+      <div padding class="submit-block">
+        <button ion-button color="primary" block (click)="createPost()">Criar</button>
+      </div>
+    </ion-list>
+
+    <ion-list *ngIf="posts.length > 0">
+      <ion-list-header>Seus últimos posts</ion-list-header>
+      <ion-card *ngFor="let post of posts" text-wrap (press)="presentUpdatePopover($event, post)">
+        <ion-item>
+          <ion-avatar item-left>
+            <ion-img [src]="IMG_URL + post?.author?.photo"></ion-img>
+          </ion-avatar>
+          <h2>{{post?.author?.name}}</h2>
+          <p>{{fromNow(post?.createdAt)}}</p>
+          <button ion-button clear item-right icon-only (click)="presentUpdatePopover($event, post)">
+            <ion-icon name="more"></ion-icon>
+          </button>
+        </ion-item>
+
+        <ion-card-content>
+          <p>{{post?.content}}</p>
+        </ion-card-content>
+      </ion-card>
+
+    </ion-list>
+  </form>
+</ion-content>

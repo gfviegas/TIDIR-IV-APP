@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { HomePage } from '../home/home';
-import { SellersPage } from '../sellers/sellers';
+import { SellerPostsPage } from '../seller-posts/seller-posts';
 import { ProductsPage } from '../products/products';
 import { ProfilePage } from '../profile/profile';
 
@@ -10,14 +10,14 @@ import { ProfilePage } from '../profile/profile';
 })
 export class SellersTabsPage {
 
+  public tabSellersPosts: any;
   public tabHome: any;
-  public tabSellers: any;
   public tabProducts: any;
   public tabProfile: any;
 
   constructor() {
+    this.tabSellersPosts = SellerPostsPage;
     this.tabHome = HomePage;
-    this.tabSellers = SellersPage;
     this.tabProducts = ProductsPage;
     this.tabProfile = ProfilePage;
   }

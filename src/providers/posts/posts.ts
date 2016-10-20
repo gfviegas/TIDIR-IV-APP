@@ -26,4 +26,27 @@ export class PostsService {
     return this.http.get(API_URL + 'users/' + userId + '/followers/posts').map(res => res.json());
   }
 
+  /**
+  * Gets the posts from a sellerId
+  * @method getPosts
+  * @param  {String} sellerId Seller ID
+  */
+  getPosts(sellerId: string): Observable<Array<PostObject>> {
+    return this.http.get(API_URL + 'sellers/' + sellerId + '/posts').map(res=> res.json());
+  }
+
+  /**
+   * Creates a post with a content in a seller context
+   * @method createPost
+   * @param  {String}          sellerId Seller ID
+   * @param  {String}          content  Content of the Posts
+   */
+  createPost(sellerId: string, content: string): Observable<any> {
+    return this.http.post(API_URL + 'sellers/' + sellerId + '/posts', {content: content}).map(res => res.json());
+  }
+
+  deletePost(postId: string): Observable<any> {
+    return this.http.delete(API_URL + 'posts/' + postId);
+  }
+
 }
