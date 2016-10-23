@@ -1,7 +1,7 @@
-<ion-list radio-group class="popover-page">
+<ion-list radio-group *ngIf="!showEditForm">
   <ion-row>
     <ion-col>
-      <button ion-item detail-none class="text-button">Editar</button>
+      <button ion-item detail-none class="text-button" (click)="toggleEditForm()">Editar</button>
     </ion-col>
   </ion-row>
   <ion-row>
@@ -12,3 +12,26 @@
     </ion-col>
   </ion-row>
 </ion-list>
+
+<div *ngIf="showEditForm">
+  <ion-buttons right>
+    <button ion-button clear (click)="toggleEditForm()">
+      <ion-icon name="close"></ion-icon>
+    </button>
+  </ion-buttons>
+  <form [formGroup]="postForm" novalidate="">
+    <ion-item>
+      <ion-label stacked>Conteúdo</ion-label>
+      <ion-textarea [formControl]="postContent" maxlength="250" rows="6" placeholder="Compartilhe algo com seus seguidores!"></ion-textarea>
+    </ion-item>
+    <div *ngIf="!postContent.valid && (postContent.touched || clientFormSubmitted)">
+      <p padding-left color="danger" *ngIf="postContent.errors.required">Este campo é obrigatório</p>
+      <p padding-left color="danger" *ngIf="postContent.errors.maxlength">Este campo deve ter no máximo 250 caracteres</p>
+    </div>
+
+    <div padding class="submit-block">
+      <button ion-button color="primary" block (click)="editPost()">Editar</button>
+    </div>
+
+  </form>
+</div>

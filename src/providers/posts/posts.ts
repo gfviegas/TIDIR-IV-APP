@@ -49,4 +49,8 @@ export class PostsService {
     return this.http.delete(API_URL + 'posts/' + postId);
   }
 
+  updatePost(postId: string, content: string): Observable<any> {
+    return this.http.put(API_URL + 'posts/' + postId, {content: content});
+  }
+
 }

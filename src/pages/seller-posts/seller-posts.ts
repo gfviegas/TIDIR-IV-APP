@@ -84,8 +84,8 @@ export class SellerPostsPage {
       sellerId: this.sellerId
     });
     popover.onDidDismiss(
-      (deleted) => {
-        if (deleted) {
+      (response) => {
+        if (response.deleted) {
           let toast = this.toastCtrl.create({
             message: 'Post excluído com sucesso!',
             position: 'top',
@@ -99,6 +99,17 @@ export class SellerPostsPage {
           if (index > -1) {
             this.posts.splice(index, 1);
           }
+        } else if (response.updated) {
+          let toast = this.toastCtrl.create({
+            message: 'Post editado com sucesso!',
+            position: 'top',
+            showCloseButton: true,
+            closeButtonText: 'Fechar',
+            duration: 3500
+          });
+          toast.present();
+          let updatedPost = this.posts.find(p => p == post);
+          updatedPost.content = response.content;
         }
       }
     )
