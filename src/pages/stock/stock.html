@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-navbar color="gold">
+    <ion-title>Estoque</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div class="spinner-container" padding text-center *ngIf="loading">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <ion-list *ngIf="products.length > 0 && !loading" [virtualScroll]="products" approxItemHeight="40px">
+    <ion-item *virtualItem="let product" text-wrap>
+      <button ion-button clear item-right icon-only (click)="presentUpdatePopover($event, product)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+      <ion-row>
+        <ion-col>
+          <ion-row>
+            <ion-col>
+              <h2>{{product.name}}</h2>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <p>{{product?.description}}</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              Estoque Total:
+              <b item-right> {{product?.stock_avaible + product?.stock_reserved}} </b>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                Estoque Disponível:
+                <b item-right> {{product?.stock_avaible}} </b>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                Estoque Reservado:
+                <b item-right> {{product?.stock_reserved}} </b>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+
+  <div class="not-found-container" padding text-center *ngIf="products.length < 1 && !loading">
+    <h6> Não foi encontrado nenhum produto </h6>
+  </div>
+</ion-content>

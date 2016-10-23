@@ -99,7 +99,11 @@ export class ProductsService {
    * @param  {number} productId The ID of the Product to be found
    * @return {Observable}          The HTTP GET Request Observable
    */
-  getById(productId: number): Observable<ProductObject> {
+  getById(productId: string): Observable<ProductObject> {
     return this.http.get(API_URL + 'products/' + productId).map(res => res.json());
+  }
+
+  updateStock(productId: string, avaible: number, reserved: number): Observable<ProductObject> {
+    return this.http.put(API_URL + 'products/' + productId, {stock_avaible: avaible, stock_reserved: reserved}).map(res => res.json());
   }
 }

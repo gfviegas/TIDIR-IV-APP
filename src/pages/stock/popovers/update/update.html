@@ -1,0 +1,28 @@
+<div>
+  <ion-buttons right>
+    <button ion-button clear (click)="exit()">
+      <ion-icon name="close"></ion-icon>
+    </button>
+  </ion-buttons>
+  <form [formGroup]="stockForm" novalidate="">
+    <ion-item>
+      <ion-label stacked>Estoque Disponível</ion-label>
+      <ion-input [formControl]="stockAvaible"></ion-input>
+    </ion-item>
+    <div *ngIf="!stockAvaible.valid && (stockAvaible.touched || stockFormSubmitted)">
+      <p padding-left color="danger" *ngIf="stockAvaible.errors.required">Este campo é obrigatório</p>
+    </div>
+    <ion-item>
+      <ion-label stacked>Estoque Reservado</ion-label>
+      <ion-input [formControl]="stockReserved"></ion-input>
+    </ion-item>
+    <div *ngIf="!stockReserved.valid && (stockReserved.touched || stockFormSubmitted)">
+      <p padding-left color="danger" *ngIf="stockReserved.errors.required">Este campo é obrigatório</p>
+    </div>
+
+    <div padding class="submit-block">
+      <button ion-button color="primary" block (click)="submit()">Atualizar</button>
+    </div>
+
+  </form>
+</div>
