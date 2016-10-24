@@ -18,7 +18,7 @@
     </ion-toolbar>
 
     <ion-toolbar color="gold" *ngIf="searchVisible">
-      <ion-searchbar placeholder="Pesquisar Vendedor" [(ngModel)]="searchQuery" (input)="getItems($event)"></ion-searchbar>
+      <ion-searchbar placeholder="Pesquisar Produto" [(ngModel)]="searchQuery" (input)="getItems($event)"></ion-searchbar>
       <ion-buttons end>
         <button ion-button (click)="toggleSearchBar()">
           Cancelar

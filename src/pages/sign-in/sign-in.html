@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar color="gold">
-    <ion-title text-center>Cadastro</ion-title>
+    <ion-title>Cadastro</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -23,7 +23,7 @@
 
       <ion-item>
         <ion-label>Email*</ion-label>
-        <ion-input [formControl]="email" type="email" pattern="^\[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"></ion-input>
+        <ion-input [formControl]="email" type="email" [pattern]="emailRegex"></ion-input>
       </ion-item>
       <!-- <p>{{email.errors | json}}</p> -->
       <div *ngIf="!email.valid && (email.touched || formSubmitted)">

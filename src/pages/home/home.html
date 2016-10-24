@@ -24,4 +24,8 @@
       </ion-card-content>
     </ion-card>
   </ion-list>
+
+  <div class="not-found-container" padding text-center *ngIf="posts.length < 1 && !loading">
+    <h6> Não foi encontrado nenhum post dos vendedores que você segue. </h6>
+  </div>
 </ion-content>

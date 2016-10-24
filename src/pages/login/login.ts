@@ -12,6 +12,7 @@ import { SignInPage } from '../sign-in/sign-in';
 export class LoginPage {
 
   type: string = 'client';
+  emailRegex = "^\\s*[\\w\\-\\+_]+(\\.[\\w\\-\\+_]+)*\\@[\\w\\-\\+_]+\\.[\\w\\-\\+_]+(\\.[\\w\\-\\+_]+)*\\s*$";
 
   clientLoginForm: FormGroup;
   clientEmail: AbstractControl;

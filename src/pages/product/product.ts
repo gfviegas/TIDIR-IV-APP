@@ -15,6 +15,7 @@ export class ProductPage {
 
   IMG_URL: string = IMG_URL;
   sellerPage: boolean = false;
+  seller:any = {};
   slideOptions = {
     pager: true,
     initialSlide: 0,
@@ -31,10 +32,16 @@ export class ProductPage {
   ) {
     this.product = this.params.get('product');
     this.sellerPage = this.params.get('sellerPage');
+    this.seller = this.params.get('seller');
+    console.log(this.params);
   }
 
-  showSeller() {
+  showSeller(): void {
     this.navCtrl.push(SellerPage, {id : this.product.seller._id});
+  }
+
+  checkSeller(): boolean {
+    return !(this.sellerPage || (this.seller.name.length > 0));
   }
 
 }

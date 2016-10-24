@@ -14,7 +14,7 @@
         <ion-label stacked>Conteúdo</ion-label>
         <ion-textarea [formControl]="postContent" maxlength="250" rows="6" placeholder="Compartilhe algo com seus seguidores!"></ion-textarea>
       </ion-item>
-      <div *ngIf="!postContent.valid && (postContent.touched || clientFormSubmitted)">
+      <div *ngIf="!postContent.valid && (postContent.touched || postFormSubmitted)">
         <p padding-left color="danger" *ngIf="postContent.errors.required">Este campo é obrigatório</p>
         <p padding-left color="danger" *ngIf="postContent.errors.maxlength">Este campo deve ter no máximo 250 caracteres</p>
       </div>

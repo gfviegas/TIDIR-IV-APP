@@ -149,7 +149,7 @@ export class ProductsPage {
   }
 
   presentProduct(product: ProductObject) {
-    this.navCtrl.push(ProductPage, {product: product, sellerPage: this.sellerPage});
+    this.navCtrl.push(ProductPage, {product: product, sellerPage: this.sellerPage, seller: this.seller});
   }
 
   presentCreateModal() {

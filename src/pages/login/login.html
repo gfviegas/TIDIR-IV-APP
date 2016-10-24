@@ -26,7 +26,7 @@
       <form [formGroup]="clientLoginForm" novalidate="">
         <ion-item>
           <ion-label floating>Email</ion-label>
-          <ion-input [formControl]="clientEmail" type="email" pattern="^\[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"></ion-input>
+          <ion-input [formControl]="clientEmail" type="email" [pattern]="emailRegex"></ion-input>
         </ion-item>
         <div *ngIf="!clientEmail.valid && (clientEmail.touched || clientFormSubmitted)">
           <p padding-left color="danger" *ngIf="clientEmail.errors.required">Este campo é obrigatório</p>
@@ -56,7 +56,7 @@
       <form [formGroup]="sellerLoginForm" novalidate="">
         <ion-item>
           <ion-label floating>Email</ion-label>
-          <ion-input [formControl]="sellerEmail" type="email" pattern="^\[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"></ion-input>
+          <ion-input [formControl]="sellerEmail" type="email" [pattern]="emailRegex"></ion-input>
         </ion-item>
         <div *ngIf="!sellerEmail.valid && (sellerEmail.touched || sellerFormSubmitted)">
           <p padding-left color="danger" *ngIf="sellerEmail.errors.required">Este campo é obrigatório</p>
