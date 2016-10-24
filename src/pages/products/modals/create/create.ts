@@ -70,7 +70,7 @@ export class CreateProductPage {
     modal.present();
   }
 
-  submit() {
+  create() {
     this.productFormSubmitted = true;
     this.productsService.createProduct(this.productForm.value).subscribe(
       (product) => {
@@ -83,6 +83,26 @@ export class CreateProductPage {
         });
         toast.present();
         this.viewCtrl.dismiss({created: true, product: product});
+      },
+      (error) => {
+        console.error(error);
+      }
+    )
+  }
+
+  update() {
+    this.productFormSubmitted = true;
+    this.productsService.updateProduct(this.product._id, this.productForm.value).subscribe(
+      (product) => {
+        let toast = this.toastCtrl.create({
+          message: 'Produto atualizado com sucesso!',
+          position: 'top',
+          showCloseButton: true,
+          closeButtonText: 'Fechar',
+          duration: 3500
+        });
+        toast.present();
+        this.viewCtrl.dismiss({updated: true, product: product});
       },
       (error) => {
         console.error(error);

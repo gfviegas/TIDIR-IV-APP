@@ -44,4 +44,13 @@
       <button ion-button clear item-right (click)="showSeller()" > Ver </button>
     </ion-item>
   </ion-list>
+
+  <button ion-button color="gold" full (click)="editProduct()" icon-right>
+    Editar Dados
+    <ion-icon name="open"></ion-icon>
+  </button>
+  <button ion-button color="danger" full (click)="presentConfirmDelete()" icon-right>
+    Excluir Produto
+    <ion-icon name="trash"></ion-icon>
+  </button>
 </ion-content>

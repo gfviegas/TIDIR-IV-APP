@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, ToastController, ModalController, LoadingController } from 'ionic-angular';
+import { App, NavController, AlertController, ToastController, ModalController, LoadingController } from 'ionic-angular';
 import { IMG_URL } from '../../app/config';
 import moment from 'moment';
 import { Subscription } from 'rxjs/Subscription';
@@ -26,6 +26,7 @@ export class ProfilePage {
 
 
   constructor(
+    public app: App,
     public navCtrl: NavController,
     public authService: AuthService,
     public toastCtrl: ToastController,
@@ -60,7 +61,9 @@ export class ProfilePage {
   logout() {
     if (this.authService.logout()) {
       this.presentLoggedOutAlert();
-      this.navCtrl.setRoot(LoginPage);
+      const root = this.app.getRootNav();
+      root.popToRoot();
+      root.setRoot(LoginPage);
     }
   }
 

@@ -1,7 +1,8 @@
 <ion-header>
 
   <ion-navbar color="gold">
-    <ion-title text-center>Adicionar Produto</ion-title>
+    <ion-title text-center *ngIf="!updateProduct">Adicionar Produto</ion-title>
+    <ion-title text-center *ngIf="updateProduct">Atualizar Produto</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -63,10 +64,11 @@
 
     </ion-list>
 
-    <p>Depois de adicionar o produto você poderá cadastrar suas imagens</p>
+    <p *ngIf="!updateProduct">Depois de adicionar o produto você poderá cadastrar suas imagens</p>
 
     <div padding class="submit-block">
-      <button ion-button color="primary" block (click)="submit()">Adicionar Produto</button>
+      <button ion-button color="primary" block (click)="create()" *ngIf="!updateProduct">Adicionar Produto</button>
+      <button ion-button color="primary" block (click)="update()" *ngIf="updateProduct">Atualizar Produto</button>
     </div>
   </form>
 

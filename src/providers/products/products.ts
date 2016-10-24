@@ -115,4 +115,12 @@ export class ProductsService {
   createProduct(params: any): Observable<ProductObject> {
     return this.http.post(API_URL + 'products/', params).map(res => res.json());
   }
+
+  updateProduct(productId: string, params: any): Observable<ProductObject> {
+    return this.http.put(API_URL + 'products/' + productId, params).map(res => res.json());
+  }
+
+  deleteProduct(productId: string): Observable<any> {
+    return this.http.delete(API_URL + 'products/' + productId);
+  }
 }

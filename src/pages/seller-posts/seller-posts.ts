@@ -74,6 +74,7 @@ export class SellerPostsPage {
       },
       () => {
         this.postForm.reset();
+        this.postFormSubmitted = false;
       }
     );
   }
@@ -113,9 +114,7 @@ export class SellerPostsPage {
         }
       }
     )
-    popover.present({
-      ev: event
-    });
+    popover.present();
   }
 
   fromNow(dateField) {
