@@ -48,34 +48,36 @@ export class User implements UserObject {
 export class UsersService {
 
   public jwtHelper: JwtHelper = new JwtHelper();
-  public userId: string;
 
   constructor(
     public http: AuthHttp,
     public local: Storage
   ) {
-    this.userId = this.jwtHelper.decodeToken(localStorage.getItem('id_token')).sub;
+  }
+
+  getUserId(): string {
+    return this.jwtHelper.decodeToken(localStorage.getItem('id_token')).sub;
   }
 
   update(values: any) :Observable<UserObject> {
     let params = values;
-    return this.http.put(API_URL + '/users/' + this.userId, params).map(res => res.json());
+    return this.http.put(API_URL + '/users/' + this.getUserId(), params).map(res => res.json());
   }
 
   getFollowedSellers(): Observable<Array<SellerObject>> {
-    return this.http.get(API_URL + 'users/' + this.userId + '/followers').map(res => res.json());
+    return this.http.get(API_URL + 'users/' + this.getUserId() + '/followers').map(res => res.json());
   }
 
   checkFollowingSeller(sellerId: string): Observable<any> {
-    return this.http.get(API_URL + 'users/' + this.userId + '/followers/check/' + sellerId).map(res => res.json());
+    return this.http.get(API_URL + 'users/' + this.getUserId() + '/followers/check/' + sellerId).map(res => res.json());
   }
 
   followSeller(sellerId: string): Observable<any> {
-    return this.http.post(API_URL + 'users/' + this.userId + '/followers', {seller: sellerId}).map(res => res.json());
+    return this.http.post(API_URL + 'users/' + this.getUserId() + '/followers', {seller: sellerId}).map(res => res.json());
   }
 
   unfollowSeller(sellerId: string): Observable<any> {
-    return this.http.delete(API_URL + 'users/' + this.userId + '/followers/' + sellerId).map(res => res.json());
+    return this.http.delete(API_URL + 'users/' + this.getUserId() + '/followers/' + sellerId).map(res => res.json());
   }
 
 }
