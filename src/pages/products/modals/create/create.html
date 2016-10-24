@@ -1,8 +1,13 @@
 <ion-header>
 
   <ion-navbar color="gold">
-    <ion-title text-center *ngIf="!updateProduct">Adicionar Produto</ion-title>
-    <ion-title text-center *ngIf="updateProduct">Atualizar Produto</ion-title>
+    <ion-buttons left>
+      <button ion-button (click)="cancel()">
+        Cancelar
+      </button>
+    </ion-buttons>
+    <ion-title *ngIf="!updateProduct">Adicionar Produto</ion-title>
+    <ion-title *ngIf="updateProduct">Atualizar Produto</ion-title>
   </ion-navbar>
 
 </ion-header>

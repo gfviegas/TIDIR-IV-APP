@@ -45,11 +45,11 @@
     </ion-item>
   </ion-list>
 
-  <button ion-button color="gold" full (click)="editProduct()" icon-right>
+  <button ion-button color="gold" full (click)="editProduct()" icon-right *ngIf="sellerPage">
     Editar Dados
     <ion-icon name="open"></ion-icon>
   </button>
-  <button ion-button color="danger" full (click)="presentConfirmDelete()" icon-right>
+  <button ion-button color="danger" full (click)="presentConfirmDelete()" icon-right *ngIf="sellerPage">
     Excluir Produto
     <ion-icon name="trash"></ion-icon>
   </button>

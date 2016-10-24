@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar color="gold">
+    <ion-buttons left>
+      <button ion-button (click)="dismiss()">
+        Cancelar
+      </button>
+    </ion-buttons>
+    <ion-title> Atualizar Imagem </ion-title>
+    <ion-buttons left>
+      <button ion-button (click)="dismiss()">
+        Salvar
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="picture-page" padding>
+  Atualiza sua imagem
+
+  <button ion-button (click)="pickImage()">Selecionar Imagem</button>
+
+  <img [src]="base64Image">
+</ion-content>

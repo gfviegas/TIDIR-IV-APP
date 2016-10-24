@@ -110,4 +110,8 @@ export class CreateProductPage {
     )
   }
 
+  cancel() {
+    this.viewCtrl.dismiss({created: false});
+  }
+
 }

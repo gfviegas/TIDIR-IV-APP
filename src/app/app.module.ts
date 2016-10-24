@@ -16,6 +16,7 @@ import { ProfilePage } from '../pages/profile/profile';
 import { FollowingPage } from '../pages/profile/modals/following/following';
 import { TermsPage } from '../pages/profile/modals/terms/terms';
 import { EditUserPage } from '../pages/profile/modals/edit/edit';
+import { PicturePage } from '../pages/profile/modals/picture/picture';
 import { SellerPage } from '../pages/seller/seller';
 import { SellersPage } from '../pages/sellers/sellers';
 import { SellersCategoriesModalPage } from '../pages/sellers/modals/categories/categories';
@@ -79,6 +80,7 @@ export function getAuthHttp(http) {
     FollowingPage,
     TermsPage,
     EditUserPage,
+    PicturePage,
     SellerPage,
     SellersPage,
     SellersCategoriesModalPage,
@@ -114,6 +116,7 @@ export function getAuthHttp(http) {
     FollowingPage,
     TermsPage,
     EditUserPage,
+    PicturePage,
     SellerPage,
     SellersPage,
     SellersCategoriesModalPage,

@@ -12,6 +12,7 @@ import { LoginPage } from '../login/login';
 import { FollowingPage } from './modals/following/following';
 import { TermsPage } from './modals/terms/terms';
 import { EditUserPage } from './modals/edit/edit';
+import { PicturePage } from './modals/picture/picture';
 
 @Component({
   templateUrl: 'profile.html',
@@ -107,63 +108,8 @@ export class ProfilePage {
     modal.present();
   }
 
-  // presentEditName(): void {
-  //   let prompt = this.alertCtrl.create({
-  //     title: 'Editar Nome',
-  //     message: "Atualize o seu nome. Digite no máximo 30 caracteres.",
-  //     inputs: [{
-  //       name: 'name',
-  //       placeholder: 'Nome',
-  //       value: this.user.name
-  //     }],
-  //     buttons: [
-  //       { text: 'Cancelar' },
-  //       {
-  //         text: 'Salvar',
-  //         handler: data => {
-  //           if (data.name !== '') {
-  //             this.updateData('name', data.name).then(
-  //               value => {
-  //                 if (value.name) {
-  //                   this.user.name = value.name;
-  //                 }
-  //               }
-  //             );
-  //           } else {
-  //             let toast = this.toastCtrl.create({
-  //               message: 'Dado inválido!',
-  //               duration: 3000
-  //             });
-  //             toast.present();
-  //             this.presentEditName();
-  //           }
-  //         }
-  //       }
-  //     ]
-  //   });
-  //   prompt.present();
-  // }
-  //
-  // updateData(field: string, newValue: any): Promise<UserObject> {
-  //   let toast = this.toastCtrl.create({
-  //     message: 'Dado atualizado com sucesso!',
-  //     position: 'top',
-  //     showCloseButton: true,
-  //     closeButtonText: 'Fechar',
-  //     duration: 3000
-  //   });
-  //
-  //   return new Promise((resolve, reject) => {
-  //     this.usersService.update(field, newValue).subscribe(
-  //       user => {
-  //         toast.present();
-  //         resolve(user);
-  //       },
-  //       error => {
-  //         reject(error);
-  //       }
-  //     );
-  //   });
-  //
-  // }
+  presentPictureModal(): void {
+    let modal = this.modalCtrl.create(PicturePage);
+    modal.present();
+  }
 }

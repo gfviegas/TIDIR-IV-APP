@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="gold">
-    <ion-title text-center>Home</ion-title>
+    <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -16,7 +16,7 @@
         </ion-avatar>
         <h2>{{post?.author?.name}}</h2>
         <p>{{post?.createdAt}}</p>
-        <button ion-button clear item-right> Ver Perfil </button>
+        <button ion-button clear item-right (click)="presentSeller(post.author._id)"> Ver Perfil </button>
       </ion-item>
 
       <ion-card-content>

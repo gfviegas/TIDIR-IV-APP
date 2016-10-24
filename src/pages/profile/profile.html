@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="gold">
-    <ion-title text-center> Meu Perfil </ion-title>
+    <ion-title> Meu Perfil </ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -8,6 +8,7 @@
 
   <ion-toolbar color="dark" text-center class="user-image-toolbar">
     <img [src]="user.photo ? IMG_URL + user.photo : IMG_URL + 'person.jpeg'">
+    <!-- <p (click)="presentPictureModal()" style="color:white">Atualizar Imagem</p> -->
   </ion-toolbar>
   <div padding>
     <ion-segment color="dark" [(ngModel)]="page">

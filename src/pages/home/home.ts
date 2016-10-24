@@ -7,6 +7,8 @@ import { IMG_URL } from '../../app/config';
 import { PostsService, PostObject } from '../../providers/posts/posts';
 import { AuthService } from '../../providers/auth/auth';
 
+import { SellerPage } from '../seller/seller';
+
 @Component({
   templateUrl: 'home.html'
 })
@@ -52,5 +54,8 @@ export class HomePage {
     return moment(dateField).fromNow();
   }
 
+  presentSeller(sellerId: string) {
+    this.navCtrl.push(SellerPage, {id : sellerId});
+  }
 
 }

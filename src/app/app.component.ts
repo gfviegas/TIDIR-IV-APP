@@ -22,10 +22,6 @@ export class MyApp {
     public authService: AuthService
   ) {
     moment.locale('pt-br');
-    console.log(moment.locales());
-
-    // console.log(moment.locale('pt-br'));
-    // console.log(moment.locale('pt-BR'));
     let userLogged = this.authService.isLoggedIn();
 
     if (! userLogged) {
