@@ -14,6 +14,7 @@ export interface SortProducts {
 })
 export class ProductsFilterModalPage {
 
+  sellerPage: boolean = false;
   category: string = '';
   sort: SortProducts = {name: 'Mais Novos', value: '-created_at'};
   onlyFollowedSellers: boolean = true;
@@ -28,6 +29,7 @@ export class ProductsFilterModalPage {
     this.sort = params.get('sort');
     this.onlyFollowedSellers = params.get('onlyFollowedSellers');
     this.onlyInStock = params.get('onlyInStock');
+    this.sellerPage = params.get('seller');
   }
 
   presentCategoriesModal() {

@@ -1,0 +1,73 @@
+<ion-header>
+
+  <ion-navbar color="gold">
+    <ion-title text-center>Adicionar Produto</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <form [formGroup]="productForm" novalidate="">
+
+    <ion-list>
+      <ion-item>
+        <ion-label>Nome*</ion-label>
+        <ion-input [formControl]="name" type="text"></ion-input>
+      </ion-item>
+      <div *ngIf="!name.valid && (name.touched || productFormSubmitted)">
+        <p padding-left color="danger" *ngIf="name.errors?.required">Este campo é obrigatório</p>
+      </div>
+
+      <ion-item>
+        <ion-label>Descrição*</ion-label>
+        <ion-textarea [formControl]="description" maxlength="100" rows="6" placeholder="Descrição do seu produto"></ion-textarea>
+      </ion-item>
+      <div *ngIf="!description.valid && (description.touched || productFormSubmitted)">
+        <p padding-left color="danger" *ngIf="description.errors?.required">Este campo é obrigatório</p>
+        <p padding-left color="danger" *ngIf="description.errors?.maxlength">Este campo pode ter no máximo 100 caracteres</p>
+      </div>
+
+      <ion-item>
+        <ion-label>Preço Unitário*</ion-label>
+        <ion-input [formControl]="price" type="number"></ion-input>
+      </ion-item>
+      <div *ngIf="!price.valid && (price.touched || productFormSubmitted)">
+        <p padding-left color="danger" *ngIf="price.errors?.required">Este campo é obrigatório</p>
+      </div>
+
+      <ion-item (click)="presentCategoriesModal()">
+        <ion-label>Categoria</ion-label>
+        <ion-input [formControl]="category" disabled placeholder="Clique para escolher.." type="text"></ion-input>
+      </ion-item>
+      <div *ngIf="!category.valid && (category.touched || productFormSubmitted)">
+        <p padding-left color="danger" *ngIf="category.errors?.required">Este campo é obrigatório</p>
+      </div>
+
+      <ion-item>
+        <ion-label>Estoque Disponível</ion-label>
+        <ion-input [formControl]="stock_avaible" type="number"></ion-input>
+      </ion-item>
+      <div *ngIf="!stock_avaible.valid && (stock_avaible.touched || productFormSubmitted)">
+        <p padding-left color="danger" *ngIf="stock_avaible.errors?.required">Este campo é obrigatório</p>
+      </div>
+
+      <ion-item>
+        <ion-label>Estoque Reservado</ion-label>
+        <ion-input [formControl]="stock_reserved" type="number"></ion-input>
+      </ion-item>
+      <div *ngIf="!stock_reserved.valid && (stock_reserved.touched || productFormSubmitted)">
+        <p padding-left color="danger" *ngIf="stock_reserved.errors?.required">Este campo é obrigatório</p>
+      </div>
+
+    </ion-list>
+
+    <p>Depois de adicionar o produto você poderá cadastrar suas imagens</p>
+
+    <div padding class="submit-block">
+      <button ion-button color="primary" block (click)="submit()">Adicionar Produto</button>
+    </div>
+  </form>
+
+</ion-content>

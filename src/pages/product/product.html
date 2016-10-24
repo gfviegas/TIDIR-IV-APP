@@ -34,8 +34,8 @@
       <b item-right> {{product?.stock_avaible}} unidade{{product?.stock_avaible > 1 ? 's' : ''}} </b>
     </ion-item>
 
-    <ion-item-divider>Vendido Por:</ion-item-divider>
-    <ion-item>
+    <ion-item-divider *ngIf="!sellerPage">Vendido Por:</ion-item-divider>
+    <ion-item *ngIf="!sellerPage">
       <ion-thumbnail item-left>
         <img [src]="product?.seller?.photo ? IMG_URL + product.seller.photo : IMG_URL + 'person.jpeg'">
       </ion-thumbnail>

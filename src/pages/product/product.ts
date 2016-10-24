@@ -14,6 +14,7 @@ import { SellerPage } from '../seller/seller';
 export class ProductPage {
 
   IMG_URL: string = IMG_URL;
+  sellerPage: boolean = false;
   slideOptions = {
     pager: true,
     initialSlide: 0,
@@ -29,21 +30,7 @@ export class ProductPage {
     public params: NavParams
   ) {
     this.product = this.params.get('product');
-  }
-
-  ngOnInit() {
-    // this.loadInit();
-  }
-
-  ionViewDidLeave() {
-    this.navCtrl.popToRoot();
-  }
-
-  loadInit(): void {
-    // let loading = this.loadingCtrl.create({
-    //   content: 'Carregando...'
-    // });
-    // loading.present();
+    this.sellerPage = this.params.get('sellerPage');
   }
 
   showSeller() {

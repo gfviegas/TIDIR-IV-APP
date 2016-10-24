@@ -62,11 +62,16 @@ export class ProductsService {
    * @param  {string}   sellerName The name to query
    * @return {Observable}          HTTP Observable of query result
    */
-  findProduct(productName: string): Observable<Array<ProductObject>> {
+  findProduct(productName: string, sellerId?: string): Observable<Array<ProductObject>> {
     let options = new RequestOptions({
       search: new URLSearchParams('name='+productName)
     });
-    return this.http.get(API_URL + 'products', options).map(res => res.json());
+    let url = API_URL + 'products';
+    if (sellerId) {
+      url = API_URL + 'sellers/' + sellerId + '/products';
+    }
+
+    return this.http.get(url, options).map(res => res.json());
   }
 
   /**
@@ -105,5 +110,9 @@ export class ProductsService {
 
   updateStock(productId: string, avaible: number, reserved: number): Observable<ProductObject> {
     return this.http.put(API_URL + 'products/' + productId, {stock_avaible: avaible, stock_reserved: reserved}).map(res => res.json());
+  }
+
+  createProduct(params: any): Observable<ProductObject> {
+    return this.http.post(API_URL + 'products/', params).map(res => res.json());
   }
 }

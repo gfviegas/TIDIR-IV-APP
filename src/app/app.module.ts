@@ -32,6 +32,7 @@ import { SellerPostsPage } from '../pages/seller-posts/seller-posts';
 import { UpdatePostPage } from '../pages/seller-posts/popovers/update/update';
 import { StockPage } from '../pages/stock/stock';
 import { UpdateStockPage } from '../pages/stock/popovers/update/update';
+import { CreateProductPage } from '../pages/products/modals/create/create';
 
 /**
  * PROVIDERS
@@ -62,7 +63,7 @@ export function getAuthHttp(http) {
 
 // import { ImageViewerDirective } from 'ionic-img-viewer';
 // import MaskedInput from 'angular2-text-mask';
-
+// import {TextMaskModule} from 'angular2-text-mask';
 
 @NgModule({
   declarations: [
@@ -90,7 +91,8 @@ export function getAuthHttp(http) {
     SellerPostsPage,
     UpdatePostPage,
     StockPage,
-    UpdateStockPage
+    UpdateStockPage,
+    CreateProductPage
   ],
   imports: [
     IonicModule.forRoot(MyApp, {
@@ -124,7 +126,8 @@ export function getAuthHttp(http) {
     SellerPostsPage,
     UpdatePostPage,
     StockPage,
-    UpdateStockPage
+    UpdateStockPage,
+    CreateProductPage
   ],
   providers: [
     AuthService,

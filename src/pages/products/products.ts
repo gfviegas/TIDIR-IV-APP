@@ -4,14 +4,18 @@ import { NavController, LoadingController, ModalController, NavParams } from 'io
 import { IMG_URL } from '../../app/config';
 import { SellersService, SellerObject, Seller } from '../../providers/sellers/sellers';
 import { ProductsService, ProductObject } from '../../providers/products/products';
+import { AuthService } from '../../providers/auth/auth';
 
 import { ProductsFilterModalPage } from './modals/filter/filter';
+import { CreateProductPage } from './modals/create/create';
 import { ProductPage } from '../product/product';
 
 @Component({
   templateUrl: 'products.html'
 })
 export class ProductsPage {
+
+  sellerPage: boolean = false;
 
   IMG_URL: string = IMG_URL;
   searchQuery:string = '';
@@ -34,16 +38,50 @@ export class ProductsPage {
     public params: NavParams,
     public loadingCtrl: LoadingController,
     public productsService: ProductsService,
-    public sellersService: SellersService
+    public sellersService: SellersService,
+    public authService: AuthService
   ) {
     let seller = params.get('seller');
     if (seller) {
       this.seller = seller;
     }
+
+    let type = authService.getLoggedUser().type;
+    if (type === 'seller') {
+      this.sellerPage = true;
+      this.filter = {
+        category: '',
+        sort : {name: 'Mais Novos', value: '-created_at'},
+        onlyFollowedSellers: false,
+        onlyInStock: false
+      };
+      authService.getLoggedUserData().subscribe(
+        (seller) => {
+          this.seller = seller;
+        }
+      )
+    }
   }
 
   ionViewDidEnter() {
-    this.loadInit();
+    let type = this.authService.getLoggedUser().type;
+    if (type === 'seller') {
+      this.sellerPage = true;
+      this.filter = {
+        category: '',
+        sort : {name: 'Mais Novos', value: '-created_at'},
+        onlyFollowedSellers: false,
+        onlyInStock: false
+      };
+      this.authService.getLoggedUserData().subscribe(
+        (seller) => {
+          this.seller = seller;
+          this.loadInit();
+        }
+      )
+    } else {
+      this.loadInit();
+    }
   }
 
   loadInit(): void {
@@ -79,7 +117,7 @@ export class ProductsPage {
 
     if (query && query.trim() != '') {
       this.loading = true;
-      this.productsService.findProduct(query).subscribe(
+      this.productsService.findProduct(query, this.seller._id).subscribe(
         response => {
           this.products = response;
           this.loading = false;
@@ -101,7 +139,8 @@ export class ProductsPage {
   }
 
   presentFilterModal() {
-    let modal = this.modalCtrl.create(ProductsFilterModalPage, this.filter);
+    let params = Object.assign(this.filter, {seller: this.sellerPage});
+    let modal = this.modalCtrl.create(ProductsFilterModalPage, params);
     modal.onDidDismiss(data => {
       this.filter = data;
       this.loadInit();
@@ -110,7 +149,17 @@ export class ProductsPage {
   }
 
   presentProduct(product: ProductObject) {
-    this.navCtrl.push(ProductPage, {product: product});
+    this.navCtrl.push(ProductPage, {product: product, sellerPage: this.sellerPage});
+  }
+
+  presentCreateModal() {
+    let modal = this.modalCtrl.create(CreateProductPage, {});
+    modal.onDidDismiss(data => {
+      if (data.created) {
+        this.products.push(data.product);
+      }
+    });
+    modal.present();
   }
 
 }
