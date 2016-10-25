@@ -61,7 +61,7 @@ export class UsersService {
 
   update(values: any) :Observable<UserObject> {
     let params = values;
-    return this.http.put(API_URL + '/users/' + this.getUserId(), params).map(res => res.json());
+    return this.http.put(API_URL + 'users/' + this.getUserId(), params).map(res => res.json());
   }
 
   getFollowedSellers(): Observable<Array<SellerObject>> {

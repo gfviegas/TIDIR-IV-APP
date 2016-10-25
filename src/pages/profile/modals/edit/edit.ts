@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 
 import { SignService } from '../../../../providers/sign/sign';
 import { UsersService } from '../../../../providers/users/users';
+import { SellersService } from '../../../../providers/sellers/sellers';
 
 @Component({
   templateUrl: 'edit.html'
@@ -12,6 +13,7 @@ export class EditUserPage {
 
   public mask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
   user: any;
+  userType: string = 'user';
 
   editForm: FormGroup;
   name: AbstractControl;
@@ -31,12 +33,32 @@ export class EditUserPage {
     public fb: FormBuilder,
     public signService: SignService,
     public usersService: UsersService,
+    public sellersService: SellersService,
     public viewCtrl: ViewController,
     public navCtrl: NavController,
     public params: NavParams,
     public loadingCtrl: LoadingController
   ) {
     this.user = params.get('user');
+    this.userType = this.params.get('userType');
+
+    let userWhatsapp;
+    let userFacebook;
+    let userPhone;
+    if (this.user.contact) {
+      if (this.user.contact.whatsapp) {
+        userWhatsapp = this.user.contact.whatsapp;
+      }
+      if (this.user.contact.facebook) {
+        userFacebook = this.user.contact.facebook;
+      }
+      if (this.user.contact.phone) {
+        userPhone = this.user.contact.phone;
+      }
+
+      console.log(this.user.contact);
+    }
+
 
     this.editForm = fb.group({
       name: [this.user.name, Validators.required],
@@ -45,9 +67,9 @@ export class EditUserPage {
         city: [this.user.location.city, Validators.required]
       }),
       contact: fb.group({
-        whatsapp: [this.user.contact.whatsapp],
-        facebook: [this.user.contact.facebook],
-        phone: [this.user.contact.phone]
+        whatsapp: [userWhatsapp],
+        facebook: [userFacebook],
+        phone: [userPhone]
       })
     });
     this.name = this.editForm.controls['name'];
@@ -135,9 +157,6 @@ export class EditUserPage {
       let params = {
         name: editValues.name,
         contact: {
-          whatsapp: editValues.contact.whatsapp,
-          facebook: editValues.contact.facebook,
-          phone: editValues.contact.phone
         },
         location: {
           state: editValues.location.state.uf,
@@ -145,11 +164,29 @@ export class EditUserPage {
         }
       };
 
-      this.usersService.update(params).subscribe(
-        (user) => {
-          this.viewCtrl.dismiss(user);
-        }
-      );
+      if (editValues.contact.whatsapp) {
+        params.contact['whatsapp'] = editValues.contact.whatsapp;
+      }
+      if (editValues.contact.facebook) {
+        params.contact['facebook'] = editValues.contact.facebook;
+      }
+      if (editValues.contact.phone) {
+        params.contact['phone'] = editValues.contact.phone;
+      }
+
+      if (this.userType === 'seller') {
+        this.sellersService.update(params).subscribe(
+          (seller) => {
+            this.viewCtrl.dismiss(seller);
+          }
+        );
+      } else {
+        this.usersService.update(params).subscribe(
+          (user) => {
+            this.viewCtrl.dismiss(user);
+          }
+        );
+      }
 
     }
   }

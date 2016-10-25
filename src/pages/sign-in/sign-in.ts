@@ -6,6 +6,7 @@ import { SignService } from '../../providers/sign/sign';
 // import MaskedInput from 'angular2-text-mask';
 
 import { TabsPage } from '../tabs/tabs';
+import { SellersTabsPage } from '../sellers-tabs/sellers-tabs';
 
 @Component({
   templateUrl: 'sign-in.html'
@@ -143,8 +144,19 @@ export class SignInPage {
         location: {
           state: this.ufs[signValues.location.state].uf,
           city: this.cities[signValues.location.city].name,
-        }
+        },
+        contact: {}
       };
+
+      if (signValues.contact.whatsapp) {
+        params.contact['whatsapp'] = signValues.contact.whatsapp;
+      }
+      if (signValues.contact.facebook) {
+        params.contact['facebook'] = signValues.contact.facebook;
+      }
+      if (signValues.contact.phone) {
+        params.contact['phone'] = signValues.contact.phone;
+      }
 
       if (!signAsSeller) {
         this.signService.signUser(params).subscribe(
@@ -209,7 +221,12 @@ export class SignInPage {
       success => {
         // loading.dismiss();
         this.presentAlert('Sucesso!', 'Cadastrado com sucesso!');
-        this.navCtrl.setRoot(TabsPage);
+
+        if (type === 'user') {
+          this.navCtrl.setRoot(TabsPage);
+        } else {
+          this.navCtrl.setRoot(SellersTabsPage);
+        }
       },
       error => {
       }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
-import { Platform, ViewController, NavParams } from 'ionic-angular';
+import { Platform, ViewController, NavParams, LoadingController } from 'ionic-angular';
 
 import { Camera, CameraOptions, Transfer, FileUploadOptions } from 'ionic-native';
 
@@ -24,6 +24,7 @@ export class PicturePage {
     public sellersService: SellersService,
     public usersService: UsersService,
     public sanitizer: DomSanitizer,
+    public loadingCtrl: LoadingController,
     public params: NavParams
   ) {
     this.imageURL =  sanitizer.bypassSecurityTrustUrl(IMG_URL + this.params.get('photo'));
@@ -41,15 +42,32 @@ export class PicturePage {
 
   submit() {
     if (this.image) {
+
+      let loading = this.loadingCtrl.create({
+        content: 'Carregando'
+      });
+      loading.present();
       if (this.userType === 'seller') {
         this.sellersService.uploadPicture(this.image).then(
-          (response) => this.viewCtrl.dismiss(response.photo + '?_ts=' + new Date().getTime()),
-          (error) => console.error(error)
+          (response) => {
+            this.viewCtrl.dismiss(response.photo + '?_ts=' + new Date().getTime());
+            loading.dismiss();
+          },
+          (error) => {
+            console.error(error);
+            loading.dismiss();
+          }
         );
       } else {
         this.usersService.uploadPicture(this.image).then(
-          (response) => this.viewCtrl.dismiss(response.photo + '?_ts=' + new Date().getTime()),
-          (error) => console.error(error)
+          (response) => {
+            this.viewCtrl.dismiss(response.photo + '?_ts=' + new Date().getTime());
+            loading.dismiss();
+          },
+          (error) => {
+            console.error(error);
+            loading.dismiss();
+          }
         );
       }
     }

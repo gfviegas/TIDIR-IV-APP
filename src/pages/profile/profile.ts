@@ -91,7 +91,7 @@ export class ProfilePage {
   }
 
   editData(): void {
-    let modal = this.modalCtrl.create(EditUserPage, {user: this.user});
+    let modal = this.modalCtrl.create(EditUserPage, {user: this.user, userType: this.userType});
     modal.onDidDismiss(data => {
       if (data) {
         let toast = this.toastCtrl.create({

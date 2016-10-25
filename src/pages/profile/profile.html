@@ -45,6 +45,10 @@
           <ion-icon name="mail" color="danger" item-left></ion-icon>
           {{user.email}}
         </ion-item>
+        <ion-item *ngIf="user.contact != null && user.contact.facebook != null">
+          <ion-icon name="logo-facebook" color="favorite" item-left></ion-icon>
+          {{user.contact.facebook}}
+        </ion-item>
         <ion-item *ngIf="user.contact != null && user.contact.whatsapp != null">
           <ion-icon name="logo-whatsapp" color="secondary" item-left></ion-icon>
           {{user.contact.whatsapp}}

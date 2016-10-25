@@ -53,14 +53,14 @@
 
       <ion-item ngControlGroup="contact">
         <ion-label>Whatsapp</ion-label>
-        <ion-input [formControl]="whatsapp" type="number" pattern="^[1-9]{2} [2-9][0-9]{3,4}[0-9]{4}$"></ion-input>
+        <ion-input [formControl]="whatsapp" type="number" pattern="^[1-9]{2}[2-9][0-9]{3,4}[0-9]{4}$"></ion-input>
       </ion-item>
       <div *ngIf="!whatsapp.valid && (whatsapp.touched || formSubmitted)">
         <p padding-left color="danger" *ngIf="whatsapp.errors?.pattern">O campo deve ter o formato 99 999999999</p>
       </div>
       <ion-item ngControlGroup="contact">
         <ion-label>Outro Telefone</ion-label>
-        <ion-input [formControl]="phone" type="number" pattern="^[1-9]{2} [2-9][0-9]{3,4}[0-9]{4}$"></ion-input>
+        <ion-input [formControl]="phone" type="number" pattern="^[1-9]{2}[2-9][0-9]{3,4}[0-9]{4}$"></ion-input>
       </ion-item>
       <div *ngIf="!phone.valid && (phone.touched || formSubmitted)">
         <p padding-left color="danger" *ngIf="whatsapp.errors?.pattern">O campo deve ter o formato 99 999999999</p>

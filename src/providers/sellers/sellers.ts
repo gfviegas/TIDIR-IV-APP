@@ -138,4 +138,9 @@ export class SellersService {
 
     });
   }
+
+  update(values: any) :Observable<SellerObject> {
+    let params = values;
+    return this.http.put(API_URL + 'sellers/' + this.getSellerId(), params).map(res => res.json());
+  }
 }
