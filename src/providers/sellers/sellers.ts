@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, URLSearchParams } from '@angular/http';
+import { JwtHelper, AuthHttp } from 'angular2-jwt';
 
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
@@ -45,9 +46,15 @@ export class Seller implements SellerObject {
 @Injectable()
 export class SellersService {
 
+  public jwtHelper: JwtHelper = new JwtHelper();
+
   constructor(
-    public http: Http
+    public http: AuthHttp
   ) {}
+
+  getSellerId(): string {
+    return this.jwtHelper.decodeToken(localStorage.getItem('id_token')).sub;
+  }
 
   /**
    * Find a seller by his name
@@ -104,5 +111,31 @@ export class SellersService {
    */
   getProducts(sellerId: string): Observable<Array<any>> {
     return this.http.get(API_URL + 'sellers/' + sellerId + '/products').map(res => res.json());
+  }
+
+  uploadPicture(file: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let sellerId = this.getSellerId();
+      let http = new XMLHttpRequest();
+
+      let formData = new FormData();
+      formData.append('file', file, file.name);
+      http.open('PUT', API_URL + 'sellers/' + sellerId + '/image', true);
+      http.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('id_token'));
+      http.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+      http.onreadystatechange = function() {
+        if(http.readyState == 4) {
+          if (http.status === 200) {
+            resolve(JSON.parse(http.response));
+          } else {
+            reject(http.response);
+          }
+        }
+      }
+
+      http.send(formData);
+
+    });
   }
 }

@@ -80,4 +80,30 @@ export class UsersService {
     return this.http.delete(API_URL + 'users/' + this.getUserId() + '/followers/' + sellerId).map(res => res.json());
   }
 
+  uploadPicture(file: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let userId = this.getUserId();
+      let http = new XMLHttpRequest();
+
+      let formData = new FormData();
+      formData.append('file', file, file.name);
+      http.open('PUT', API_URL + 'users/' + userId + '/image', true);
+      http.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('id_token'));
+      http.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+      http.onreadystatechange = function() {
+        if(http.readyState == 4) {
+          if (http.status === 200) {
+            resolve(JSON.parse(http.response));
+          } else {
+            reject(http.response);
+          }
+        }
+      }
+
+      http.send(formData);
+
+    });
+  }
+
 }

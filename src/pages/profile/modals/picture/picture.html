@@ -7,7 +7,7 @@
     </ion-buttons>
     <ion-title> Atualizar Imagem </ion-title>
     <ion-buttons left>
-      <button ion-button (click)="dismiss()">
+      <button ion-button (click)="submit()">
         Salvar
       </button>
     </ion-buttons>
@@ -15,10 +15,25 @@
 </ion-header>
 
 
-<ion-content class="picture-page" padding>
-  Atualiza sua imagem
+<ion-content text-center class="seller-page" padding>
 
-  <button ion-button (click)="pickImage()">Selecionar Imagem</button>
+  <input
+    id="imageInput"
+    type="file"
+    (change)="fileChanged($event)"
+    name="name"
+    placeholder="Selecionar imagem"
+    style="display:none"
+    accept="image/gif, image/jpeg, image/png" 
+  >
+  <button (click)="getImage()" ion-button>Selecionar Imagem</button>
+  <button color="danger" ion-button>Excluir Imagem</button>
 
-  <img [src]="base64Image">
+  <br>
+
+  <div text-center class="user-image-toolbar">
+    <img [src]="imageURL">
+    <p>Pré-visualização</p>
+  </div>
+
 </ion-content>

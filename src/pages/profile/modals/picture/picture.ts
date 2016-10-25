@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
-import { Platform, ViewController } from 'ionic-angular';
+import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
+import { Platform, ViewController, NavParams } from 'ionic-angular';
 
 import { Camera, CameraOptions, Transfer, FileUploadOptions } from 'ionic-native';
+
+import { UsersService } from '../../../../providers/users/users';
+import { SellersService } from '../../../../providers/sellers/sellers';
 
 import { IMG_URL, API_URL } from '../../../../app/config';
 
@@ -10,57 +14,49 @@ import { IMG_URL, API_URL } from '../../../../app/config';
 })
 export class PicturePage {
   base64Image = '';
+  image;
+  imageURL: SafeUrl;
+  userType: string;
 
   constructor(
     public viewCtrl: ViewController,
-    public platform: Platform
+    public platform: Platform,
+    public sellersService: SellersService,
+    public usersService: UsersService,
+    public sanitizer: DomSanitizer,
+    public params: NavParams
   ) {
+    this.imageURL =  sanitizer.bypassSecurityTrustUrl(IMG_URL + this.params.get('photo'));
+    this.userType = this.params.get('userType');
   }
 
   dismiss() {
     return this.viewCtrl.dismiss();
   }
 
-  pickImage() {
-    this.platform.ready().then(() => {
-      let options: CameraOptions = {
-        sourceType: 0,
-        mediaType: 0,
-        targetWidth: 132,
-        targetHeight: 132
-      };
-
-      Camera.getPicture(options).then((imageData) => {
-        this.base64Image = 'data:image/jpeg;base64,' + imageData;
-        this.upload(imageData);
-      }, (err) => {
-        console.error(err);
-      });
-    });
+  fileChanged(event) {
+    this.image = event.srcElement.files[0];
+    this.imageURL = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.image));
   }
 
-  upload(image: string): void {
-    let token = '';
-    let ft = new Transfer();
-    let filename = 'userid' + '.jpg';
-    let options: FileUploadOptions = {
-      fileKey: 'file',
-      fileName: filename,
-      mimeType: 'image/jpeg',
-      chunkedMode: false,
-      headers: {
-        'Content-Type' : null,
-        'Authorization' : 'Bearer ' + token
-      },
-      params: {
-        fileName: filename
+  submit() {
+    if (this.image) {
+      if (this.userType === 'seller') {
+        this.sellersService.uploadPicture(this.image).then(
+          (response) => this.viewCtrl.dismiss(response.photo + '?_ts=' + new Date().getTime()),
+          (error) => console.error(error)
+        );
+      } else {
+        this.usersService.uploadPicture(this.image).then(
+          (response) => this.viewCtrl.dismiss(response.photo + '?_ts=' + new Date().getTime()),
+          (error) => console.error(error)
+        );
       }
-    };
-    ft.upload(image, API_URL + 'image/upload', options, false)
-    .then((result: any) => {
-      console.log(JSON.stringify(result));
-    }).catch((error: any) => {
-      console.error(JSON.stringify(error));
-    });
+    }
   }
+
+  getImage() {
+    document.getElementById('imageInput').click();
+  }
+
 }

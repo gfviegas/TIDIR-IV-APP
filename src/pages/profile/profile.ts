@@ -109,7 +109,22 @@ export class ProfilePage {
   }
 
   presentPictureModal(): void {
-    let modal = this.modalCtrl.create(PicturePage);
+    let modal = this.modalCtrl.create(PicturePage, {photo: this.user.photo, userType: this.userType});
+    modal.onDidDismiss(data => {
+      console.log(data);
+      if (data) {
+        let toast = this.toastCtrl.create({
+          message: 'Imagem atualizada!',
+          position: 'top',
+          showCloseButton: true,
+          closeButtonText: 'Fechar',
+          duration: 3000
+        });
+        toast.present();
+
+        this.user.photo = data;
+      }
+    });
     modal.present();
   }
 }

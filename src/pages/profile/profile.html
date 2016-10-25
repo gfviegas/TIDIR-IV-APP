@@ -8,7 +8,11 @@
 
   <ion-toolbar color="dark" text-center class="user-image-toolbar">
     <img [src]="user.photo ? IMG_URL + user.photo : IMG_URL + 'person.jpeg'">
-    <!-- <p (click)="presentPictureModal()" style="color:white">Atualizar Imagem</p> -->
+    <p>
+      <button ion-button (click)="presentPictureModal()" color="gold" clear small icon-left>
+        Atualizar Imagem
+      </button>
+    </p>
   </ion-toolbar>
   <div padding>
     <ion-segment color="dark" [(ngModel)]="page">
