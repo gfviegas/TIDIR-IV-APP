@@ -24,6 +24,7 @@ export class ProductsPage {
   products: Array<ProductObject> = [];
   seller:SellerObject = new Seller();
   loading: boolean = false;
+  currentUser;
 
   filter: Object = {
     category: '',
@@ -55,11 +56,6 @@ export class ProductsPage {
         onlyFollowedSellers: false,
         onlyInStock: false
       };
-      authService.getLoggedUserData().subscribe(
-        (seller) => {
-          this.seller = seller;
-        }
-      )
     }
   }
 
@@ -76,11 +72,22 @@ export class ProductsPage {
       this.authService.getLoggedUserData().subscribe(
         (seller) => {
           this.seller = seller;
+          if (!this.filter['location']) {
+            this.filter['location'] = seller.location;
+          }
           this.loadInit();
         }
       )
     } else {
-      this.loadInit();
+      this.authService.getLoggedUserData().subscribe(
+        (user) => {
+          this.currentUser = user;
+          if (!this.filter['location']) {
+            this.filter['location'] = user.location;
+          }
+          this.loadInit();
+        }
+      );
     }
   }
 
