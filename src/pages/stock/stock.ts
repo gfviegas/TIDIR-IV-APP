@@ -3,7 +3,7 @@ import { NavController, PopoverController, ToastController } from 'ionic-angular
 
 import { UpdateStockPage } from './popovers/update/update';
 
-import { ProductObject, Product } from '../../providers/products/products';
+import { ProductObject } from '../../providers/products/products';
 import { SellersService } from '../../providers/sellers/sellers';
 import { AuthService } from '../../providers/auth/auth';
 

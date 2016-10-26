@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions, URLSearchParams } from '@angular/http';
+import { RequestOptions, URLSearchParams } from '@angular/http';
 import { JwtHelper, AuthHttp } from 'angular2-jwt';
 
 import 'rxjs/add/operator/map';

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { App, NavController, AlertController, ToastController, ModalController, LoadingController } from 'ionic-angular';
 import { IMG_URL } from '../../app/config';
 import moment from 'moment';
-import { Subscription } from 'rxjs/Subscription';
 
 import { AuthService, UserObject, AuthUser } from '../../providers/auth/auth';
 import { UsersService } from '../../providers/users/users';

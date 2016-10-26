@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
+import { DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import { Platform, ViewController, NavParams, LoadingController } from 'ionic-angular';
 
-import { Camera, CameraOptions, Transfer, FileUploadOptions } from 'ionic-native';
+// import { Camera, CameraOptions, Transfer, FileUploadOptions } from 'ionic-native';
 
 import { UsersService } from '../../../../providers/users/users';
 import { SellersService } from '../../../../providers/sellers/sellers';
 
-import { IMG_URL, API_URL } from '../../../../app/config';
+import { IMG_URL } from '../../../../app/config';
 
 @Component({
   templateUrl: 'picture.html'

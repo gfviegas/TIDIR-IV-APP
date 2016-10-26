@@ -46,20 +46,20 @@
       <ion-item text-wrap>
         <ion-label>Estado</ion-label>
         <ion-select [formControl]="state" (ionChange)="getCities()" multiple="false" cancelText="Cancelar" okText="Selecionar">
-          <ion-option *ngFor="let uf of ufs; trackBy:uf?.uf" [value]="uf">{{uf.name}}</ion-option>
+          <ion-option *ngFor="let uf of ufs" [value]="uf">{{uf.name}}</ion-option>
         </ion-select>
       </ion-item>
-      <div *ngIf="!state.valid && (state.touched || formSubmitted)">
+      <div *ngIf="!state.valid && state.touched">
         <p padding-left color="danger" *ngIf="state.errors?.required">Este campo é obrigatório</p>
       </div>
 
       <ion-item text-wrap>
         <ion-label>Cidade</ion-label>
         <ion-select [formControl]="city" multiple="false" cancelText="Cancelar" okText="Selecionar">
-          <ion-option *ngFor="let city of cities; trackBy:city?.id" [value]="city">{{city.name}}</ion-option>
+          <ion-option *ngFor="let city of cities" [value]="city">{{city.name}}</ion-option>
         </ion-select>
       </ion-item>
-      <div *ngIf="!city.valid && (city.touched || formSubmitted)">
+      <div *ngIf="!city.valid && city.touched">
         <p padding-left color="danger" *ngIf="city.errors?.required">Este campo é obrigatório</p>
       </div>
 
