@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar color="gold">
+    <ion-buttons left>
+      <button ion-button (click)="dismiss()">
+        OK
+      </button>
+    </ion-buttons>
+    <ion-title> Atualizar Imagem </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content text-center class="seller-page" padding>
+  <input
+  id="imageInput"
+  type="file"
+  (change)="fileChanged($event)"
+  name="name"
+  placeholder="Selecionar imagem"
+  style="display:none"
+  accept="image/*"
+  capture="camera"
+  >
+
+  <ion-list *ngIf="images.length > 0">
+    <ion-item *ngFor="let image of images">
+      <ion-row>
+        <ion-col text-center>
+          <img [src]="trustUrl(image)">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col width-80 offset-10>
+          <button ion-button full icon-right color="danger" (click)="deleteImage(image)">
+            Remover Imagem
+            <ion-icon name="trash"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+
+  <div class="not-found-container" padding text-center *ngIf="!images.length > 0">
+    <h6> Você ainda não adicionou nenhuma imagem para esse produto! </h6>
+  </div>
+
+  <ion-fab right bottom>
+    <button ion-fab color="gold" (click)="getImage()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

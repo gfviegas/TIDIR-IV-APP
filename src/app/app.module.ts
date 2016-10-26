@@ -35,6 +35,7 @@ import { UpdatePostPage } from '../pages/seller-posts/popovers/update/update';
 import { StockPage } from '../pages/stock/stock';
 import { UpdateStockPage } from '../pages/stock/popovers/update/update';
 import { CreateProductPage } from '../pages/products/modals/create/create';
+import { ProductPicturesPage } from '../pages/products/modals/picture/picture';
 
 /**
  * PROVIDERS
@@ -96,7 +97,8 @@ export function getAuthHttp(http) {
     UpdatePostPage,
     StockPage,
     UpdateStockPage,
-    CreateProductPage
+    CreateProductPage,
+    ProductPicturesPage
   ],
   imports: [
     IonicModule.forRoot(MyApp, {
@@ -133,7 +135,8 @@ export function getAuthHttp(http) {
     UpdatePostPage,
     StockPage,
     UpdateStockPage,
-    CreateProductPage
+    CreateProductPage,
+    ProductPicturesPage
   ],
   providers: [
     AuthService,

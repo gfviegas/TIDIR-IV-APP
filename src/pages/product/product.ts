@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import { NavController, NavParams, LoadingController, ModalController, AlertController, ToastController } from 'ionic-angular';
 
 import { IMG_URL } from '../../app/config';
@@ -8,6 +9,7 @@ import { ProductObject, Product, ProductsService } from '../../providers/product
 // import { ImageViewerDirective } from 'ionic-img-viewer';
 import { SellerPage } from '../seller/seller';
 import { CreateProductPage } from '../products/modals/create/create';
+import { ProductPicturesPage } from '../products/modals/picture/picture';
 import { ProductsPage } from '../products/products';
 
 @Component({
@@ -34,12 +36,12 @@ export class ProductPage {
     public toastCtrl: ToastController,
     public alertCtrl: AlertController,
     public params: NavParams,
-    public productsService: ProductsService
+    public productsService: ProductsService,
+    public sanitizer: DomSanitizer
   ) {
     this.product = this.params.get('product');
     this.sellerPage = this.params.get('sellerPage');
     this.seller = this.params.get('seller');
-    console.log(this.params);
   }
 
   showSeller(): void {
@@ -48,6 +50,10 @@ export class ProductPage {
 
   checkSeller(): boolean {
     return !(this.sellerPage || (this.seller.name.length > 0));
+  }
+
+  trustUrl(image) {
+    return this.sanitizer.bypassSecurityTrustUrl(IMG_URL + image);
   }
 
   editProduct(): void {
@@ -77,6 +83,14 @@ export class ProductPage {
       ]
     });
     confirm.present();
+  }
+
+  presentPictureModal(): void {
+    let modal = this.modalCtrl.create(ProductPicturesPage, {product: this.product});
+    modal.onDidDismiss(data => {
+      this.product.images = data;
+    });
+    modal.present();
   }
 
   deleteProduct(): void {

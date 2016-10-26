@@ -6,11 +6,20 @@
 
 
 <ion-content class="product-page">
-  <ion-slides [options]="slideOptions" color="gold">
+  <ion-row>
+    <ion-col width-80 offset-10>
+      <button ion-button color="favorite" full (click)="presentPictureModal()" icon-right *ngIf="sellerPage">
+        Gerenciar Imagens
+        <ion-icon name="open"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+  <ion-slides [options]="slideOptions" color="gold" *ngIf="product.images.length > 0">
     <ion-slide *ngFor="let image of product.images">
-      <img [src]="IMG_URL + image" imageViewer>
+      <img [src]="trustUrl(image)">
     </ion-slide>
   </ion-slides>
+  <img [src]="IMG_URL + 'product.png'" *ngIf="!product.images.length > 0">
 
   <ion-item text-wrap>
     <h2>{{product?.name}}</h2>

@@ -123,4 +123,33 @@ export class ProductsService {
   deleteProduct(productId: string): Observable<any> {
     return this.http.delete(API_URL + 'products/' + productId);
   }
+
+  addPicture(productId: string, file: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let http = new XMLHttpRequest();
+
+      let formData = new FormData();
+      formData.append('file', file, file.name);
+      http.open('POST', API_URL + 'products/' + productId + '/image', true);
+      http.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('id_token'));
+      http.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+      http.onreadystatechange = () => {
+        if(http.readyState == 4) {
+          if (http.status === 200) {
+            resolve(JSON.parse(http.response));
+          } else {
+            reject(http.response);
+          }
+        }
+      }
+
+      http.send(formData);
+
+    });
+  }
+
+  deletePicture(productId: string, image: any): Observable<any> {
+    return this.http.post(API_URL + 'products/' + productId + '/images/delete', {image: image});
+  }
 }
