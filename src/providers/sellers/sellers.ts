@@ -82,7 +82,7 @@ export class SellersService {
       if (key == 'sort') {
         params.set(key, filters[key].value);
       } else if (filters[key] != '') {
-        params.set(key, filters[key]);
+        params.set(key, JSON.stringify(filters[key]));
       }
     }
 

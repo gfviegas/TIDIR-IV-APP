@@ -3,6 +3,7 @@ import { NavController, LoadingController, ModalController } from 'ionic-angular
 
 import { IMG_URL } from '../../app/config';
 import { SellersService, SellerObject } from '../../providers/sellers/sellers';
+import { AuthService } from '../../providers/auth/auth';
 
 import { SellersFilterModalPage } from './modals/filter/filter';
 import { SellerPage } from '../seller/seller';
@@ -18,8 +19,9 @@ export class SellersPage {
 
   sellers: Array<SellerObject> = [];
   loading: boolean = false;
+  currentUser;
 
-  filter: Object = {
+  filter: any = {
     category: '',
     sort : {name: 'Cadastrados Mais Recentemente', value: '-date'},
     onlyFollowedSellers: false
@@ -29,12 +31,19 @@ export class SellersPage {
     public modalCtrl: ModalController,
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,
-    public sellersService: SellersService
+    public sellersService: SellersService,
+    public authService: AuthService
   ) {
   }
 
-  ionViewDidEnter() {
-    this.loadInit();
+  ngOnInit() {
+    this.authService.getLoggedUserData().subscribe(
+      (user) => {
+        this.currentUser = user;
+        this.filter['location'] = user.location;
+        this.loadInit();
+      }
+    );
   }
 
   loadInit(): void {
@@ -78,7 +87,8 @@ export class SellersPage {
   }
 
   presentFilterModal() {
-    let modal = this.modalCtrl.create(SellersFilterModalPage, this.filter);
+    console.info(this.filter);
+    let modal = this.modalCtrl.create(SellersFilterModalPage, {filter: this.filter, location: this.filter.location});
     modal.onDidDismiss(data => {
       this.filter = data;
       this.loadInit();

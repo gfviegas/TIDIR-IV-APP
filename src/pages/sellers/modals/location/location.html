@@ -1,49 +1,27 @@
 <ion-header>
-  <ion-navbar color="gold" align-title="center">
+
+  <ion-navbar color="gold">
     <ion-buttons left>
-      <button ion-button (click)="clear()">
-        Limpar
+      <button ion-button (click)="cancel()">
+        Cancelar
       </button>
     </ion-buttons>
-    <ion-title>Filtrar</ion-title>
     <ion-buttons right>
       <button ion-button (click)="dismiss()">
-        OK
+        Confirmar
       </button>
     </ion-buttons>
+    <ion-title>Localização</ion-title>
   </ion-navbar>
+
 </ion-header>
 
 
 <ion-content padding>
-  <ion-list>
-    <ion-item>
-      Categoria
-      <ion-note (click)="presentCategoriesModal()" item-right>
-        {{(category ? category : 'Nenhum Selecionado')}}
-        <ion-icon name="arrow-forward"></ion-icon>
-      </ion-note>
-    </ion-item>
+  <form [formGroup]="locationForm" novalidate="">
 
-    <ion-item text-wrap>
-      Ordenar Por
-      <ion-note (click)="presentSortModal()" item-right>
-        {{(sort ? sort.name : 'Nenhum Selecionado')}}
-        <ion-icon name="arrow-forward"></ion-icon>
-      </ion-note>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>
-        Somente Vendedores que eu sigo
-      </ion-label>
-      <ion-toggle [(ngModel)]="onlyFollowedSellers"></ion-toggle>
-    </ion-item>
-
-    <form [formGroup]="locationForm" novalidate="">
-      <ion-item-divider light>Localização</ion-item-divider>
-
-      <ion-item text-wrap>
+    <ion-list>
+      <ion-item>
         <ion-label>Estado</ion-label>
         <ion-select [formControl]="state" (ionChange)="getCities()" multiple="false" cancelText="Cancelar" okText="Selecionar">
           <ion-option *ngFor="let uf of ufs; trackBy:uf?.uf" [value]="uf">{{uf.name}}</ion-option>
@@ -53,7 +31,7 @@
         <p padding-left color="danger" *ngIf="state.errors?.required">Este campo é obrigatório</p>
       </div>
 
-      <ion-item text-wrap>
+      <ion-item>
         <ion-label>Cidade</ion-label>
         <ion-select [formControl]="city" multiple="false" cancelText="Cancelar" okText="Selecionar">
           <ion-option *ngFor="let city of cities; trackBy:city?.id" [value]="city">{{city.name}}</ion-option>
@@ -62,9 +40,8 @@
       <div *ngIf="!city.valid && (city.touched || formSubmitted)">
         <p padding-left color="danger" *ngIf="city.errors?.required">Este campo é obrigatório</p>
       </div>
+    </ion-list>
 
-    </form>
-  </ion-list>
-
+  </form>
 
 </ion-content>
