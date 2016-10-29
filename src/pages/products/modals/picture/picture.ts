@@ -39,8 +39,6 @@ export class ProductPicturesPage {
 
   fileChanged(event) {
     this.upload(event.srcElement.files[0]);
-    let imageURL = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(event.srcElement.files[0]));
-    this.images.push(imageURL);
   }
 
   upload(image) {

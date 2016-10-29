@@ -13,6 +13,7 @@ export class LoginPage {
 
   type: string = 'client';
   emailRegex = "^\\s*[\\w\\-\\+_]+(\\.[\\w\\-\\+_]+)*\\@[\\w\\-\\+_]+\\.[\\w\\-\\+_]+(\\.[\\w\\-\\+_]+)*\\s*$";
+  logo = 'assets/img/avender.png';
 
   clientLoginForm: FormGroup;
   clientEmail: AbstractControl;
@@ -23,6 +24,7 @@ export class LoginPage {
   sellerEmail: AbstractControl;
   sellerPassword: AbstractControl;
   sellerFormSubmitted: boolean = false;
+
 
   constructor (
     public navCtrl: NavController,
