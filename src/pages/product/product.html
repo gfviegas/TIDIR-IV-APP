@@ -14,12 +14,14 @@
       </button>
     </ion-col>
   </ion-row>
-  <ion-slides [options]="slideOptions" color="gold" *ngIf="product.images.length > 0">
-    <ion-slide *ngFor="let image of product.images">
-      <img [src]="trustUrl(image)">
-    </ion-slide>
-  </ion-slides>
-  <img [src]="IMG_URL + 'product.png'" *ngIf="!product.images.length > 0">
+  <div text-center>
+    <ion-slides [options]="slideOptions" color="gold" *ngIf="product.images.length > 0">
+      <ion-slide *ngFor="let image of product.images">
+        <img [src]="trustUrl(image)">
+      </ion-slide>
+    </ion-slides>
+    <img [src]="IMG_URL + 'product.png'" *ngIf="!product.images.length > 0">
+  </div>
 
   <ion-item text-wrap>
     <h2>{{product?.name}}</h2>
@@ -54,12 +56,20 @@
     </ion-item>
   </ion-list>
 
-  <button ion-button color="gold" full (click)="editProduct()" icon-right *ngIf="sellerPage">
-    Editar Dados
-    <ion-icon name="open"></ion-icon>
-  </button>
-  <button ion-button color="danger" full (click)="presentConfirmDelete()" icon-right *ngIf="sellerPage">
-    Excluir Produto
-    <ion-icon name="trash"></ion-icon>
-  </button>
+  <ion-row>
+    <ion-col width-80 offset-10>
+      <button ion-button color="gold" full (click)="editProduct()" icon-right *ngIf="sellerPage">
+        Editar Dados
+        <ion-icon name="open"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col width-80 offset-10>
+      <button ion-button color="danger" full (click)="presentConfirmDelete()" icon-right *ngIf="sellerPage">
+        Excluir Produto
+        <ion-icon name="trash"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
 </ion-content>

@@ -53,7 +53,6 @@ export class ProductPage {
   }
 
   trustUrl(image) {
-    console.info(IMG_URL + image);
     return this.sanitizer.bypassSecurityTrustUrl(IMG_URL + image);
   }
 
