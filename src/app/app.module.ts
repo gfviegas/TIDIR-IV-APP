@@ -19,7 +19,6 @@ import { EditUserPage } from '../pages/profile/modals/edit/edit';
 import { PicturePage } from '../pages/profile/modals/picture/picture';
 import { SellerPage } from '../pages/seller/seller';
 import { SellersPage } from '../pages/sellers/sellers';
-// import { SellersLocationModalPage } from '../pages/sellers/modals/location/location';
 import { SellersCategoriesModalPage } from '../pages/sellers/modals/categories/categories';
 import { SellersFilterModalPage } from '../pages/sellers/modals/filter/filter';
 import { SellersSortModalPage } from '../pages/sellers/modals/sort/sort';
@@ -85,7 +84,6 @@ export function getAuthHttp(http) {
     PicturePage,
     SellerPage,
     SellersPage,
-    // SellersLocationModalPage,
     SellersCategoriesModalPage,
     SellersFilterModalPage,
     SellersSortModalPage,
@@ -123,7 +121,6 @@ export function getAuthHttp(http) {
     PicturePage,
     SellerPage,
     SellersPage,
-    // SellersLocationModalPage,
     SellersCategoriesModalPage,
     SellersFilterModalPage,
     SellersSortModalPage,

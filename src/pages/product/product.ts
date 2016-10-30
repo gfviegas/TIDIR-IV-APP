@@ -49,7 +49,17 @@ export class ProductPage {
   }
 
   checkSeller(): boolean {
-    return !(this.sellerPage || (this.seller.name.length > 0));
+    let nameLength: number = this.seller.name.length;
+    return !(this.sellerPage || (nameLength > 0));
+  }
+
+  checkImagesLength(): boolean {
+    if (this.product && this.product.images) {
+      let imagesLength: number = this.product.images.length;
+      return (imagesLength > 0);
+    } else {
+      return false;
+    }
   }
 
   trustUrl(image) {

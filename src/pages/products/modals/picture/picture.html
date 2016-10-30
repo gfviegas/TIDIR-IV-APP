@@ -22,7 +22,7 @@
   capture="camera"
   >
 
-  <ion-list *ngIf="images.length > 0">
+  <ion-list *ngIf="checkImagesLength()">
     <ion-item *ngFor="let image of images">
       <ion-row>
         <ion-col text-center>
@@ -40,7 +40,7 @@
     </ion-item>
   </ion-list>
 
-  <div class="not-found-container" padding text-center *ngIf="!images.length > 0">
+  <div class="not-found-container" padding text-center *ngIf="!checkImagesLength()">
     <h6> Você ainda não adicionou nenhuma imagem para esse produto! </h6>
   </div>
 

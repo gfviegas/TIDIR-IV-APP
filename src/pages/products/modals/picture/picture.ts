@@ -37,6 +37,15 @@ export class ProductPicturesPage {
     return this.viewCtrl.dismiss(this.images);
   }
 
+  checkImagesLength(): boolean {
+    if (this.images) {
+      let imagesLength: number = this.images.length;
+      return (imagesLength > 0);
+    } else {
+      return false;
+    }
+  }
+
   fileChanged(event) {
     this.upload(event.srcElement.files[0]);
   }
@@ -74,7 +83,7 @@ export class ProductPicturesPage {
     this.productsService.deletePicture(this.product._id, image).subscribe(
       (success) => {
         let deletedImage = this.images.find(i => i == image);
-        let index = this.images.indexOf(deletedImage, 0);
+        let index: number = this.images.indexOf(deletedImage, 0);
         if (index > -1) {
           this.images.splice(index, 1);
         }

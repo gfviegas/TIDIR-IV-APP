@@ -15,12 +15,12 @@
     </ion-col>
   </ion-row>
   <div text-center>
-    <ion-slides [options]="slideOptions" color="gold" *ngIf="product.images.length > 0">
+    <ion-slides [options]="slideOptions" color="gold" *ngIf="checkImagesLength()">
       <ion-slide *ngFor="let image of product.images">
         <img [src]="trustUrl(image)">
       </ion-slide>
     </ion-slides>
-    <img [src]="IMG_URL + 'product.png'" *ngIf="!product.images.length > 0">
+    <img [src]="IMG_URL + 'product.png'" *ngIf="!checkImagesLength()">
   </div>
 
   <ion-item text-wrap>

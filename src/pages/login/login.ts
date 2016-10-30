@@ -69,10 +69,10 @@ export class LoginPage {
           loading.dismiss();
           let errorMessage = JSON.parse(error._body).error;
 
-          if (error.status === 422 && errorMessage === 'user_not_found') {
-            this.presentAlert('Erro!', 'Usuário não encontrado, verifique seu email e tente novamente!');
-          } else if (error.status === 422 && errorMessage === 'wrong_credentials') {
+          if (error.status === 422 && errorMessage === 'wrong_credentials') {
             this.presentAlert('Erro!', 'Credenciais inváidas, verifique sua senha e tente novamente!');
+          } else {
+            this.presentAlert('Erro!', 'Usuário não encontrado, verifique seu email e tente novamente!');
           }
         }
       );
@@ -100,10 +100,10 @@ export class LoginPage {
           loading.dismiss();
           let errorMessage = JSON.parse(error._body).error;
 
-          if (error.status === 422 && errorMessage === 'user_not_found') {
-            this.presentAlert('Erro!', 'Usuário não encontrado, verifique seu email e tente novamente!');
-          } else if (error.status === 422 && errorMessage === 'wrong_credentials') {
+          if (error.status === 422 && errorMessage === 'wrong_credentials') {
             this.presentAlert('Erro!', 'Credenciais inváidas, verifique sua senha e tente novamente!');
+          } else {
+            this.presentAlert('Erro!', 'Usuário não encontrado, verifique seu email e tente novamente!');
           }
         }
       );

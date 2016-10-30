@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 
 import { SellersCategoriesModalPage } from '../categories/categories';
 import { SellersSortModalPage } from '../sort/sort';
-// import { SellersLocationModalPage } from '../location/location';
 
 import { SignService } from '../../../../providers/sign/sign';
 
@@ -110,15 +109,6 @@ export class SellersFilterModalPage {
 
     modal.present();
   }
-
-  // presentLocationModal() {
-  //   let modal = this.modalCtrl.create(SellersLocationModalPage, {location: this.location});
-  //   modal.onDidDismiss(data => {
-  //    this.location = data;
-  //  });
-  //
-  //   modal.present();
-  // }
 
   presentSortModal() {
     let modal = this.modalCtrl.create(SellersSortModalPage, {sort: this.sort});
