@@ -14,7 +14,7 @@ import { ProductsFilterModalPage } from '../pages/products/modals/filter/filter'
 import { ProductsSortModalPage } from '../pages/products/modals/sort/sort';
 import { ProfilePage } from '../pages/profile/profile';
 import { FollowingPage } from '../pages/profile/modals/following/following';
-import { TermsPage } from '../pages/profile/modals/terms/terms';
+import { TermsPage } from '../pages/terms/terms';
 import { EditUserPage } from '../pages/profile/modals/edit/edit';
 import { PicturePage } from '../pages/profile/modals/picture/picture';
 import { SellerPage } from '../pages/seller/seller';

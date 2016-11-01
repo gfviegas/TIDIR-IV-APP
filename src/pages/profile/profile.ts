@@ -9,7 +9,7 @@ import { UsersService } from '../../providers/users/users';
 
 import { LoginPage } from '../login/login';
 import { FollowingPage } from './modals/following/following';
-import { TermsPage } from './modals/terms/terms';
+import { TermsPage } from '../terms/terms';
 import { EditUserPage } from './modals/edit/edit';
 import { PicturePage } from './modals/picture/picture';
 

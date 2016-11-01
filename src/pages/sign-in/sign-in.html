@@ -7,7 +7,7 @@
 </ion-header>
 
 
-<ion-content padding class="login-page">
+<ion-content padding class="sign-in-page">
   <p text-center>Faça seu cadastro!</p>
   <form [formGroup]="signInForm" novalidate="">
 
@@ -101,6 +101,7 @@
     </ion-list>
 
     <p>Os campos com * são obrigatórios</p>
+    <p>Ao se cadastrar você concorda com nossos <a class="hyperlink" (click)="presentTermsModal()">Termos de Uso</a> </p>
 
 
     <div padding class="submit-block">

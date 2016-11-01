@@ -91,8 +91,9 @@ export class ProductsFilterModalPage {
       content: "Carregando..."
     });
     loading.present();
-    let selectedUF = this.ufs[this.state.value];
-    this.signService.getCities(selectedUF.uf).subscribe(
+    let selectedUF = this.state.value.uf;
+
+    this.signService.getCities(selectedUF).subscribe(
       (cities) => {
         loading.dismiss();
         this.cities = cities;

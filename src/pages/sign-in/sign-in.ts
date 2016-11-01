@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, LoadingController, AlertController, ModalController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { AuthService } from '../../providers/auth/auth';
 import { SignService } from '../../providers/sign/sign';
@@ -7,6 +7,7 @@ import { SignService } from '../../providers/sign/sign';
 
 import { TabsPage } from '../tabs/tabs';
 import { SellersTabsPage } from '../sellers-tabs/sellers-tabs';
+import { TermsPage } from '../terms/terms';
 
 @Component({
   templateUrl: 'sign-in.html'
@@ -41,7 +42,8 @@ export class SignInPage {
     public signService: SignService,
     public authService: AuthService,
     public navCtrl: NavController,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public modalCtrl: ModalController
   ) {
     this.signInForm = fb.group({
       name: ['', Validators.required],
@@ -242,5 +244,9 @@ export class SignInPage {
     alert.present();
   }
 
+  presentTermsModal(): void {
+    let modal = this.modalCtrl.create(TermsPage);
+    modal.present();
+  }
 
 }
