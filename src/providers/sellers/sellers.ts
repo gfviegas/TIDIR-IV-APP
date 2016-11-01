@@ -143,4 +143,8 @@ export class SellersService {
     let params = values;
     return this.http.put(API_URL + 'sellers/' + this.getSellerId(), params).map(res => res.json());
   }
+
+  deleteSeller(): Observable<any> {
+    return this.http.delete(API_URL + 'sellers/' + this.getSellerId());
+  }
 }

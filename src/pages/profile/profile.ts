@@ -5,7 +5,7 @@ import moment from 'moment';
 
 import { AuthService, UserObject, AuthUser } from '../../providers/auth/auth';
 import { UsersService } from '../../providers/users/users';
-// import { SellersService } from '../../providers/sellers/sellers';
+import { SellersService } from '../../providers/sellers/sellers';
 
 import { LoginPage } from '../login/login';
 import { FollowingPage } from './modals/following/following';
@@ -33,7 +33,7 @@ export class ProfilePage {
     public alertCtrl: AlertController,
     public modalCtrl: ModalController,
     public loadingCtrl: LoadingController,
-    // public sellersService: SellersService,
+    public sellersService: SellersService,
     public usersService: UsersService
   ) {
     this.userType = authService.getLoggedUser().type;
@@ -125,5 +125,60 @@ export class ProfilePage {
       }
     });
     modal.present();
+  }
+
+  confirmProfileDelete(): void {
+    let confirm = this.alertCtrl.create({
+      title: 'Excluir sua Conta?',
+      message: `Você realmente deseja excluir sua conta definitivamente? Essa ação não pode ser cancelada!`,
+      buttons: [
+        {
+          text: 'Não'
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            this.deleteProfile();
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
+  deleteProfile(): void {
+    if (this.userType === 'seller') {
+      this.sellersService.deleteSeller().subscribe(
+        (success) => {
+          this.presentDeleteSuccess();
+        }
+      );
+    } else {
+      this.usersService.deleteUser().subscribe(
+        (success) => {
+          this.presentDeleteSuccess();
+        }
+      );
+    }
+  }
+
+  presentDeleteSuccess(): void {
+    let confirm = this.alertCtrl.create({
+      title: 'Sucesso',
+      message: `Sua conta foi excluída com sucesso! Desconectando...`,
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            if (this.authService.logout()) {
+              let root1 = this.app.getRootNav();
+              root1.popToRoot();
+              root1.setRoot(LoginPage);
+            }
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 }

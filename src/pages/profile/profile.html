@@ -100,10 +100,10 @@
           <ion-icon color="gold" name="document" item-left></ion-icon>
           Ver Termos de Uso
         </ion-item>
-        <!-- <ion-item>
-          <ion-icon name="key" color="danger" item-left></ion-icon>
-          Alterar minha Senha
-        </ion-item> -->
+        <ion-item (click)="confirmProfileDelete()">
+          <ion-icon name="trash" color="danger" item-left></ion-icon>
+          Excluir Minha Conta
+        </ion-item>
         <ion-item (click)="logout()">
           <ion-icon name="lock" warning item-left></ion-icon>
           Desconectar

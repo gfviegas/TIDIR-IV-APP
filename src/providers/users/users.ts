@@ -106,4 +106,8 @@ export class UsersService {
     });
   }
 
+  deleteUser(): Observable<any> {
+    return this.http.delete(API_URL + 'users/' + this.getUserId());
+  }
+
 }
