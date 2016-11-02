@@ -43,27 +43,30 @@
     <form [formGroup]="locationForm" novalidate="">
       <ion-item-divider light>Localização</ion-item-divider>
 
-      <ion-item text-wrap>
-        <ion-label>Estado</ion-label>
-        <ion-select [formControl]="state" (ionChange)="getCities()" multiple="false" cancelText="Cancelar" okText="Selecionar">
+      <ion-item>
+        <ion-label class="black-content">Estado</ion-label>
+        <ion-select class="gray-content" [formControl]="state" (ionChange)="clearCity()" multiple="false" cancelText="Cancelar" okText="Selecionar">
           <ion-option *ngFor="let uf of ufs" [value]="uf">{{uf.name}}</ion-option>
         </ion-select>
       </ion-item>
-      <div *ngIf="!state.valid && state.touched">
+      <div *ngIf="!state.valid">
         <p padding-left color="danger" *ngIf="state.errors?.required">Este campo é obrigatório</p>
       </div>
 
-      <ion-item text-wrap>
+      <ion-item (click)="presentCitiesModal()">
         <ion-label>Cidade</ion-label>
-        <ion-select [formControl]="city" multiple="false" cancelText="Cancelar" okText="Selecionar">
-          <ion-option *ngFor="let city of cities" [value]="city">{{city.name}}</ion-option>
-        </ion-select>
+        <ion-note item-right>
+          <!-- <ion-input item-right [formControl]="city" disabled placeholder="Clique para escolher.." type="text"></ion-input> -->
+          {{(city.value ? city.value : 'Nenhum Selecionado')}}
+          <ion-icon name="arrow-forward"></ion-icon>
+        </ion-note>
       </ion-item>
-      <div *ngIf="!city.valid && city.touched">
-        <p padding-left color="danger" *ngIf="city.errors?.required">Este campo é obrigatório</p>
+      <div *ngIf="!city.valid">
+        <p padding-right text-right color="danger" *ngIf="city.errors?.required">Este campo é obrigatório</p>
       </div>
 
     </form>
+
   </ion-list>
 
 

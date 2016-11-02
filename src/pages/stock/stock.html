@@ -30,14 +30,14 @@
           <ion-row>
             <ion-col>
               Estoque Total:
-              <b item-right> {{product?.stock_avaible + product?.stock_reserved}} </b>
+              <b item-right> {{product?.stock_avaible + product?.stock_reserved}} {{product?.reference}}{{(product?.stock_avaible + product?.stock_reserved) > 1 ? 's' : ''}} </b>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
               <ion-item>
                 Estoque Disponível:
-                <b item-right> {{product?.stock_avaible}} </b>
+                <b item-right> {{product?.stock_avaible}} {{product?.reference}}{{product?.stock_avaible > 1 ? 's' : ''}} </b>
               </ion-item>
             </ion-col>
           </ion-row>
@@ -45,7 +45,7 @@
             <ion-col>
               <ion-item>
                 Estoque Reservado:
-                <b item-right> {{product?.stock_reserved}} </b>
+                <b item-right> {{product?.stock_reserved}} {{product?.reference}}{{product?.stock_reserved > 1 ? 's' : ''}} </b>
               </ion-item>
             </ion-col>
           </ion-row>

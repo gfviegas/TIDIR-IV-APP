@@ -75,26 +75,28 @@
 
       <ion-item ngControlGroup="location">
         <ion-label>Estado*</ion-label>
-        <ion-select [formControl]="state" (ionChange)="getCities()" multiple="false" cancelText="Cancelar" okText="Selecionar">
-          <ion-option *ngFor="let uf of ufs; let i = index" [value]="i">{{uf.name}}</ion-option>
+        <ion-select [formControl]="state" (ionChange)="clearCity()" multiple="false" cancelText="Cancelar" okText="Selecionar">
+          <ion-option *ngFor="let uf of ufs" [value]="uf">{{uf.name}}</ion-option>
         </ion-select>
       </ion-item>
       <div *ngIf="!state.valid && (state.touched || formSubmitted)">
         <p padding-left color="danger" *ngIf="state.errors?.required">Este campo é obrigatório</p>
       </div>
 
-      <ion-item ngControlGroup="location">
-        <ion-label>Cidade*</ion-label>
-        <ion-select [formControl]="city" [disabled]="state.value.length < 1" multiple="false" cancelText="Cancelar" okText="Selecionar">
-          <ion-option *ngFor="let city of cities; let i = index" [value]="i">{{city.name}}</ion-option>
-        </ion-select>
+      <ion-item ngControlGroup="location" (click)="presentCitiesModal()">
+        <ion-label class="gray-content">Cidade*</ion-label>
+        <ion-note item-right class="black-content">
+          <!-- <ion-input item-right [formControl]="city" disabled placeholder="Clique para escolher.." type="text"></ion-input> -->
+          {{(city.value ? city.value : 'Nenhum Selecionado')}}
+          <ion-icon name="arrow-forward"></ion-icon>
+        </ion-note>
       </ion-item>
       <div *ngIf="!city.valid && (city.touched || formSubmitted)">
-        <p padding-left color="danger" *ngIf="city.errors?.required">Este campo é obrigatório</p>
+        <p padding-right text-right color="danger" *ngIf="city.errors?.required">Este campo é obrigatório</p>
       </div>
 
       <ion-item>
-        <ion-label> Cadastrar como Vendedor</ion-label>
+        <ion-label class="gray-content"> Cadastrar como Vendedor</ion-label>
         <ion-toggle [formControl]="signAsSeller" checked="false"></ion-toggle>
       </ion-item>
 

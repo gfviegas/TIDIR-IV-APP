@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar color="gold">
+    <ion-title>Cidades</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="cancel()">
+        Cancelar
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-header>
+  <ion-navbar color="gold">
+    <ion-toolbar color="gold" *ngIf="!searchVisible" align-title="center">
+      <ion-buttons left>
+        <button ion-button (click)="toggleSearchBar()" icon-only>
+          <ion-icon name="search"></ion-icon>
+        </button>
+        <button ion-button (click)="cancel()">
+          Cancelar
+        </button>
+      </ion-buttons>
+
+      <ion-title>Cidades de {{selectedUF}}</ion-title>
+    </ion-toolbar>
+
+    <ion-toolbar color="gold" *ngIf="searchVisible">
+      <ion-searchbar placeholder="Pesquisar Cidade" [(ngModel)]="searchQuery" (input)="filterCities($event)"></ion-searchbar>
+      <ion-buttons end>
+        <button ion-button (click)="toggleSearchBar()">
+          Cancelar
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-item-group radio-group [(ngModel)]="selectedCity" (ionChange)="select()" [virtualScroll]="cities" approxItemHeight="40px">
+      <ion-item *virtualItem="let city">
+        <ion-label>{{city}}</ion-label>
+        <ion-radio [value]="city"></ion-radio>
+      </ion-item>
+  </ion-item-group>
+
+</ion-content>

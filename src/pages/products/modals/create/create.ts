@@ -20,11 +20,22 @@ export class CreateProductPage {
   productForm: FormGroup;
   name: AbstractControl;
   description: AbstractControl;
+  reference: AbstractControl;
   price: AbstractControl;
   category: AbstractControl;
   stock_avaible: AbstractControl;
   stock_reserved: AbstractControl;
   productFormSubmitted: boolean = false;
+
+  references = [
+    'Unidade',
+    'Quilo',
+    'Pacote',
+    'Embalagem',
+    'Pote',
+    'Garrafa',
+    'Litro'
+  ]
 
   constructor(
     public params: NavParams,
@@ -48,6 +59,7 @@ export class CreateProductPage {
       name: [this.product.name, Validators.required],
       description: [this.product.description, Validators.required],
       price: [this.product.price, Validators.required],
+      reference: [this.product.reference, Validators.required],
       category: [this.product.category, Validators.required],
       stock_avaible: [this.product.stock_avaible, Validators.required],
       stock_reserved: [this.product.stock_reserved, Validators.required],
@@ -56,6 +68,7 @@ export class CreateProductPage {
     this.name = this.productForm.controls['name'];
     this.description = this.productForm.controls['description'];
     this.price = this.productForm.controls['price'];
+    this.reference = this.productForm.controls['reference'];
     this.category = this.productForm.controls['category'];
     this.stock_avaible = this.productForm.controls['stock_avaible'];
     this.stock_reserved = this.productForm.controls['stock_reserved'];

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 
 import { ProductsSortModalPage } from '../sort/sort';
 import { ProductsCategoriesModalPage } from '../categories/categories';
+import { CitiesModalPage } from '../../../common/cities/cities';
 
 import { SignService } from '../../../../providers/sign/sign';
 
@@ -70,14 +71,8 @@ export class ProductsFilterModalPage {
         this.ufs = data;
         let selectedUF = data.find((uf) => { return uf.uf === this.location.state });
         this.state.reset(selectedUF);
-        this.signService.getCities(this.location.state).subscribe(
-          (cities) => {
-            this.cities = cities;
-            let selectedCity = cities.find((city) => { return city.name === this.location.city });
-            this.city.reset(selectedCity);
-            loading.dismiss();
-          }
-        );
+        this.city.reset(this.location.city);
+        loading.dismiss();
       },
       (error) => {
         loading.dismiss();
@@ -86,29 +81,23 @@ export class ProductsFilterModalPage {
     );
   }
 
-  getCities() {
-    let loading = this.loadingCtrl.create({
-      content: "Carregando..."
-    });
-    loading.present();
-    let selectedUF = this.state.value.uf;
-
-    this.signService.getCities(selectedUF).subscribe(
-      (cities) => {
-        loading.dismiss();
-        this.cities = cities;
-      },
-      (error) => {
-        loading.dismiss();
-        console.info(error);
-      }
-    );
+  clearCity() {
+    this.city.reset();
   }
 
   presentCategoriesModal() {
     let modal = this.modalCtrl.create(ProductsCategoriesModalPage, {category: this.category});
     modal.onDidDismiss(data => {
      this.category = data;
+   });
+
+    modal.present();
+  }
+
+  presentCitiesModal() {
+    let modal = this.modalCtrl.create(CitiesModalPage, {uf: this.state.value.uf, city: this.city.value});
+    modal.onDidDismiss(data => {
+     this.city.setValue(data);
    });
 
     modal.present();
@@ -124,19 +113,21 @@ export class ProductsFilterModalPage {
   }
 
   dismiss() {
-    let location = {
-      state: this.state.value.uf,
-      city: this.city.value.name
-    }
-    let filter = {
-      category: this.category,
-      sort: this.sort,
-      onlyFollowedSellers: this.onlyFollowedSellers,
-      onlyInStock: this.onlyInStock,
-      location: location
-    };
+    if (this.locationForm.valid) {
+      let location = {
+        state: this.state.value.uf,
+        city: this.city.value
+      }
+      let filter = {
+        category: this.category,
+        sort: this.sort,
+        onlyFollowedSellers: this.onlyFollowedSellers,
+        onlyInStock: this.onlyInStock,
+        location: location
+      };
 
-    this.viewCtrl.dismiss(filter);
+      this.viewCtrl.dismiss(filter);
+    }
   }
 
   clear() {

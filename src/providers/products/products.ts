@@ -13,6 +13,7 @@ export interface ProductObject {
   description: string;
   price: number;
   category: string;
+  reference?: string;
   seller: {
     _id: string;
     name: string;
@@ -34,6 +35,7 @@ export class Product implements ProductObject {
   description = '';
   price = 0;
   category = '';
+  reference = '';
   seller = {
     _id : '',
     name : '',

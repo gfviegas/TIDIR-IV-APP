@@ -36,13 +36,13 @@
     </ion-item>
     <ion-item>
       <ion-icon name="cash" color="secondary"></ion-icon>
-      <span class="product-item-text"> Preço Unitário </span>
+      <span class="product-item-text"> Preço por {{product?.reference}}</span>
       <b item-right> {{product?.price | currency:'BRL':true:'1.2-2'}} </b>
     </ion-item>
     <ion-item>
       <ion-icon [color]="product.stock_avaible > 0 ? 'warning' : 'danger'" name="logo-buffer"></ion-icon>
       <span class="product-item-text"> Estoque Disponível </span>
-      <b item-right> {{product?.stock_avaible}} unidade{{product?.stock_avaible > 1 ? 's' : ''}} </b>
+      <b item-right> {{product?.stock_avaible}} {{product?.reference}}{{product?.stock_avaible > 1 ? 's' : ''}} </b>
     </ion-item>
 
     <ion-item-divider *ngIf="checkSeller()">Vendido Por:</ion-item-divider>

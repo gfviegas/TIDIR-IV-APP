@@ -7,6 +7,7 @@ import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
+import { CitiesModalPage } from '../pages/common/cities/cities';
 import { ProductPage } from '../pages/product/product';
 import { ProductsPage } from '../pages/products/products';
 import { ProductsCategoriesModalPage } from '../pages/products/modals/categories/categories';
@@ -72,6 +73,7 @@ export function getAuthHttp(http) {
     MyApp,
     HomePage,
     LoginPage,
+    CitiesModalPage,
     ProductPage,
     ProductsPage,
     ProductsCategoriesModalPage,
@@ -109,6 +111,7 @@ export function getAuthHttp(http) {
     MyApp,
     HomePage,
     LoginPage,
+    CitiesModalPage,
     ProductPage,
     ProductsPage,
     ProductsCategoriesModalPage,

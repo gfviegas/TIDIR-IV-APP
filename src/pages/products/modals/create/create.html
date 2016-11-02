@@ -35,16 +35,8 @@
         <p padding-left color="danger" *ngIf="description.errors?.maxlength">Este campo pode ter no máximo 100 caracteres</p>
       </div>
 
-      <ion-item>
-        <ion-label>Preço Unitário*</ion-label>
-        <ion-input [formControl]="price" type="number"></ion-input>
-      </ion-item>
-      <div *ngIf="!price.valid && (price.touched || productFormSubmitted)">
-        <p padding-left color="danger" *ngIf="price.errors?.required">Este campo é obrigatório</p>
-      </div>
-
       <ion-item (click)="presentCategoriesModal()">
-        <ion-label>Categoria</ion-label>
+        <ion-label>Categoria*</ion-label>
         <ion-input [formControl]="category" disabled placeholder="Clique para escolher.." type="text"></ion-input>
       </ion-item>
       <div *ngIf="!category.valid && (category.touched || productFormSubmitted)">
@@ -52,7 +44,25 @@
       </div>
 
       <ion-item>
-        <ion-label>Estoque Disponível</ion-label>
+        <ion-label>Referência*</ion-label>
+        <ion-select class="gray-content" [formControl]="reference" multiple="false" cancelText="Cancelar" okText="Selecionar">
+          <ion-option *ngFor="let option of references" [value]="option">{{option}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <div *ngIf="!price.valid && (price.touched || productFormSubmitted)">
+        <p padding-left color="danger" *ngIf="price.errors?.required">Este campo é obrigatório</p>
+      </div>
+
+      <ion-item>
+        <ion-label>Preço*</ion-label>
+        <ion-input [formControl]="price" type="number"></ion-input>
+      </ion-item>
+      <div *ngIf="!price.valid && (price.touched || productFormSubmitted)">
+        <p padding-left color="danger" *ngIf="price.errors?.required">Este campo é obrigatório</p>
+      </div>
+
+      <ion-item>
+        <ion-label>Estoque Disponível*</ion-label>
         <ion-input [formControl]="stock_avaible" type="number"></ion-input>
       </ion-item>
       <div *ngIf="!stock_avaible.valid && (stock_avaible.touched || productFormSubmitted)">
@@ -60,7 +70,7 @@
       </div>
 
       <ion-item>
-        <ion-label>Estoque Reservado</ion-label>
+        <ion-label>Estoque Reservado*</ion-label>
         <ion-input [formControl]="stock_reserved" type="number"></ion-input>
       </ion-item>
       <div *ngIf="!stock_reserved.valid && (stock_reserved.touched || productFormSubmitted)">

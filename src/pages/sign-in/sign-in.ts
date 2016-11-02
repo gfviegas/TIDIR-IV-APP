@@ -8,6 +8,7 @@ import { SignService } from '../../providers/sign/sign';
 import { TabsPage } from '../tabs/tabs';
 import { SellersTabsPage } from '../sellers-tabs/sellers-tabs';
 import { TermsPage } from '../terms/terms';
+import { CitiesModalPage } from '../common/cities/cities';
 
 @Component({
   templateUrl: 'sign-in.html'
@@ -114,22 +115,17 @@ export class SignInPage {
     }
   }
 
-  getCities() {
-    let loading = this.loadingCtrl.create({
-      content: "Carregando..."
-    });
-    loading.present();
-    let selectedUF = this.ufs[this.state.value];
-    this.signService.getCities(selectedUF.uf).subscribe(
-      (cities) => {
-        loading.dismiss();
-        this.cities = cities;
-      },
-      (error) => {
-        loading.dismiss();
-        console.info(error);
-      }
-    );
+  clearCity() {
+    this.city.reset();
+  }
+
+  presentCitiesModal() {
+    let modal = this.modalCtrl.create(CitiesModalPage, {uf: this.state.value.uf, city: this.city.value});
+    modal.onDidDismiss(data => {
+     this.city.setValue(data);
+   });
+
+    modal.present();
   }
 
   signIn() {
@@ -144,8 +140,8 @@ export class SignInPage {
         email: signValues.email,
         password: signValues.passwords.password,
         location: {
-          state: this.ufs[signValues.location.state].uf,
-          city: this.cities[signValues.location.city].name,
+          state: this.state.value.uf,
+          city: this.city.value,
         },
         contact: {}
       };
