@@ -75,7 +75,7 @@
             <ion-col>
               <button ion-button [color]="product.stock_avaible > 0 ? 'primary' : 'danger'" clear small icon-left>
                 <ion-icon [color]="product.stock_avaible > 0 ? 'warning' : 'danger'" name="logo-buffer"></ion-icon>
-                <span> <b>{{product?.stock_avaible}}</b> em estoque</span>
+                <span> <b>{{product?.stock_avaible}}</b> {{product?.reference}}{{product?.stock_avaible > 1 ? 's' : ''}}</span>
               </button>
             </ion-col>
           </ion-row>

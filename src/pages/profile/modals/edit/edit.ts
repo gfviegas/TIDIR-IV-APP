@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, LoadingController, ViewController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 
 import { SignService } from '../../../../providers/sign/sign';
 import { UsersService } from '../../../../providers/users/users';
 import { SellersService } from '../../../../providers/sellers/sellers';
+
+import { CitiesModalPage } from '../../../common/cities/cities';
 
 @Component({
   templateUrl: 'edit.html'
@@ -35,6 +37,7 @@ export class EditUserPage {
     public usersService: UsersService,
     public sellersService: SellersService,
     public viewCtrl: ViewController,
+    public modalCtrl: ModalController,
     public navCtrl: NavController,
     public params: NavParams,
     public loadingCtrl: LoadingController
@@ -88,31 +91,36 @@ export class EditUserPage {
     let loading = this.loadingCtrl.create({
       content: "Carregando..."
     });
-    loading.present();
     this.editForm.markAsUntouched();
     this.editForm.markAsPristine();
 
+    loading.present();
     this.signService.getUfs().subscribe(
       (data) => {
         loading.dismiss();
         this.ufs = data;
         let selectedUF = data.find((uf) => { return uf.uf === this.user.location.state });
         this.state.reset(selectedUF);
-        console.info(this.state.value);
-        // this.state.value = this.user.location.state;
-        this.signService.getCities(this.user.location.state).subscribe(
-          (cities) => {
-            this.cities = cities;
-            let selectedCity = cities.find((city) => { return city.name === this.user.location.city });
-            this.city.reset(selectedCity);
-          }
-        );
       },
       (error) => {
         loading.dismiss();
         console.info(error);
       }
     );
+  }
+
+  presentCitiesModal() {
+    let modal = this.modalCtrl.create(CitiesModalPage, {uf: this.state.value.uf, city: this.city.value});
+    modal.onDidDismiss(data => {
+     this.city.setValue(data);
+   });
+
+    modal.present();
+  }
+
+
+  clearCity() {
+    this.city.reset();
   }
 
   cellphoneMask(userInput) {
@@ -130,24 +138,6 @@ export class EditUserPage {
     }
   }
 
-  getCities() {
-    let loading = this.loadingCtrl.create({
-      content: "Carregando..."
-    });
-    loading.present();
-    let selectedUF = this.ufs[this.state.value];
-    this.signService.getCities(selectedUF.uf).subscribe(
-      (cities) => {
-        loading.dismiss();
-        this.cities = cities;
-      },
-      (error) => {
-        loading.dismiss();
-        console.info(error);
-      }
-    );
-  }
-
   submit() {
     this.formSubmitted = true;
     console.log(this.editForm);
@@ -160,7 +150,7 @@ export class EditUserPage {
         },
         location: {
           state: editValues.location.state.uf,
-          city: editValues.location.city.name,
+          city: editValues.location.city,
         }
       };
 

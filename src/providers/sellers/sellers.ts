@@ -109,8 +109,23 @@ export class SellersService {
    * @param  {string}    sellerId The seller ID
    * @return {Observable}             THe HTTP GET Request Observable
    */
-  getProducts(sellerId: string): Observable<Array<any>> {
-    return this.http.get(API_URL + 'sellers/' + sellerId + '/products').map(res => res.json());
+  getProducts(sellerId: string, filters?): Observable<Array<any>> {
+    let params = new URLSearchParams();
+
+    for (let key in filters) {
+      if (key == 'sort') {
+        params.set(key, filters[key].value);
+      } else if (filters[key] != '') {
+        params.set(key, JSON.stringify(filters[key]));
+      }
+    }
+
+
+    let options = new RequestOptions({
+      search: params
+    });
+
+    return this.http.get(API_URL + 'sellers/' + sellerId + '/products', options).map(res => res.json());
   }
 
   uploadPicture(file: any): Promise<any> {

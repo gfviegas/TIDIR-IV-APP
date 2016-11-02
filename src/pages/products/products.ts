@@ -95,7 +95,7 @@ export class ProductsPage {
     this.loading = true;
 
     if (this.seller['_id'] != '') {
-      this.sellersService.getProducts(this.seller['_id']).subscribe(
+      this.sellersService.getProducts(this.seller['_id'], this.filter).subscribe(
         products => {
           this.products = products;
           this.loading = false;
@@ -146,7 +146,7 @@ export class ProductsPage {
   }
 
   presentFilterModal() {
-    let params = Object.assign(this.filter, {seller: this.sellerPage});
+    let params = Object.assign(this.filter, {sellerPage: this.sellerPage, seller: (this.seller['_id'] != '') });
     let modal = this.modalCtrl.create(ProductsFilterModalPage, params);
     modal.onDidDismiss(data => {
       this.filter = data;

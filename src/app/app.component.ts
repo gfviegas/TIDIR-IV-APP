@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
-import { StatusBar, Keyboard } from 'ionic-native';
+import { StatusBar, Keyboard, AppRate } from 'ionic-native';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { SellersTabsPage } from '../pages/sellers-tabs/sellers-tabs';
@@ -45,6 +45,14 @@ export class MyApp {
       Keyboard.onKeyboardHide().subscribe(() => {
         document.body.classList.remove('keyboard-is-open');
       });
+
+      AppRate.preferences.displayAppName = 'aVender';
+      AppRate.preferences.useLanguage = 'pt';
+      AppRate.preferences.storeAppURL = {
+        android: 'market://details?id=com.gfviegas.avender',
+      };
+
+      AppRate.promptForRating(false);
     });
   }
 }

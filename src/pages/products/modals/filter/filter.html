@@ -33,7 +33,7 @@
       </ion-note>
     </ion-item>
 
-    <ion-item *ngIf="!sellerPage">
+    <ion-item *ngIf="!sellerPage && !seller">
       <ion-label>
         Somente de Vendedores que eu sigo
       </ion-label>
@@ -47,7 +47,7 @@
       <ion-toggle [(ngModel)]="onlyInStock"></ion-toggle>
     </ion-item>
 
-    <form [formGroup]="locationForm" novalidate="">
+    <form [formGroup]="locationForm" novalidate="" *ngIf="!sellerPage && !seller">
       <ion-item-divider light>Localização</ion-item-divider>
 
       <ion-item>

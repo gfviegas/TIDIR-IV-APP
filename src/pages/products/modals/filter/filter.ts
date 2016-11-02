@@ -25,6 +25,7 @@ export class ProductsFilterModalPage {
   ufs;
   cities;
 
+  seller: boolean = false;
   sellerPage: boolean = false;
   category: string = '';
   sort: SortProducts = {name: 'Mais Novos', value: '-created_at'};
@@ -43,7 +44,8 @@ export class ProductsFilterModalPage {
     this.sort = params.get('sort');
     this.onlyFollowedSellers = params.get('onlyFollowedSellers');
     this.onlyInStock = params.get('onlyInStock');
-    this.sellerPage = params.get('seller');
+    this.sellerPage = params.get('sellerPage');
+    this.seller = params.get('seller');
 
     this.location = params.get('location');
 
