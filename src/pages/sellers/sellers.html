@@ -32,7 +32,7 @@
   <div class="spinner-container" padding text-center *ngIf="loading">
     <ion-spinner></ion-spinner>
   </div>
-  <ion-list *ngIf="sellers.length > 0 && !loading" [virtualScroll]="sellers" approxItemHeight="40px">
+  <ion-list *ngIf="sellers.length > 0 && !loading" [virtualScroll]="sellers" approxItemHeight="65px">
     <ion-item *virtualItem="let seller">
       <ion-avatar item-left>
         <ion-img [src]="seller.photo ? IMG_URL + seller.photo : IMG_URL + 'person.jpeg'"></ion-img>

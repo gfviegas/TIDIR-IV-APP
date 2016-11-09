@@ -34,7 +34,7 @@
     <ion-spinner></ion-spinner>
   </div>
 
-  <ion-list *ngIf="products.length > 0 && !loading" [virtualScroll]="products" approxItemHeight="40px">
+  <ion-list *ngIf="products.length > 0 && !loading" [virtualScroll]="products" approxItemHeight="356px">
     <ion-item *virtualItem="let product" text-wrap (click)="presentProduct(product)">
       <!-- Product Image -->
       <ion-row center>

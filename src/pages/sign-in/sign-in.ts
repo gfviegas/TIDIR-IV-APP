@@ -120,6 +120,9 @@ export class SignInPage {
   }
 
   presentCitiesModal() {
+    if (!this.state.value || !this.state.value.uf) {
+      return false;
+    }
     let modal = this.modalCtrl.create(CitiesModalPage, {uf: this.state.value.uf, city: this.city.value});
     modal.onDidDismiss(data => {
      this.city.setValue(data);

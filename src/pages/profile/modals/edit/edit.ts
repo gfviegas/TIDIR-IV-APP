@@ -14,11 +14,14 @@ import { CitiesModalPage } from '../../../common/cities/cities';
 export class EditUserPage {
 
   public mask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+  public emailRegex = "^\\s*[\\w\\-\\+_]+(\\.[\\w\\-\\+_]+)*\\@[\\w\\-\\+_]+\\.[\\w\\-\\+_]+(\\.[\\w\\-\\+_]+)*\\s*$";
+
   user: any;
   userType: string = 'user';
 
   editForm: FormGroup;
   name: AbstractControl;
+  email: AbstractControl;
   location: AbstractControl;
   state: AbstractControl;
   city: AbstractControl;
@@ -65,6 +68,7 @@ export class EditUserPage {
 
     this.editForm = fb.group({
       name: [this.user.name, Validators.required],
+      email: [this.user.email, Validators.required, this.emailExists.bind(this)],
       location: fb.group({
         state: [this.user.location.state, Validators.required],
         city: [this.user.location.city, Validators.required]
@@ -75,6 +79,7 @@ export class EditUserPage {
         phone: [userPhone]
       })
     });
+    this.email = this.editForm.controls['email'];
     this.name = this.editForm.controls['name'];
 
     this.location = this.editForm.controls['location'];
@@ -107,6 +112,24 @@ export class EditUserPage {
         console.info(error);
       }
     );
+  }
+
+  emailExists(control: FormGroup) {
+    let requestedEmail = control.value;
+    return new Promise((resolve, reject) => {
+      this.signService.checkIfEmailExists(requestedEmail).subscribe(
+        (response) => {
+          if (response.taken && requestedEmail !== this.user.email) {
+            resolve({taken: true});
+          } else {
+            resolve(null);
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+    });
   }
 
   presentCitiesModal() {
@@ -146,6 +169,7 @@ export class EditUserPage {
       let editValues = Object.assign({}, this.editForm.value);
       let params = {
         name: editValues.name,
+        email: editValues.email,
         contact: {
         },
         location: {

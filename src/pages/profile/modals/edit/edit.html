@@ -25,6 +25,17 @@
         <p padding-left color="danger" *ngIf="name.errors?.minlength">Este campo deve ter pelo menos 8 caracteres</p>
       </div>
 
+      <ion-item>
+        <ion-label>Email*</ion-label>
+        <ion-input [formControl]="email" type="email" [pattern]="emailRegex"></ion-input>
+      </ion-item>
+      <div *ngIf="!email.valid && (email.touched || formSubmitted)">
+        <p padding-left color="danger" *ngIf="email.errors?.required">Este campo é obrigatório</p>
+        <p padding-left color="danger" *ngIf="email.errors?.minlength">Este campo deve ter pelo menos 8 caracteres</p>
+        <p padding-left color="danger" *ngIf="email.errors?.pattern">Este campo deve ser um email válido</p>
+        <p padding-left color="danger" *ngIf="email.errors?.taken">Este email já está cadastrado</p>
+      </div>
+
       <ion-item ngControlGroup="contact">
         <ion-label>Whatsapp</ion-label>
         <ion-input [formControl]="whatsapp" type="number" pattern="^[1-9]{2}[2-9][0-9]{3,4}[0-9]{4}$"></ion-input>
@@ -49,7 +60,7 @@
 
       <ion-item ngControlGroup="location">
         <ion-label>Estado*</ion-label>
-        <ion-select [formControl]="state" (ionChange)="getCities()" multiple="false" cancelText="Cancelar" okText="Selecionar">
+        <ion-select [formControl]="state" (ionChange)="clearCity()" multiple="false" cancelText="Cancelar" okText="Selecionar">
           <ion-option *ngFor="let uf of ufs" [value]="uf">{{uf.name}}</ion-option>
         </ion-select>
       </ion-item>
